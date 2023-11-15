@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.active {
+  color: red;
+  font-weight: 700;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
