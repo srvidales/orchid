@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 const dateFormat = require('../utils/dateFormat');
 
 const userSchema = new Schema({
@@ -22,6 +23,11 @@ const userSchema = new Schema({
     minlength: 1,
     maxlength: 280,
     trim: true,
+  },
+  password: {
+    type: String,
+    required: 'You need to enter a password!',
+    minlength: 8,
   },
   createdAt: {
     type: Date,
