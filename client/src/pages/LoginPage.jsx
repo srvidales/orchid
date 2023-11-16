@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from ''; // Import your GraphQL mutation
 
-import Nav from './components/Nav';
-import Login from './components/Login';
+import Nav from '../components/Nav';
+import Login from '../components/Login';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');

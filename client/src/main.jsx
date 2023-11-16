@@ -9,12 +9,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import Home from "./components/Home.jsx";
-import About from "./components/About.jsx";
-import Contact from "./components/Contact.jsx";
-import Login from "./components/Login.jsx";
-import Menu from "./components/Menu.jsx";
-import Parents from "./components/Parents.jsx";
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Contact from "./pages/Contact.jsx";
+import Login from "./pages/Login.jsx";
+import Menu from "./pages/Menu.jsx";
+import Parents from "./pages/Parents.jsx";
 
 const router = createBrowserRouter([
   {
