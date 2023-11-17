@@ -61,9 +61,6 @@ const typeDefs = `
     menus: [DailyMenu]
   }
 
-  type Mutation {
-    
-  }
 
 `;
 

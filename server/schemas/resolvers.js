@@ -1,4 +1,4 @@
-const { User, MenuItem, School } = require('../models');
+const { User, MenuItem, School, DailyMenu } = require('../models');
 
 const resolvers = {
     Query: {

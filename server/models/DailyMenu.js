@@ -24,6 +24,6 @@ const DailyMenuSchema = new Schema({
   },
 });
 
-const DailyMenu = model("DailyMenuSchema", menuItemSchema);
+const DailyMenu = model("DailyMenuSchema", DailyMenuSchema);
 
 module.exports = DailyMenu;
