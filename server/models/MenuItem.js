@@ -18,7 +18,6 @@ const menuItemSchema = new Schema({
   },
   image: {
     type: String,
-    required: 'You need to enter a image!',
   },
   category: {
     type: String,

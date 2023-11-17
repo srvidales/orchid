@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
-const DailyMenuSchema = new Schema({
+const dailyMenuSchema = new Schema({
   date: {
     type: Date,
-    required: "You need to enter a date!",
+    // required: "You need to enter a date!",
     get: (timestamp) => dateFormat(timestamp),
   },
   menuItems: [
@@ -24,6 +24,6 @@ const DailyMenuSchema = new Schema({
   },
 });
 
-const DailyMenu = model("DailyMenuSchema", DailyMenuSchema);
+const DailyMenu = model("DailyMenu", dailyMenuSchema);
 
 module.exports = DailyMenu;

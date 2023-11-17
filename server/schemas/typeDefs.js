@@ -5,26 +5,26 @@ const typeDefs = `
     lastName: String!
     email: String!
     password: String!
-    school: School!
-    createdAt: String!
+    schoolId: School
+    createdAt: String
   }
 
   type MenuItem {
     _id: ID
     name: String!
     description: String!
-    image: String!
-    category: Category!
-    school: School!
-    createdAt: String!
+    image: String
+    category: Category
+    school: School
+    createdAt: String
   }
 
   type DailyMenu {
     _id: ID
-    date: String!
+    date: String
     menuItems: [MenuItem]
-    school: School!
-    createdAt: String!
+    school: School
+    createdAt: String
   }
 
   type School {
@@ -39,7 +39,7 @@ const typeDefs = `
     users: [User]
     menuItems: [MenuItem]
     menus: [DailyMenu]
-    createdAt: String!
+    createdAt: String
   }
 
   type Auth {
@@ -60,8 +60,6 @@ const typeDefs = `
     menuItems: [MenuItem]
     menus: [DailyMenu]
   }
-
-
 `;
 
 module.exports = typeDefs;

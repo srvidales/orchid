@@ -36,7 +36,7 @@ const userSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
-  school: {
+  schoolId: {
     type: Schema.Types.ObjectId,
     ref: 'School',
   },

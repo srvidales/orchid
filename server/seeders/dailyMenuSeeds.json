@@ -1,0 +1,18 @@
+{
+  "dailyMenus": [
+    {
+      "date": "2023-10-10T10:16:16.075+00:00",
+      "menuItems": [
+        {
+          "name": "Venomous Viper Pizza",
+          "category": "ENTREE"
+        },
+        {
+          "name": "Toxic Triple Burger",
+          "category": "ENTREE"
+        }
+      ],
+      "school": "Nightshade Academy"
+    }
+  ]
+}
