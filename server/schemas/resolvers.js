@@ -15,6 +15,10 @@ const resolvers = {
             return await MenuItem.find().sort({ createdAt: -1 });
             // return await MenuItem.find().sort({ createdAt: -1 }).populate('school');
         },
+
+        menus: async () => {
+            return await DailyMenu.find().sort({ createdAt: -1 });
+        }
     }
 }
 

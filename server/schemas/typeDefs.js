@@ -1,43 +1,45 @@
 const typeDefs = `
   type User {
     _id: ID
-    firstName: String
-    lastName: String
-    email: String
-    createdAt: String
-    school: School
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    school: School!
+    createdAt: String!
   }
 
   type MenuItem {
     _id: ID
-    name: String
-    description: String
-    price: Float
-    school: School
-    createdAt: String
+    name: String!
+    description: String!
+    image: String!
+    category: Category!
+    school: School!
+    createdAt: String!
   }
 
-  type WeeklyMenu {
+  type DailyMenu {
     _id: ID
-    week: Int
-    year: Int
-    school: School
+    date: String!
     menuItems: [MenuItem]
+    school: School!
+    createdAt: String!
   }
 
   type School {
     _id: ID
-    name: String
-    address: String
-    city: String
-    state: String
-    zip: String
-    phone: String
-    email: String
-    createdAt: String
+    name: String!
+    address: String!
+    city: String!
+    state: String!
+    zip: String!
+    phone: String!
+    email: String!
     users: [User]
     menuItems: [MenuItem]
-    weeklyMenus: [WeeklyMenu]
+    menus: [DailyMenu]
+    createdAt: String!
   }
 
   type Auth {
@@ -45,11 +47,24 @@ const typeDefs = `
     user: User
   }
 
+  enum Category {
+    ENTREE
+    SIDE
+    DRINK
+    SNACK
+  }
+
   type Query {
     users: [User]
     schools: [School]
     menuItems: [MenuItem]
+    menus: [DailyMenu]
   }
+
+  type Mutation {
+    
+  }
+
 `;
 
 module.exports = typeDefs;

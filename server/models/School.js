@@ -7,6 +7,7 @@ const schoolSchema = new Schema({
     required: 'You need to enter a name!',
     minlength: 1,
     maxlength: 280,
+    unique: true,
     trim: true,
   },
   address: {
@@ -14,6 +15,7 @@ const schoolSchema = new Schema({
     required: 'You need to enter an address!',
     minlength: 1,
     maxlength: 280,
+    unique: true,
     trim: true,
   },
   city: {
@@ -42,6 +44,7 @@ const schoolSchema = new Schema({
     required: 'You need to enter a phone number!',
     minlength: 1,
     maxlength: 280,
+    unique: true,
     trim: true,
   },
   email: {
@@ -49,32 +52,25 @@ const schoolSchema = new Schema({
     required: 'You need to enter an email address!',
     minlength: 1,
     maxlength: 280,
+    unique: true,
     trim: true,
+    match: [/.+@.+\..+/, 'Must match an email address!'],    
   },
-  user: {
-    type: Schema.Types.ObjectId, ref: 'User',
+  users: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   menuItems: [
     {
-      type: Schema.Types.ObjectId, ref: 'MenuItem',
+      type: Schema.Types.ObjectId,
+      ref: 'MenuItem',
     },
   ],
-  weeklyMenus: [
+  menus: [
     {
-      week: {
-        type: Number,
-        required: 'You need to enter a week!',
-      },
-      year: {
-        type: Number,
-        required: 'You need to enter a year!',
-      },
-      items: [
-        {
-          type: Schema.Types.ObjectId, ref: 'MenuItem',
-        },
-      ],
-    }
+      type: Schema.Types.ObjectId,
+      ref: 'DailyMenu',
+    },
   ],
   createdAt: {
     type: Date,

@@ -23,6 +23,8 @@ const userSchema = new Schema({
     minlength: 1,
     maxlength: 280,
     trim: true,
+    unique: true,    
+    match: [/.+@.+\..+/, 'Must match an email address!'],
   },
   password: {
     type: String,
@@ -35,9 +37,25 @@ const userSchema = new Schema({
     get: (timestamp) => dateFormat(timestamp),
   },
   school: {
-    type: Schema.Types.ObjectId, ref: 'School',
+    type: Schema.Types.ObjectId,
+    ref: 'School',
   },
 });
+
+// set up pre-save middleware to create password
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+
+  next();
+});
+
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 const User = model('User', userSchema);
 

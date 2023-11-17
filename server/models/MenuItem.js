@@ -20,6 +20,11 @@ const menuItemSchema = new Schema({
     type: String,
     required: 'You need to enter a image!',
   },
+  category: {
+    type: String,
+    required: 'You need to enter a category!',
+    enum: ['ENTREE', 'SIDE', 'DRINK', 'SNACK'],
+  },
   school: {
     type: Schema.Types.ObjectId, ref: 'School',
   },
