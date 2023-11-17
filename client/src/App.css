@@ -6,8 +6,12 @@
 }
 
 .active {
-  color: #FA897B;
+  color: #9e4539;
   font-weight: 700;
+}
+
+.navbar {
+  position: sticky;
 }
 
 .logo {
@@ -17,10 +21,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #996f15);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #ffdd94);
 }
 
 @keyframes logo-spin {
