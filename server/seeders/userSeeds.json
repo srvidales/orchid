@@ -1,7 +1,38 @@
 [
-    {
-        "firstName": "John",
-        "lastName": "Doe",
-        "email": "jdoe@domain.com"
-    }
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "jdoe@domain.com",
+    "password": "Pass/root"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Roote",
+    "email": "proote@domain.com",
+    "password": "Root/pass"
+  },
+  {
+    "firstName": "Eva",
+    "lastName": "Williams",
+    "email": "ewilliams@domain.com",
+    "password": "EvaPass13"
+  },
+  {
+    "firstName": "Bobbi",
+    "lastName": "Johnson",
+    "email": "bjohnson@domain.com",
+    "password": "Secret123"
+  },
+  {
+    "firstName": "Olive",
+    "lastName": "Branch",
+    "email": "obranch@domain.com",
+    "password": "Peace123"
+  },
+  {
+    "firstName": "Al",
+    "lastName": "Dente",
+    "email": "adente@domain.com",
+    "password": "Pasta789"
+  }
 ]
