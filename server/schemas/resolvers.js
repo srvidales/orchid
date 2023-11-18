@@ -22,6 +22,7 @@ const resolvers = {
       return await School.find()
         .sort({ createdAt: -1 })
         .populate('menuItems')
+        .populate('users')
         .populate({
           path: 'menus',
           populate: { path: 'menuItems' },

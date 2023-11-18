@@ -54,12 +54,14 @@ const schoolSchema = new Schema({
     maxlength: 280,
     unique: true,
     trim: true,
-    match: [/.+@.+\..+/, 'Must match an email address!'],    
+    match: [/.+@.+\..+/, 'Must match an email address!'],
   },
-  users: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
+  users: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
   menuItems: [
     {
       type: Schema.Types.ObjectId,

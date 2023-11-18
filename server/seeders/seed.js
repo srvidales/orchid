@@ -24,11 +24,11 @@ db.once('open', async () => {
   const users = await User.create(userSeeds);
 
   // Associating users with schools (commented out for now)
-  // for (newUser of users) {
-  //   const school = schools[Math.floor(Math.random() * schools.length)];
-  //   school.users.push(newUser);
-  //   await school.save();
-  // }
+  for (newUser of users) {
+    const school = schools[Math.floor(Math.random() * schools.length)];
+    school.users.push(newUser);
+    await school.save();
+  }
 
   // Associating menu items with schools
   for (newMenuItem of menuItems) {

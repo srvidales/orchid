@@ -5,7 +5,6 @@ const typeDefs = `
     lastName: String!
     email: String!
     password: String!
-    schoolId: School
     createdAt: String
   }
 

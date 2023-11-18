@@ -36,10 +36,6 @@ const userSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
-  schoolId: {
-    type: Schema.Types.ObjectId,
-    ref: 'School',
-  },
 });
 
 // set up pre-save middleware to create password
