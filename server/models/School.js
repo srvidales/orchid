@@ -1,7 +1,10 @@
+// Importing necessary modules from Mongoose and a utility function for date formatting
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
+// Define the schema for the School model
 const schoolSchema = new Schema({
+  // School name properties
   name: {
     type: String,
     required: 'You need to enter a name!',
@@ -10,6 +13,8 @@ const schoolSchema = new Schema({
     unique: true,
     trim: true,
   },
+  
+  // School address properties
   address: {
     type: String,
     required: 'You need to enter an address!',
@@ -18,6 +23,8 @@ const schoolSchema = new Schema({
     unique: true,
     trim: true,
   },
+  
+  // School city properties
   city: {
     type: String,
     required: 'You need to enter a city!',
@@ -25,6 +32,8 @@ const schoolSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+  
+  // School state properties
   state: {
     type: String,
     required: 'You need to enter a state!',
@@ -32,6 +41,8 @@ const schoolSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+  
+  // School zip code properties
   zip: {
     type: String,
     required: 'You need to enter a zip code!',
@@ -39,6 +50,8 @@ const schoolSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+  
+  // School phone number properties
   phone: {
     type: String,
     required: 'You need to enter a phone number!',
@@ -47,6 +60,8 @@ const schoolSchema = new Schema({
     unique: true,
     trim: true,
   },
+  
+  // School email properties with validation
   email: {
     type: String,
     required: 'You need to enter an email address!',
@@ -56,24 +71,32 @@ const schoolSchema = new Schema({
     trim: true,
     match: [/.+@.+\..+/, 'Must match an email address!'],
   },
+  
+  // Array of User references associated with the school
   users: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
   ],
+  
+  // Array of MenuItem references associated with the school
   menuItems: [
     {
       type: Schema.Types.ObjectId,
       ref: 'MenuItem',
     },
   ],
+  
+  // Array of DailyMenu references associated with the school
   menus: [
     {
       type: Schema.Types.ObjectId,
       ref: 'DailyMenu',
     },
   ],
+  
+  // Timestamp for school creation
   createdAt: {
     type: Date,
     default: Date.now,
@@ -81,6 +104,8 @@ const schoolSchema = new Schema({
   },
 });
 
+// Create the School model using the defined schema
 const School = model('School', schoolSchema);
 
+// Export the School model for use in other files
 module.exports = School;
