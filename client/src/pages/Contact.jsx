@@ -9,6 +9,7 @@ const Contact = () => {
     email: "",
     cellphone: "",
     message: "",
+    timeSlots: [],
     to_name: "Whippersnappers Daycare",
   });
 
@@ -54,6 +55,17 @@ const Contact = () => {
       { controlId: "", label: "" },
     ];
   };
+
+ const handleCheckBoxChange = (e) =>{
+  const {name} = e.target
+  console.log(name)
+  if(formState.timeSlots.includes(name)){
+    const updatedTimes = formState.timeSlots.filter(time=> time !== name)
+    setFormState({...formState, timeSlots: updatedTimes})
+    return
+  } 
+  setFormState({...formState, timeSlots: [...formState.timeSlots,name]})
+ }
 
   return (
     <div>
@@ -117,6 +129,7 @@ const Contact = () => {
           rows={4}
           cols={50}
         />
+            
         {/* 
         //! Submit Checkboxes Need to be handled and sent. 
         //! Width of the forms? Should I do a class and width them there?
@@ -134,6 +147,8 @@ const Contact = () => {
                 name="morning"
                 type={type}
                 id={`inline-${type}-1`}
+                checked={formState.timeSlots.includes("morning") ? true : false}
+                onChange={handleCheckBoxChange}
               />
               <Form.Check
                 inline
@@ -141,6 +156,8 @@ const Contact = () => {
                 name="afternoon"
                 type={type}
                 id={`inline-${type}-2`}
+               checked={formState.timeSlots.includes("afternoon") ? true : false} 
+               onChange={handleCheckBoxChange}
               />
               <Form.Check
                 inline
@@ -148,11 +165,14 @@ const Contact = () => {
                 name="evening"
                 type={type}
                 id={`inline-${type}-3`}
+               checked={formState.timeSlots.includes("evening") ? true : false} 
+               onChange={handleCheckBoxChange}
               />
             </div>
           ))}
         </div>
         <Button onClick={sendEmail}>Submit</Button>
+        <Button onClick={()=> console.log(formState)}>Check State</Button>
         <p>{displayMessage}</p>
       </div>
     </div>
