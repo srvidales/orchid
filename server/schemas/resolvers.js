@@ -17,6 +17,7 @@ const resolvers = {
       // Using the School model to find all schools
       // Sorting them by creation date in descending order
       // Populating the 'menuItems' field to retrieve associated menu items
+      // Populating the 'users' field to retrieve associated users
       // Populating the 'menus' field to retrieve associated daily menus
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
