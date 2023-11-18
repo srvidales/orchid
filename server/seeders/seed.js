@@ -23,10 +23,15 @@ db.once('open', async () => {
   const dailyMenus = await DailyMenu.create(dailyMenuSeeds);
   const users = await User.create(userSeeds);
 
-  // Associating users with schools (commented out for now)
+  // Associating users with schools
   for (newUser of users) {
+    // Randomly selecting a school from the list
     const school = schools[Math.floor(Math.random() * schools.length)];
+
+    // Adding the new user to the selected school's 'users' array
     school.users.push(newUser);
+
+    // Saving the school with the updated 'users' array
     await school.save();
   }
 
