@@ -58,7 +58,6 @@ const Contact = () => {
 
  const handleCheckBoxChange = (e) =>{
   const {name} = e.target
-
   console.log(name)
   if(formState.timeSlots.includes(name)){
     const updatedTimes = formState.timeSlots.filter(time=> time !== name)
@@ -130,6 +129,7 @@ const Contact = () => {
           rows={4}
           cols={50}
         />
+            
         {/* 
         //! Submit Checkboxes Need to be handled and sent. 
         //! Width of the forms? Should I do a class and width them there?
