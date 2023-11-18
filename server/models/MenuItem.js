@@ -45,5 +45,5 @@ const menuItemSchema = new Schema({
 // Creating the MenuItem model based on the defined schema
 const MenuItem = model('MenuItem', menuItemSchema);
 
-// Exporting the MenuItem model 
+// Exporting the MenuItem model
 module.exports = MenuItem;

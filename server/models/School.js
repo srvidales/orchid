@@ -13,7 +13,6 @@ const schoolSchema = new Schema({
     unique: true,
     trim: true,
   },
-  
   // School address properties
   address: {
     type: String,
@@ -23,7 +22,6 @@ const schoolSchema = new Schema({
     unique: true,
     trim: true,
   },
-  
   // School city properties
   city: {
     type: String,
@@ -32,7 +30,6 @@ const schoolSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  
   // School state properties
   state: {
     type: String,
@@ -41,7 +38,6 @@ const schoolSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  
   // School zip code properties
   zip: {
     type: String,
@@ -50,7 +46,6 @@ const schoolSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-  
   // School phone number properties
   phone: {
     type: String,
@@ -60,7 +55,6 @@ const schoolSchema = new Schema({
     unique: true,
     trim: true,
   },
-  
   // School email properties with validation
   email: {
     type: String,
@@ -71,7 +65,6 @@ const schoolSchema = new Schema({
     trim: true,
     match: [/.+@.+\..+/, 'Must match an email address!'],
   },
-  
   // Array of User references associated with the school
   users: [
     {
@@ -79,7 +72,6 @@ const schoolSchema = new Schema({
       ref: 'User',
     },
   ],
-  
   // Array of MenuItem references associated with the school
   menuItems: [
     {
@@ -87,7 +79,6 @@ const schoolSchema = new Schema({
       ref: 'MenuItem',
     },
   ],
-  
   // Array of DailyMenu references associated with the school
   menus: [
     {
@@ -95,7 +86,6 @@ const schoolSchema = new Schema({
       ref: 'DailyMenu',
     },
   ],
-  
   // Timestamp for school creation
   createdAt: {
     type: Date,

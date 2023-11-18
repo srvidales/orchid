@@ -1,5 +1,5 @@
 // Import necessary modules
-const { User } = require('./models'); 
+const { User } = require('./models');
 const jwt = require('jsonwebtoken');
 
 // Secret key for JWT (should be stored securely, preferably in an environment variable)
