@@ -8,8 +8,13 @@ const resolvers = {
     },
 
     schools: async () => {
-      return await School.find().sort({ createdAt: -1 });
-      // return await School.find().sort({ createdAt: -1 }).populate('users').populate('menuItems').populate('weeklyMenus');
+      return await School.find()
+        .sort({ createdAt: -1 })
+        .populate('menuItems')
+        .populate({
+          path: 'menus',
+          populate: { path: 'menuItems' },
+        });
     },
 
     menuItems: async () => {
