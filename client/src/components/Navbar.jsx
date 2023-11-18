@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import "../index.css";
 
 const Navbar = () => {
   const links = [
@@ -11,7 +12,7 @@ const Navbar = () => {
     { title: "Login", link: "/login" },
   ];
   return (
-    <nav>
+    <nav className="navbar">
       {links.map((navlink) => (
         <NavLink to={navlink.link}>
           {({ isActive }) => (
