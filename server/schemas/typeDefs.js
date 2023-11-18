@@ -15,7 +15,6 @@ const typeDefs = `
     description: String!
     image: String
     category: Category
-    school: School
     createdAt: String
   }
 
@@ -23,7 +22,6 @@ const typeDefs = `
     _id: ID
     date: String
     menuItems: [MenuItem]
-    school: School
     createdAt: String
   }
 
@@ -57,6 +55,7 @@ const typeDefs = `
   type Query {
     users: [User]
     schools: [School]
+    schoolById(_id: ID!): School
     menuItems: [MenuItem]
     menus: [DailyMenu]
   }
