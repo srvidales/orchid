@@ -20,6 +20,7 @@ const typeDefs = `
   type DailyMenu {
     _id: ID
     date: String
+    meal: MealType
     menuItems: [MenuItem]
     createdAt: String
   }
@@ -49,6 +50,12 @@ const typeDefs = `
     SIDE
     DRINK
     SNACK
+  }
+
+  enum MealType {
+    BREAKFAST
+    SNACK
+    LUNCH
   }
 
   type Query {
