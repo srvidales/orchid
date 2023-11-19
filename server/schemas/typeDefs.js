@@ -74,6 +74,7 @@ const typeDefs = `
       password: String!,
       school: ID!
     ): Auth
+  }
 `;
 
 module.exports = typeDefs;

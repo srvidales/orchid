@@ -54,37 +54,37 @@ const resolvers = {
       // Sorting them by creation date in descending order
       return await DailyMenu.find().sort({ createdAt: -1 });
     },
-    Mutation: {
-      signupUser: async (parent, { firstName, lastName, email, password, school }) => {
-        try {
-          // Hash the password before storing it
-          const hashedPassword = await bcrypt.hash(password, 10);
+  },
+  Mutation: {
+    signupUser: async (parent, { firstName, lastName, email, password, school }) => {
+      try {
+        // Hash the password before storing it
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-          // Create a new user in the database
-          const user = await User.create({
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword,
-            school,
-          });
+        // Create a new user in the database
+        const user = await User.create({
+          firstName,
+          lastName,
+          email,
+          password: hashedPassword,
+          school,
+        });
 
-          // Generate a token for the new user
-          const token = generateToken({
-            id: user._id,
-            username: user.username,
-          });
+        // Generate a token for the new user
+        const token = generateToken({
+          id: user._id,
+          username: user.username,
+        });
 
-          // Return the token and user information
-          return { token, user };
-        } catch (error) {
-          console.error("Error during user signup:", error);
-          // Handle the error and throw it or return an error message
-          throw new AuthenticationError(
-            "An error occurred during signup. Please try again."
-          );
-        }
-      },
+        // Return the token and user information
+        return { token, user };
+      } catch (error) {
+        console.error("Error during user signup:", error);
+        // Handle the error and throw it or return an error message
+        throw new AuthenticationError(
+          "An error occurred during signup. Please try again."
+        );
+      }
     },
   },
 };
