@@ -65,6 +65,15 @@ const typeDefs = `
     menuItems: [MenuItem]
     menus: [DailyMenu]
   }
+  
+  type Mutation {
+    signupUser(
+      firstName: String!,
+      lastName: String!,
+      email: String!,
+      password: String!,
+      school: ID!
+    ): Auth
 `;
 
 module.exports = typeDefs;

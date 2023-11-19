@@ -1,5 +1,8 @@
-// Importing the necessary models
-const { User, MenuItem, School, DailyMenu } = require('../models');
+// Importing the necessary models and packages
+const { User, MenuItem, School } = require("../models");
+const bcrypt = require("bcrypt");
+const { AuthenticationError } = require("apollo-server");
+const { generateToken } = require("../utils/auth");
 
 // Creating GraphQL resolvers
 const resolvers = {
@@ -22,11 +25,11 @@ const resolvers = {
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
         .sort({ createdAt: -1 })
-        .populate('menuItems')
-        .populate('users')
+        .populate("menuItems")
+        .populate("users")
         .populate({
-          path: 'menus',
-          populate: { path: 'menuItems' },
+          path: "menus",
+          populate: { path: "menuItems" },
         });
     },
 
@@ -51,8 +54,39 @@ const resolvers = {
       // Sorting them by creation date in descending order
       return await DailyMenu.find().sort({ createdAt: -1 });
     },
+    Mutation: {
+      signupUser: async (parent, { firstName, lastName, email, password, school }) => {
+        try {
+          // Hash the password before storing it
+          const hashedPassword = await bcrypt.hash(password, 10);
+
+          // Create a new user in the database
+          const user = await User.create({
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+            school,
+          });
+
+          // Generate a token for the new user
+          const token = generateToken({
+            id: user._id,
+            username: user.username,
+          });
+
+          // Return the token and user information
+          return { token, user };
+        } catch (error) {
+          console.error("Error during user signup:", error);
+          // Handle the error and throw it or return an error message
+          throw new AuthenticationError(
+            "An error occurred during signup. Please try again."
+          );
+        }
+      },
+    },
   },
 };
 
-// Exporting the resolvers for use in the GraphQL schema
 module.exports = resolvers;
