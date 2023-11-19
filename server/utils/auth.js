@@ -1,66 +1,29 @@
-// Import necessary modules
-const { User } = require('./models');
+const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
+const { User } = require('../models/User'); 
 
-// Secret key for JWT (should be stored securely, preferably in an environment variable)
-const secretKey = 'yourSecretKey';
+const secretKey = 'mysecretssshhhhhhh';
+const expiration = '1h';
 
-// Function to generate a JWT token
-const generateToken = (user) => {
-  // Create a payload with user ID and username
-  const payload = {
-    id: user.id,
-    username: user.username,
-  };
-
-  // Sign the payload to generate a JWT token with a 1-hour expiration
-  return jwt.sign(payload, secretKey, { expiresIn: '1h' });
+const generateToken = ({ id, username }) => {
+  const payload = { id, username };
+  return jwt.sign({ data: payload }, secretKey, { expiresIn: expiration });
 };
 
-// Middleware to authenticate requests
-const authenticateUser = (req, res, next) => {
-  // Extract the token from the request headers
-  const token = req.headers.authorization;
-
-  // Check if the token is missing
-  if (!token) {
-    return res.status(401).json({ message: 'Authorization token is missing.' });
-  }
-
-  // Verify the token using the secret key
-  jwt.verify(token, secretKey, (err, decoded) => {
-    // Handle invalid tokens
-    if (err) {
-      return res.status(401).json({ message: 'Invalid token.' });
-    }
-
-    // Find the user based on the decoded ID from the token
-    User.findById(decoded.id, (error, user) => {
-      // Handle errors or non-existent users
-      if (error || !user) {
-        return res.status(401).json({ message: 'User not found.' });
-      }
-
-      // Attach the user object to the request for subsequent middleware or routes
-      req.user = user;
-      next();
-    });
-  });
-};
-
-// Function to handle user login
-const loginUser = async (username, password) => {
+const loginUser = async (email, password) => {
   try {
-    // Find the user by username
-    const user = await User.findOne({ username });
+    // Find the user by their email
+    const user = await User.findOne({ email });
 
     // Check for invalid credentials
-    if (!user || !user.comparePassword(password)) {
-      return null; // Invalid credentials
+    if (!user || !(await user.comparePassword(password))) {
+      // Invalid credentials
+      return null;
     }
 
+    // Valid credentials, generate and return a token
     // Generate a JWT token for the authenticated user
-    const token = generateToken(user);
+    const token = generateToken({ id: user._id, username: user.username });
     return token;
   } catch (error) {
     // Log and throw any errors that occur during login
@@ -69,9 +32,21 @@ const loginUser = async (username, password) => {
   }
 };
 
+const AuthenticationError = new GraphQLError('Could not authenticate user.', {
+  extensions: {
+    code: 'UNAUTHENTICATED',
+  },
+});
+
+const AuthenticationError = new GraphQLError('Could not authenticate user.', {
+  extensions: {
+    code: 'UNAUTHENTICATED',
+  },
+});
+
 // Export the functions for use in other files
 module.exports = {
   generateToken,
-  authenticateUser,
   loginUser,
+  AuthenticationError,
 };
