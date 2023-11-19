@@ -11,6 +11,11 @@ const dailyMenuSchema = new Schema({
     get: (timestamp) => dateFormat(timestamp), // Applying custom date formatting using the dateFormat utility
   },
 
+  meal: {
+    type: String,
+    enum: ['BREAKFAST', 'SNACK', 'LUNCH'],
+  },
+
   // Array of menu items associated with the daily menu
   menuItems: [
     {
