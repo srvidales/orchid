@@ -17,7 +17,7 @@ const Login = () => {
   // Handle Login Function
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     if (loginUsername === 'exampleUser' && loginPassword === 'password') {
       // Successful login
       setLoginError(null);

@@ -12,14 +12,6 @@ const resolvers = {
       // Using the User model to find all users
       // Sorting them by creation date in descending order
       // Populating the 'schoolId' field to retrieve associated school information
-      return await User.find().sort({ createdAt: -1 }).populate("school");
-    },
-  Query: {
-    // Resolver for fetching users with associated school information
-    users: async () => {
-      // Using the User model to find all users
-      // Sorting them by creation date in descending order
-      // Populating the 'schoolId' field to retrieve associated school information
       return await User.find().sort({ createdAt: -1 }).populate('schoolId');
     },
 

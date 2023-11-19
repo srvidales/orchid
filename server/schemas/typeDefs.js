@@ -58,7 +58,7 @@ const typeDefs = `
     menuItems: [MenuItem]
     menus: [DailyMenu]
   }
-
+  
   type Mutation {
     signupUser(
       firstName: String!,

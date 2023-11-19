@@ -38,12 +38,6 @@ const AuthenticationError = new GraphQLError('Could not authenticate user.', {
   },
 });
 
-const AuthenticationError = new GraphQLError('Could not authenticate user.', {
-  extensions: {
-    code: 'UNAUTHENTICATED',
-  },
-});
-
 // Export the functions for use in other files
 module.exports = {
   generateToken,
