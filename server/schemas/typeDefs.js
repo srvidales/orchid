@@ -74,6 +74,7 @@ const typeDefs = `
       password: String!,
       school: ID!
     ): Auth
+    loginUser(email: String!, password: String!): Auth
   }
 `;
 
