@@ -1,14 +1,11 @@
 // Importing the necessary models and packages
 const { User, MenuItem, School } = require('../models');
 const bcrypt = require('bcrypt');
-// import { AuthenticationError } from 'apollo-server'
-// Ask Sergio which one he wants to use because I think he's mixing the 2
-// If he want the above, we need to install it and use 'new' and message
 const {
   generateToken,
   loginUser,
   AuthenticationError,
-} = require('../utils/auth'); // cannot use 'new' and message
+} = require('../utils/auth'); 
 
 // Creating GraphQL resolvers
 const resolvers = {
