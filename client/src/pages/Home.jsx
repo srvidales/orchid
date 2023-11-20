@@ -34,13 +34,7 @@ const Home = () => {
         <img src="image2.jpg" alt="School Photo" style={{ width: '45%' }} />
       </div>{' '}
       */}
-      {/* Page Divider */}
-      <hr
-        style={{ width: '95%', margin: '20px auto', border: '2px solid black' }}
-      />
-      <hr
-        style={{ width: '95%', margin: '20px auto', border: '2px solid black' }}
-      />
+ 
 
       {/* Clickable Info Cards  */}
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
