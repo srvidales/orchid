@@ -27,6 +27,18 @@ export default function Header() {
         {/* Image 2 with alt text and styling */}
         <img src="image2.jpg" alt="School Photo" style={{ width: '45%' }} />
       </div>
+      <div>
+        <br></br>
+        {/* Page Divider */}
+        <hr
+          style={{
+            width: '95%',
+            margin: '20px auto',
+            border: '2px solid black',
+          }}
+        />
+        <br></br>
+      </div>
     </div>
   );
 }
