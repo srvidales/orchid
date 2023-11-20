@@ -24,7 +24,7 @@ const loginUser = async (email, password) => {
     // Valid credentials, generate and return a token
     // Generate a JWT token for the authenticated user
     const token = generateToken({ id: user._id, username: user.username });
-    return token;
+    return { token, user };
   } catch (error) {
     // Log and throw any errors that occur during login
     console.error(error);

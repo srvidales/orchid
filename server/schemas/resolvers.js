@@ -1,11 +1,14 @@
 // Importing the necessary models and packages
 const { User, MenuItem, School } = require('../models');
 const bcrypt = require('bcrypt');
+// import { AuthenticationError } from 'apollo-server'
+// Ask Sergio which one he wants to use because I think he's mixing the 2
+// If he want the above, we need to install it and use 'new' and message
 const {
   generateToken,
   loginUser,
   AuthenticationError,
-} = require('../utils/auth');
+} = require('../utils/auth'); // cannot use 'new' and message
 
 // Creating GraphQL resolvers
 const resolvers = {
@@ -97,20 +100,20 @@ const resolvers = {
     loginUser: async (_parent, { email, password }) => {
       try {
         // Call the loginUser function from the auth module
-        const token = await loginUser(email, password);
+        const { token, user } = await loginUser(email, password);
 
         // Check if the login was successful
-        if (!token) {
+        if (!token || !user) {
           // If not successful, throw an authentication error
           throw new AuthenticationError('Invalid credentials');
         }
 
-        // If successful, return the token information
-        return { token };
+        // If successful, return the token and user information
+        return { token, user };
       } catch (error) {
         // Log and throw any errors that occur during login
         console.error(error);
-        throw new AuthenticationError('An error occurred during login');
+        throw new AuthenticationError('Invalid credentials');
       }
     },
   },
