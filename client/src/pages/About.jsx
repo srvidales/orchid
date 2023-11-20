@@ -24,9 +24,14 @@ function About() {
   ];
 
   return (
-    <Row xs={1} md={2} className="g-3">
+    <Row
+      xs={1}
+      md={2}
+      className="g-3"
+      style={{ display: 'flex', flexWrap: 'wrap' }}
+    >
       {cardData.map((card, idx) => (
-        <Col key={idx}>
+        <Col key={idx} xs={12} md={6} style={{ flex: '1', margin: '0' }}>
           <Card>
             <Card.Img variant="top" src="holder.js/100px160" />
             <Card.Body>
