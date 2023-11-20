@@ -21,7 +21,8 @@ const Home = () => {
 
   return (
     <div>
-      {/* Header */}
+      {/* Moved this to it's own file in the component's folder */}
+      {/* Header
       <div
         style={{
           display: 'flex',
@@ -31,9 +32,12 @@ const Home = () => {
       >
         <img src="image1.jpg" alt="School Logo" style={{ width: '45%' }} />
         <img src="image2.jpg" alt="School Photo" style={{ width: '45%' }} />
-      </div>
-
+      </div>{' '}
+      */}
       {/* Page Divider */}
+      <hr
+        style={{ width: '95%', margin: '20px auto', border: '2px solid black' }}
+      />
       <hr
         style={{ width: '95%', margin: '20px auto', border: '2px solid black' }}
       />
@@ -50,7 +54,6 @@ const Home = () => {
           Upcoming Events
         </div>
       </div>
-
       {/* Modals */}
       {showCostTuitionModal && (
         <div className="modal" onClick={closeModals}>
@@ -59,6 +62,12 @@ const Home = () => {
               &times;
             </span>
             <h2>Cost/Tuition</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
+              dolores placeat cumque tempore itaque minus distinctio nemo nobis?
+              Consequatur, earum. Eum inventore recusandae veniam. Nobis libero
+              autem quod vero veritatis?
+            </p>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
               dolores placeat cumque tempore itaque minus distinctio nemo nobis?
@@ -81,6 +90,12 @@ const Home = () => {
               commodi distinctio perspiciatis tempore nam alias accusamus qui,
               possimus voluptate, reprehenderit, nesciunt enim modi. Molestias!
             </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Consectetur, eveniet tenetur. Ratione laboriosam error dolore
+              commodi distinctio perspiciatis tempore nam alias accusamus qui,
+              possimus voluptate, reprehenderit, nesciunt enim modi. Molestias!
+            </p>
           </div>
         </div>
       )}
@@ -97,10 +112,15 @@ const Home = () => {
               vero cum exercitationem quia id perspiciatis quidem atque sapiente
               tenetur consequatur ipsa soluta autem.
             </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Voluptates laudantium facere error, dolore laborum tempora quaerat
+              vero cum exercitationem quia id perspiciatis quidem atque sapiente
+              tenetur consequatur ipsa soluta autem.
+            </p>
           </div>
         </div>
       )}
-
       {/* Request Information Card */}
       <div style={{ marginTop: '20px' }}>
         <h2>Request Information</h2>
