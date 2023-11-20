@@ -1,8 +1,11 @@
 // Importing the necessary models and packages
-const { User, MenuItem, School } = require("../models");
-const bcrypt = require("bcrypt");
-const { AuthenticationError } = require("apollo-server");
-const { generateToken } = require("../utils/auth");
+const { User, MenuItem, School } = require('../models');
+const bcrypt = require('bcrypt');
+const {
+  generateToken,
+  loginUser,
+  AuthenticationError,
+} = require('../utils/auth'); 
 
 // Creating GraphQL resolvers
 const resolvers = {
@@ -25,11 +28,11 @@ const resolvers = {
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
         .sort({ createdAt: -1 })
-        .populate("menuItems")
-        .populate("users")
+        .populate('menuItems')
+        .populate('users')
         .populate({
-          path: "menus",
-          populate: { path: "menuItems" },
+          path: 'menus',
+          populate: { path: 'menuItems' },
         });
     },
 
@@ -56,7 +59,10 @@ const resolvers = {
     },
   },
   Mutation: {
-    signupUser: async (parent, { firstName, lastName, email, password, school }) => {
+    signupUser: async (
+      _parent,
+      { firstName, lastName, email, password, school },
+    ) => {
       try {
         // Hash the password before storing it
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -79,11 +85,32 @@ const resolvers = {
         // Return the token and user information
         return { token, user };
       } catch (error) {
-        console.error("Error during user signup:", error);
+        console.error('Error during user signup:', error);
         // Handle the error and throw it or return an error message
         throw new AuthenticationError(
-          "An error occurred during signup. Please try again."
+          'An error occurred during signup. Please try again.',
         );
+      }
+    },
+
+    // Mutation resolver for loginUser
+    loginUser: async (_parent, { email, password }) => {
+      try {
+        // Call the loginUser function from the auth module
+        const { token, user } = await loginUser(email, password);
+
+        // Check if the login was successful
+        if (!token || !user) {
+          // If not successful, throw an authentication error
+          throw new AuthenticationError('Invalid credentials');
+        }
+
+        // If successful, return the token and user information
+        return { token, user };
+      } catch (error) {
+        // Log and throw any errors that occur during login
+        console.error(error);
+        throw new AuthenticationError('Invalid credentials');
       }
     },
   },

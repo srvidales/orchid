@@ -1,6 +1,6 @@
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/User'); 
+const User = require('../models/User');
 
 const secretKey = 'mysecretssshhhhhhh';
 const expiration = '1h';
@@ -16,15 +16,15 @@ const loginUser = async (email, password) => {
     const user = await User.findOne({ email });
 
     // Check for invalid credentials
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user && !(await user.isCorrectPassword(password))) {
       // Invalid credentials
-      return null;
+      return { token: null, user: null };
     }
 
-    // Valid credentials, generate and return a token
-    // Generate a JWT token for the authenticated user
+    // Valid credentials, generate and return a JWT token
+    // Generate a JSON Web Token (JWT) for the authenticated user
     const token = generateToken({ id: user._id, username: user.username });
-    return token;
+    return { token, user };
   } catch (error) {
     // Log and throw any errors that occur during login
     console.error(error);
