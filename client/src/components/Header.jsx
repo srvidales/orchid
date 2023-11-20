@@ -2,8 +2,8 @@
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 
-// Creating the Header component
-const Header = () => {
+// Creating the Header component without using const
+export default function Header() {
   // Getting the current page path using useLocation hook
   const currentPage = useLocation().pathname;
 
@@ -29,7 +29,4 @@ const Header = () => {
       </div>
     </div>
   );
-};
-
-// Exporting the Header component as the default export
-export default Header;
+}
