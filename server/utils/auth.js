@@ -1,6 +1,6 @@
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/User'); 
+const User = require('../models/User');
 
 const secretKey = 'mysecretssshhhhhhh';
 const expiration = '1h';
@@ -16,7 +16,7 @@ const loginUser = async (email, password) => {
     const user = await User.findOne({ email });
 
     // Check for invalid credentials
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user || !(await user.isCorrectPassword(password))) {
       // Invalid credentials
       return null;
     }
