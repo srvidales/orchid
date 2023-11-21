@@ -63,7 +63,7 @@ db.once('open', async () => {
     await newDailyMenu.save();
 
     // Adding the daily menu to the school's menus array
-    school.menus.push(newDailyMenu);
+    school.dailyMenus.push(newDailyMenu);
 
     // Saving the school with the updated menus array
     await school.save();
