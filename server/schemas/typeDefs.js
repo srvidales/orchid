@@ -36,7 +36,7 @@ const typeDefs = `
     email: String!
     users: [User]
     menuItems: [MenuItem]
-    menus: [DailyMenu]
+    dailyMenus: [DailyMenu]
     createdAt: String
   }
 
@@ -63,7 +63,7 @@ const typeDefs = `
     schools: [School]
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
-    menus: [DailyMenu]
+    dailyMenus: [DailyMenu]
   }
   
   type Mutation {
