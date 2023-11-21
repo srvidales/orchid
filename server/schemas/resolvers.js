@@ -1,11 +1,8 @@
 // Importing the necessary models and packages
 const { User, MenuItem, School, DailyMenu } = require('../models');
 const bcrypt = require('bcrypt');
-const {
-  generateToken,
-  loginUser,
-  AuthenticationError,
-} = require('../utils/auth');
+const { generateToken, loginUser } = require('../utils/auth');
+const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
@@ -146,6 +143,32 @@ const resolvers = {
         console.error(error);
         throw new AuthenticationError(
           'An error occurred during user update. Please try again.',
+        );
+      }
+    },
+
+    // Mutation resolver for adding a daily menu
+    addDailyMenu: async (_parent, { date, meal, menuItems }) => {
+      try {
+        // Create a new daily menu in the database
+        const dailyMenu = await DailyMenu.create({
+          date,
+          meal,
+          menuItems,
+        });
+
+        // Populate the menuItems field to retrieve details for each menu item
+        const populatedDailyMenu = await DailyMenu.populate(dailyMenu, {
+          path: 'menuItems',
+        });
+
+        // Return the newly created daily menu with populated menuItems
+        return populatedDailyMenu;
+      } catch (error) {
+        // Log and throw any errors that occur during daily menu creation
+        console.error(error);
+        throw new AuthenticationError(
+          'An error occurred during daily menu creation. Please try again.',
         );
       }
     },
