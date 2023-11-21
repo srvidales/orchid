@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 function About() {
+  const [screenWidth, setScreenWidth] = useState(screen.width);
   const cardData = [
     {
       title: 'Our Daycare',
@@ -23,15 +24,46 @@ function About() {
     },
   ];
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => setScreenWidth(screen.width), 100);
+  //   return () => clearInterval(interval);
+  // }, [])
+
+  // Hook to listen for resize event on the window and update the component's state for screen width
+  const handleResize = (e) => {
+    console.log('what the');
+    setScreenWidth(e.target.innerWidth);
+  };
+
+  // The effect runs once when the component mounts the empty array []
+  // Add event listener for resizing on the window
+  // When the component is unmounted, it takes it removes the event listener
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // The effect runs when screen width is changed.
+  // Log the value of screen width.
+  // Show the changes of the screen width state when window is resized
+  useEffect(() => {
+    console.log(screenWidth);
+  }, [screenWidth]);
+
   return (
     <Row
-      xs={1}
-      md={2}
       className="g-3"
-      style={{ display: 'flex', flexWrap: 'wrap' }}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
+      }}
     >
       {cardData.map((card, idx) => (
-        <Col key={idx} xs={12} md={6} style={{ flex: '1', margin: '0' }}>
+        <Col
+          key={idx}
+          style={{ margin: '0', width: screenWidth > 500 ? '50%' : '100%' }}
+        >
           <Card>
             <Card.Img variant="top" src="holder.js/100px160" />
             <Card.Body>
