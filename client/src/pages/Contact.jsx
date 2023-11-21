@@ -9,7 +9,14 @@ const Contact = () => {
     email: '',
     cellphone: '',
     message: '',
+    from_firstname: '',
+    from_lastname: '',
+    email: '',
+    cellphone: '',
+    message: '',
     timeSlots: [],
+    textMessage: '',
+    specialMeal: '',
     to_name: 'Whippersnappers Daycare',
   });
 
@@ -20,10 +27,14 @@ const Contact = () => {
       .send(
         'service_of106il',
         'template_edqhx5z',
+        'service_of106il',
+        'template_edqhx5z',
         { ...formState },
+        'fUTN7iOm_VoOcuw60',
         'fUTN7iOm_VoOcuw60',
       )
       .then((response) => {
+        console.log('Success.', response.status, response.text);
         console.log('Success.', response.status, response.text);
         setFormState({
           from_firstname: '',
@@ -31,12 +42,20 @@ const Contact = () => {
           email: '',
           cellphone: '',
           message: '',
+          timeSlots: [],
+          textMessage: '',
+          specialMeal: '',
           to_name: 'Whippersnappers Daycare',
         });
         setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
         setTimeout(() => setDisplayMessage(''), 6000);
+        setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
+        setTimeout(() => setDisplayMessage(''), 6000);
       })
       .catch((err) => {
+        console.log('Failed.', err);
+        setDisplayMessage('Unable to send email. Please contact us by phone.');
+        setTimeout(() => setDisplayMessage(''), 6000);
         console.log('Failed.', err);
         setDisplayMessage('Unable to send email. Please contact us by phone.');
         setTimeout(() => setDisplayMessage(''), 6000);
@@ -53,6 +72,11 @@ const Contact = () => {
       { controlId: '', label: '' },
       { controlId: '', label: '' },
       { controlId: '', label: '' },
+      { controlId: 'from_firstname', label: 'First name' },
+      { controlId: '', label: '' },
+      { controlId: '', label: '' },
+      { controlId: '', label: '' },
+      { controlId: '', label: '' },
     ];
   };
 
@@ -64,79 +88,96 @@ const Contact = () => {
       setFormState({ ...formState, timeSlots: updatedTimes });
       return;
     }
-    setFormState({ ...formState, timeSlots: [...formState.timeSlots, name] });
+
+    const { text } = e.target;
+    console.log(text);
+    if (formState.textMessage.includes(text)) {
+      const updatedTextMessage = formState.textMessage.filter(
+        (time) => time !== text,
+      );
+      setFormState({ ...formState, textMessage: updatedTextMessage });
+      return;
+    }
+    setFormState({
+      ...formState,
+      timeSlots: [...formState.timeSlots, name],
+      textMessage: [...formState.textMessage, text],
+    });
   };
 
   return (
     <div>
       <h1>Contact Us</h1>
+
       <div>
-        {/* <FloatingLabel
+        {/* First Name */}
+        <FloatingLabel
           controlId="from_firstname"
           label="First Name"
           className="mb-3"
         >
           <Form.Control
             type="text"
-            placeholder="First Name"
             value={formState.from_firstname}
             onChange={handleChange}
+            name="from_firstname"
           />
-        </FloatingLabel> */}
-        <label htmlFor="from_firstname">Guardian:</label>
-        <input
-          type="text"
-          name="from_firstname"
-          placeholder="First Name"
-          value={formState.from_firstname}
-          onChange={handleChange}
-          // width={2000}
-        />
-        <label htmlFor="from_lastname"></label>
-        <input
-          type="text"
-          name="from_lastname"
-          placeholder="Last Name"
-          value={formState.from_lastname}
-          onChange={handleChange}
-        />
-        <br></br>
-        <label htmlFor="email">Email: </label>
-        <input
-          type="text"
-          name="email"
-          placeholder="yourname@email.com"
-          value={formState.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="cellphone">Cell Phone: </label>
-        <input
-          type="text"
-          name="cellphone"
-          placeholder="Cell Phone (408) 123-4567"
-          value={formState.cellphone}
-          onChange={handleChange}
-        />
-        <p />
-        <label htmlFor="message">Send us a message: </label>
-        <br></br>
-        <textarea
-          type="text"
-          name="message"
-          placeholder="Send us your questions."
-          value={formState.message}
-          onChange={handleChange}
-          rows={4}
-          cols={50}
-        />
+        </FloatingLabel> 
+        <FloatingLabel
+          controlId="from_lastname"
+          label="Last Name"
+          className="mb-b"
+        >
+          <Form.Control
+            type="text"
+            value={formState.from_lastname}
+            onChange={handleChange}
+            name="from_lastname"
+          />
+        </FloatingLabel>
+        <p></p>
 
-        {/* 
-        //! Submit Checkboxes Need to be handled and sent. 
-        //! Width of the forms? Should I do a class and width them there?
-        //! I want to use Form.Control && FloatingLabel && TextArea
-        //! https://react-bootstrap.netlify.app/docs/forms/floating-labels
-        //! How do I map over or should I use a component for the contact form?
-        */}
+        {/* Email */}
+        <FloatingLabel controlId="email" label="Email" className="mb-b">
+          <Form.Control
+            type="text"
+            value={formState.email}
+            onChange={handleChange}
+            name="email"
+          />
+        </FloatingLabel>
+        <p></p>
+
+        {/* Cell Phone */}
+        <FloatingLabel
+          controlId="cellphone"
+          label="Cell Phone"
+          className="mb-b"
+        >
+          <Form.Control
+            type="text"
+            value={formState.cellphone}
+            onChange={handleChange}
+            name="cellphone"
+          />
+        </FloatingLabel>
+        <p></p>
+
+        {/* Message Box */}
+        <FloatingLabel
+          controlId="message"
+          label="Send us a message."
+          className="mb-b"
+        >
+          <Form.Control
+            as="textarea"
+            value={formState.message}
+            onChange={handleChange}
+            name="message"
+            style={{ height: '100px' }}
+          />
+        </FloatingLabel>
+        <p></p>
 
         <div>
           {['checkbox'].map((type) => (
@@ -170,6 +211,29 @@ const Contact = () => {
                 checked={formState.timeSlots.includes('evening') ? true : false}
                 onChange={handleCheckBoxChange}
               />
+              <p></p>
+              <Form.Check
+                inline
+                label="OK to send text messages to me. (Standard text message rates apply.)"
+                name="textMessage"
+                type={type}
+                id={`inline-${type}-4`}
+                checked={
+                  formState.timeSlots.includes('textMessage') ? true : false
+                }
+                onChange={handleCheckBoxChange}
+              />
+              <Form.Check
+                inline
+                label="My child has special needs regarding their meals."
+                name="specialMeal"
+                type={type}
+                id={`inline-${type}-4`}
+                checked={
+                  formState.timeSlots.includes('specialMeal') ? true : false
+                }
+                onChange={handleCheckBoxChange}
+              />
             </div>
           ))}
         </div>
@@ -182,3 +246,55 @@ const Contact = () => {
 };
 
 export default Contact;
+
+{
+  /* <label htmlFor="from_firstname">Guardian:</label>
+      <input
+        type="text"
+        name="from_firstname"
+        placeholder="First Name"
+        value={formState.from_firstname}
+        onChange={handleChange}
+      />
+      <label htmlFor="from_lastname"></label>
+      <input
+        type="text"
+        name="from_lastname"
+        placeholder="Last Name"
+        value={formState.from_lastname}
+        onChange={handleChange}
+      />  */
+}
+
+// <br></br>
+// <label htmlFor="email">Email: </label>
+// <input
+//   type="text"
+//   name="email"
+//   placeholder="yourname@email.com"
+//   value={formState.email}
+//   onChange={handleChange}
+// />
+// <label htmlFor="cellphone">Cell Phone: </label>
+// <input
+//   type="text"
+//   name="cellphone"
+//   placeholder="Cell Phone (408) 123-4567"
+//   value={formState.cellphone}
+//   onChange={handleChange}
+// />
+
+{
+  /* <p />
+<label htmlFor="message">Send us a message: </label>
+<br></br>
+<textarea
+  type="text"
+  name="message"
+  placeholder="Send us your questions."
+  value={formState.message}
+  onChange={handleChange}
+  rows={4}
+  cols={50}
+/> */
+}

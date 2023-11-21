@@ -1,18 +1,20 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "./components/Navbar";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+// import './index.css';
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
 
 function App() {
-  const currentPage = useLocation().pathname;
-  console.log(currentPage);
+   // Moved this to it's own file in the component's folder
+  // const currentPage = useLocation().pathname;
+  // console.log(currentPage);
 
   return (
     <>
       <div>
-        <Navbar page={currentPage} />
+        <Header />
+        {/* <Navbar page={currentPage} /> */}
         <Outlet />
       </div>
     </>
