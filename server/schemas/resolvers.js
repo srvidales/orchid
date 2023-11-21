@@ -1,5 +1,5 @@
 // Importing the necessary models and packages
-const { User, MenuItem, School } = require('../models');
+const { User, MenuItem, School, DailyMenu } = require('../models');
 const bcrypt = require('bcrypt');
 const {
   generateToken,
@@ -24,14 +24,14 @@ const resolvers = {
       // Sorting them by creation date in descending order
       // Populating the 'menuItems' field to retrieve associated menu items
       // Populating the 'users' field to retrieve associated users
-      // Populating the 'menus' field to retrieve associated daily menus
+      // Populating the 'dailyMenus' field to retrieve associated daily menus
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
         .sort({ createdAt: -1 })
         .populate('menuItems')
         .populate('users')
         .populate({
-          path: 'menus',
+          path: 'dailyMenus',
           populate: { path: 'menuItems' },
         });
     },
@@ -52,7 +52,7 @@ const resolvers = {
     },
 
     // Resolver for fetching daily menus
-    menus: async () => {
+    dailyMenus: async () => {
       // Using the DailyMenu model to find all daily menus
       // Sorting them by creation date in descending order
       return await DailyMenu.find().sort({ createdAt: -1 });
