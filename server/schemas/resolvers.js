@@ -2,7 +2,7 @@
 const { User, MenuItem, School, DailyMenu } = require('../models');
 const bcrypt = require('bcrypt');
 const { generateToken, loginUser } = require('../utils/auth');
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
