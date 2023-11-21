@@ -5,7 +5,7 @@ const {
   generateToken,
   loginUser,
   AuthenticationError,
-} = require('../utils/auth'); 
+} = require('../utils/auth');
 
 // Creating GraphQL resolvers
 const resolvers = {
@@ -97,16 +97,16 @@ const resolvers = {
     loginUser: async (_parent, { email, password }) => {
       try {
         // Call the loginUser function from the auth module
-        const { token, user } = await loginUser(email, password);
+        const result = await loginUser(email, password);
 
         // Check if the login was successful
-        if (!token || !user) {
+        if (!result || !result.token || !result.user) {
           // If not successful, throw an authentication error
           throw new AuthenticationError('Invalid credentials');
         }
 
         // If successful, return the token and user information
-        return { token, user };
+        return { token: result.token, user: result.user };
       } catch (error) {
         // Log and throw any errors that occur during login
         console.error(error);
