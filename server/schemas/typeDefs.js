@@ -75,6 +75,13 @@ const typeDefs = `
       school: ID!
     ): Auth
     loginUser(email: String!, password: String!): Auth
+    updateUser(
+      userId: ID!,
+      firstName: String,
+      lastName: String,
+      email: String,
+      password: String
+    ): User
   }
 `;
 
