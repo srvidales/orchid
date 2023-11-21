@@ -1,45 +1,45 @@
-import emailjs from "@emailjs/browser";
-import { useState } from "react";
-import { Button, Form, FloatingLabel } from "react-bootstrap";
+import emailjs from '@emailjs/browser';
+import { useState } from 'react';
+import { Button, Form, FloatingLabel } from 'react-bootstrap';
 
 const Contact = () => {
   const [formState, setFormState] = useState({
-    from_firstname: "",
-    from_lastname: "",
-    email: "",
-    cellphone: "",
-    message: "",
+    from_firstname: '',
+    from_lastname: '',
+    email: '',
+    cellphone: '',
+    message: '',
     timeSlots: [],
-    to_name: "Whippersnappers Daycare",
+    to_name: 'Whippersnappers Daycare',
   });
 
-  const [displayMessage, setDisplayMessage] = useState("");
+  const [displayMessage, setDisplayMessage] = useState('');
 
   const sendEmail = () => {
     emailjs
       .send(
-        "service_of106il",
-        "template_edqhx5z",
+        'service_of106il',
+        'template_edqhx5z',
         { ...formState },
-        "fUTN7iOm_VoOcuw60"
+        'fUTN7iOm_VoOcuw60',
       )
       .then((response) => {
-        console.log("Success.", response.status, response.text);
+        console.log('Success.', response.status, response.text);
         setFormState({
-          from_firstname: "",
-          from_lastname: "",
-          email: "",
-          cellphone: "",
-          message: "",
-          to_name: "Whippersnappers Daycare",
+          from_firstname: '',
+          from_lastname: '',
+          email: '',
+          cellphone: '',
+          message: '',
+          to_name: 'Whippersnappers Daycare',
         });
-        setDisplayMessage("Thank you for email the Whippersnappers Daycare.");
-        setTimeout(() => setDisplayMessage(""), 6000);
+        setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
+        setTimeout(() => setDisplayMessage(''), 6000);
       })
       .catch((err) => {
-        console.log("Failed.", err);
-        setDisplayMessage("Unable to send email. Please contact us by phone.");
-        setTimeout(() => setDisplayMessage(""), 6000);
+        console.log('Failed.', err);
+        setDisplayMessage('Unable to send email. Please contact us by phone.');
+        setTimeout(() => setDisplayMessage(''), 6000);
       });
   };
 
@@ -48,24 +48,24 @@ const Contact = () => {
     setFormState({ ...formState, [name]: value });
 
     const form = [
-      { controlId: "from_firstname", label: "First name" },
-      { controlId: "", label: "" },
-      { controlId: "", label: "" },
-      { controlId: "", label: "" },
-      { controlId: "", label: "" },
+      { controlId: 'from_firstname', label: 'First name' },
+      { controlId: '', label: '' },
+      { controlId: '', label: '' },
+      { controlId: '', label: '' },
+      { controlId: '', label: '' },
     ];
   };
 
- const handleCheckBoxChange = (e) =>{
-  const {name} = e.target
-  console.log(name)
-  if(formState.timeSlots.includes(name)){
-    const updatedTimes = formState.timeSlots.filter(time=> time !== name)
-    setFormState({...formState, timeSlots: updatedTimes})
-    return
-  } 
-  setFormState({...formState, timeSlots: [...formState.timeSlots,name]})
- }
+  const handleCheckBoxChange = (e) => {
+    const { name } = e.target;
+    console.log(name);
+    if (formState.timeSlots.includes(name)) {
+      const updatedTimes = formState.timeSlots.filter((time) => time !== name);
+      setFormState({ ...formState, timeSlots: updatedTimes });
+      return;
+    }
+    setFormState({ ...formState, timeSlots: [...formState.timeSlots, name] });
+  };
 
   return (
     <div>
@@ -129,7 +129,7 @@ const Contact = () => {
           rows={4}
           cols={50}
         />
-            
+
         {/* 
         //! Submit Checkboxes Need to be handled and sent. 
         //! Width of the forms? Should I do a class and width them there?
@@ -139,7 +139,7 @@ const Contact = () => {
         */}
 
         <div>
-          {["checkbox"].map((type) => (
+          {['checkbox'].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
               <Form.Check
                 inline
@@ -147,7 +147,7 @@ const Contact = () => {
                 name="morning"
                 type={type}
                 id={`inline-${type}-1`}
-                checked={formState.timeSlots.includes("morning") ? true : false}
+                checked={formState.timeSlots.includes('morning') ? true : false}
                 onChange={handleCheckBoxChange}
               />
               <Form.Check
@@ -156,8 +156,10 @@ const Contact = () => {
                 name="afternoon"
                 type={type}
                 id={`inline-${type}-2`}
-               checked={formState.timeSlots.includes("afternoon") ? true : false} 
-               onChange={handleCheckBoxChange}
+                checked={
+                  formState.timeSlots.includes('afternoon') ? true : false
+                }
+                onChange={handleCheckBoxChange}
               />
               <Form.Check
                 inline
@@ -165,14 +167,14 @@ const Contact = () => {
                 name="evening"
                 type={type}
                 id={`inline-${type}-3`}
-               checked={formState.timeSlots.includes("evening") ? true : false} 
-               onChange={handleCheckBoxChange}
+                checked={formState.timeSlots.includes('evening') ? true : false}
+                onChange={handleCheckBoxChange}
               />
             </div>
           ))}
         </div>
         <Button onClick={sendEmail}>Submit</Button>
-        <Button onClick={()=> console.log(formState)}>Check State</Button>
+        <Button onClick={() => console.log(formState)}>Check State</Button>
         <p>{displayMessage}</p>
       </div>
     </div>
