@@ -1,21 +1,24 @@
 // Importing the necessary models and packages
 const { User, MenuItem, School, DailyMenu } = require('../models');
 const bcrypt = require('bcrypt');
-const {
-  generateToken,
-  loginUser,
-  AuthenticationError,
-} = require('../utils/auth');
+const { generateToken, loginUser } = require('../utils/auth');
+const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
   Query: {
-    // Resolver for fetching users with associated school information
+    // Resolver for fetching all users
     users: async () => {
-      // Using the User model to find all users
-      // Sorting them by creation date in descending order
-      // Populating the 'schoolId' field to retrieve associated school information
-      return await User.find().sort({ createdAt: -1 }).populate('schoolId');
+      try {
+        // Using the User model to find all users
+        return await User.find();
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error('Error during user fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching users.',
+        );
+      }
     },
 
     // Resolver for fetching schools with associated menu items and daily menus
@@ -36,29 +39,71 @@ const resolvers = {
         });
     },
 
-    // Resolver for fetching a school by its id
-    schoolById: async (_, { _id }) => {
-      // Using the School model to find a school by its id
-      return await School.findById(_id);
+    // Resolver for fetching a specific school by ID
+    schoolById: async (_parent, { _id }) => {
+      try {
+        // Use the School model to find the school by its ID
+        // Populate the 'menuItems' field to retrieve associated menu items
+        // Populate the 'users' field to retrieve associated users
+        // Populate the 'dailyMenus' field to retrieve associated daily menus
+        // Nested population to retrieve menu items within each daily menu
+        // Populate 'menuItems' field inside 'dailyMenus'
+        const school = await School.findById(_id)
+          .populate('menuItems')
+          .populate('users')
+          .populate({
+            path: 'dailyMenus',
+            populate: { path: 'menuItems' },
+          });
+
+        // Return the school data
+        return school;
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error(`Error during school fetch for ID ${_id}:`, error);
+        throw new AuthenticationError(
+          'An error occurred while fetching the school.',
+        );
+      }
     },
 
     // Resolver for fetching menu items
     menuItems: async () => {
-      // Using the MenuItem model to find all menu items
-      // Sorting them by creation date in descending order
-      return await MenuItem.find().sort({ createdAt: -1 });
-      // Populating the 'school' field, uncomment if needed
-      // return await MenuItem.find().sort({ createdAt: -1 }).populate('school');
+      try {
+        // Using the MenuItem model to find all menu items
+        // Sorting them by creation date in descending order
+        return await MenuItem.find().sort({ createdAt: -1 });
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error('Error during menu items fetch:', error);
+        throw new AuthenticationError('An error occurred while fetching menu items.');
+      }
     },
 
-    // Resolver for fetching daily menus
+    // Resolver that fetches daily menus and populates each one with its associated menu items
     dailyMenus: async () => {
-      // Using the DailyMenu model to find all daily menus
-      // Sorting them by creation date in descending order
-      return await DailyMenu.find().sort({ createdAt: -1 });
+      try {
+        // Using the DailyMenu model to find all daily menus
+        // Sorting them by creation date in descending order
+        const dailyMenus = await DailyMenu.find().sort({ createdAt: -1 });
+    
+        // Populate the 'menuItems' field for each daily menu
+        const populatedDailyMenus = await DailyMenu.populate(dailyMenus, {
+          path: 'menuItems',
+        });
+    
+        // Return the daily menus with populated menu items
+        return populatedDailyMenus;
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error('Error during daily menus fetch:', error);
+        throw new AuthenticationError('An error occurred while fetching daily menus.');
+      }
     },
+    
   },
   Mutation: {
+    // Mutation resolver for signupUser
     signupUser: async (
       _parent,
       { firstName, lastName, email, password, school },
@@ -146,6 +191,32 @@ const resolvers = {
         console.error(error);
         throw new AuthenticationError(
           'An error occurred during user update. Please try again.',
+        );
+      }
+    },
+
+    // Mutation resolver for adding a daily menu
+    addDailyMenu: async (_parent, { date, meal, menuItems }) => {
+      try {
+        // Create a new daily menu in the database
+        const dailyMenu = await DailyMenu.create({
+          date,
+          meal,
+          menuItems,
+        });
+
+        // Populate the menuItems field to retrieve details for each menu item
+        const populatedDailyMenu = await DailyMenu.populate(dailyMenu, {
+          path: 'menuItems',
+        });
+
+        // Return the newly created daily menu with populated menuItems
+        return populatedDailyMenu;
+      } catch (error) {
+        // Log and throw any errors that occur during daily menu creation
+        console.error(error);
+        throw new AuthenticationError(
+          'An error occurred during daily menu creation. Please try again.',
         );
       }
     },
