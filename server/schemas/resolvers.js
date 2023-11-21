@@ -113,6 +113,42 @@ const resolvers = {
         throw new AuthenticationError('Invalid credentials');
       }
     },
+
+    // Mutation resolver for updateUser
+    updateUser: async (
+      _parent,
+      { userId, firstName, lastName, email, password },
+    ) => {
+      try {
+        // Find the user by ID
+        const user = await User.findByIdAndUpdate(
+          userId, // The unique identifier of the user to be updated
+          {
+            // Only update the fields that are provided
+            // If 'firstName' is provided, update the 'firstName' field
+            ...(firstName && { firstName }),
+            // If 'lastName' is provided, update the 'lastName' field
+            ...(lastName && { lastName }),
+            // If 'email' is provided, update the 'email' field
+            ...(email && { email }),
+            // Hash and update the password if provided
+            // If 'password' is provided, hash the new password using bcrypt with 10 salt rounds,
+            // and update the 'password' field in the database
+            ...(password && { password: await bcrypt.hash(password, 10) }),
+          },
+          { new: true }, // Return the updated document after the update is applied
+        );
+
+        // Return the updated user
+        return user;
+      } catch (error) {
+        // Log and throw any errors that occur during updating user
+        console.error(error);
+        throw new AuthenticationError(
+          'An error occurred during user update. Please try again.',
+        );
+      }
+    },
   },
 };
 
