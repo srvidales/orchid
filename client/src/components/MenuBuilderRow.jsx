@@ -1,7 +1,13 @@
-export default function MenuBuilderRow() {
+import PropTypes from 'prop-types';
+
+MenuBuilderRow.propTypes = {
+  dayOfWeek: PropTypes.string.isRequired,
+};
+
+export default function MenuBuilderRow({dayOfWeek}) {
   return (
     <tr>
-      <th scope="row">Monday</th>
+      <th scope="row">{dayOfWeek}</th>
       <td className="align-top">
         <select className="selectpicker">
           <optgroup label="Entree">

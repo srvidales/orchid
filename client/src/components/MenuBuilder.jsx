@@ -30,11 +30,11 @@ export default function MenuBuilder() {
           </tr>
         </thead>
         <tbody>
-          <MenuBuilderDailyRow />
-          <MenuBuilderDailyRow />
-          <MenuBuilderDailyRow />
-          <MenuBuilderDailyRow />
-          <MenuBuilderDailyRow />
+          <MenuBuilderDailyRow dayOfWeek='Monday'/>
+          <MenuBuilderDailyRow dayOfWeek='Tuesday'/>
+          <MenuBuilderDailyRow dayOfWeek='Wednesday'/>
+          <MenuBuilderDailyRow dayOfWeek='Thursday'/>
+          <MenuBuilderDailyRow dayOfWeek='Friday'/>
         </tbody>
       </table>
     </>
