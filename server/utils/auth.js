@@ -1,4 +1,4 @@
-const { GraphQLError } = require('graphql');
+const { AuthenticationError } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -36,19 +36,11 @@ const loginUser = async (email, password) => {
   } catch (error) {
     // Log and throw any errors that occur during login
     console.error(error);
-    throw new AuthenticationError('An error occurred during login. Please try again.');
+    throw new AuthenticationError(
+      'An error occurred during login. Please try again.',
+    );
   }
 };
 
-const AuthenticationError = new GraphQLError('Could not authenticate user.', {
-  extensions: {
-    code: 'UNAUTHENTICATED',
-  },
-});
-
 // Export the functions for use in other files
-module.exports = {
-  generateToken,
-  loginUser,
-  AuthenticationError,
-};
+module.exports = { generateToken, loginUser };
