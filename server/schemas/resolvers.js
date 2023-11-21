@@ -80,12 +80,27 @@ const resolvers = {
       }
     },
 
-    // Resolver for fetching daily menus
+    // Resolver that fetches daily menus and populates each one with its associated menu items
     dailyMenus: async () => {
-      // Using the DailyMenu model to find all daily menus
-      // Sorting them by creation date in descending order
-      return await DailyMenu.find().sort({ createdAt: -1 });
+      try {
+        // Using the DailyMenu model to find all daily menus
+        // Sorting them by creation date in descending order
+        const dailyMenus = await DailyMenu.find().sort({ createdAt: -1 });
+    
+        // Populate the 'menuItems' field for each daily menu
+        const populatedDailyMenus = await DailyMenu.populate(dailyMenus, {
+          path: 'menuItems',
+        });
+    
+        // Return the daily menus with populated menu items
+        return populatedDailyMenus;
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error('Error during daily menus fetch:', error);
+        throw new AuthenticationError('An error occurred while fetching daily menus.');
+      }
     },
+    
   },
   Mutation: {
     // Mutation resolver for signupUser
