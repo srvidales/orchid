@@ -7,12 +7,16 @@ const { AuthenticationError } = require('@apollo/server');
 // Creating GraphQL resolvers
 const resolvers = {
   Query: {
-    // Resolver for fetching users with associated school information
+    // Resolver for fetching all users 
     users: async () => {
-      // Using the User model to find all users
-      // Sorting them by creation date in descending order
-      // Populating the 'schoolId' field to retrieve associated school information
-      return await User.find().sort({ createdAt: -1 }).populate('schoolId');
+      try {
+        // Using the User model to find all users
+        return await User.find();
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error('Error during user fetch:', error);
+        throw new AuthenticationError('An error occurred while fetching users.');
+      }
     },
 
     // Resolver for fetching schools with associated menu items and daily menus
@@ -56,6 +60,7 @@ const resolvers = {
     },
   },
   Mutation: {
+    // Mutation resolver for signupUser
     signupUser: async (
       _parent,
       { firstName, lastName, email, password, school },
