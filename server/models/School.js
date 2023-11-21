@@ -80,7 +80,7 @@ const schoolSchema = new Schema({
     },
   ],
   // Array of DailyMenu references associated with the school
-  menus: [
+  dailyMenus: [
     {
       type: Schema.Types.ObjectId,
       ref: 'DailyMenu',

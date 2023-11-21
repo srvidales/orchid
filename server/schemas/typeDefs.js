@@ -36,7 +36,7 @@ const typeDefs = `
     email: String!
     users: [User]
     menuItems: [MenuItem]
-    menus: [DailyMenu]
+    dailyMenus: [DailyMenu]
     createdAt: String
   }
 
@@ -63,7 +63,7 @@ const typeDefs = `
     schools: [School]
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
-    menus: [DailyMenu]
+    dailyMenus: [DailyMenu]
   }
   
   type Mutation {
@@ -74,6 +74,15 @@ const typeDefs = `
       password: String!,
       school: ID!
     ): Auth
+    loginUser(email: String!, password: String!): Auth
+    updateUser(
+      userId: ID!,
+      firstName: String,
+      lastName: String,
+      email: String,
+      password: String
+    ): User
+    addDailyMenu(date: String!, meal: MealType!, menuItems: [ID]!): DailyMenu
   }
 `;
 
@@ -83,17 +92,14 @@ module.exports = typeDefs;
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(firstName: String!, lastName: String!, email: String!, password: String!, school: ID!): Auth
-        addSchool(name: String!, address: String!, city: String!, state: String!, zip: String!, phone: String!, email: String!): School
-        addMenuItem(name: String!, description: String!, price: Float!, school: ID!): MenuItem
-        addWeeklyMenu(week: Int!, year: Int!, school: ID!): WeeklyMenu
-        addMenuItemToWeeklyMenu(menuItem: ID!, weeklyMenu: ID!): WeeklyMenu
-        removeMenuItemFromWeeklyMenu(menuItem: ID!, weeklyMenu: ID!): WeeklyMenu
-        removeSchool(_id: ID!): School
-        removeUser(_id: ID!): User
-        removeMenuItem(_id: ID!): MenuItem
-        removeWeeklyMenu(_id: ID!): WeeklyMenu
-        updateSchool(_id: ID!, name: String, address: String, city: String, state: String, zip: String, phone: String, email: String): School
-        updateUser(_id: ID!, firstName: String, lastName: String, email: String, password: String): User
+        addDailyMenu(): DailyMenu
+        WishList - addMenuItem(name: String!, description: String!, price: Float!, school: ID!): MenuItem
+        WishList - addSchool(name: String!, address: String!, city: String!, state: String!, zip: String!, phone: String!, email: String!): School
+        WishList - removeSchool(_id: ID!): School
+        WishList - removeUser(_id: ID!): User
+        WishList - removeMenuItem(_id: ID!): MenuItem
+        WishList - updateSchool(_id: ID!, name: String, address: String, city: String, state: String, zip: String, phone: String, email: String): School
+        WishList - updateUser(_id: ID!, firstName: String, lastName: String, email: String, password: String): User
     }
 
     me: User

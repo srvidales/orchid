@@ -1,6 +1,6 @@
-const { GraphQLError } = require('graphql');
+const { AuthenticationError } = require('@apollo/server');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/User'); 
+const User = require('../models/User');
 
 const secretKey = 'mysecretssshhhhhhh';
 const expiration = '1h';
@@ -16,31 +16,31 @@ const loginUser = async (email, password) => {
     const user = await User.findOne({ email });
 
     // Check for invalid credentials
-    if (!user || !(await user.comparePassword(password))) {
-      // Invalid credentials
-      return null;
+    if (!user && !(await user.isCorrectPassword(password))) {
+      // If invalid credentials, throw an authentication error
+      throw new AuthenticationError('Invalid credentials');
     }
 
-    // Valid credentials, generate and return a token
-    // Generate a JWT token for the authenticated user
+    // Valid credentials, generate and return a JWT token
+    // Generate a JSON Web Token (JWT) for the authenticated user
     const token = generateToken({ id: user._id, username: user.username });
-    return token;
+
+    // Check if the token is generated successfully
+    if (!token) {
+      // If token generation fails, throw an authentication error
+      throw new AuthenticationError('Invalid credentials');
+    }
+
+    // Return the generated token and user
+    return { token, user };
   } catch (error) {
     // Log and throw any errors that occur during login
     console.error(error);
-    throw error;
+    throw new AuthenticationError(
+      'An error occurred during login. Please try again.',
+    );
   }
 };
 
-const AuthenticationError = new GraphQLError('Could not authenticate user.', {
-  extensions: {
-    code: 'UNAUTHENTICATED',
-  },
-});
-
 // Export the functions for use in other files
-module.exports = {
-  generateToken,
-  loginUser,
-  AuthenticationError,
-};
+module.exports = { generateToken, loginUser };
