@@ -6,15 +6,20 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 
 function App() {
-  // Moved this to it's own file in the component's folder
-  // const currentPage = useLocation().pathname;
-  // console.log(currentPage);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
     <>
       <div>
-        <Header />
-        {/* <Navbar page={currentPage} /> */}
+        <Header isLoggedIn={isLoggedIn} />
         <Outlet />
       </div>
     </>

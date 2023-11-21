@@ -1,8 +1,14 @@
 import { Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import "../index.css";
+import AdminNavbar from "./AdminNavbar"; // Added to handle conditional rendering of AdminNavbar
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }) => {
+  // If the user is logged in, render the Admin navbar
+  if (isLoggedIn) {
+    return <AdminNavbar />;
+  }
+
+  // Otherwise, render the regular navbar
   const links = [
     { title: "Home", link: "/" },
     { title: "About", link: "/about" },
