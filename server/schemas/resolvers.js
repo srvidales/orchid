@@ -7,7 +7,7 @@ const { AuthenticationError } = require('@apollo/server');
 // Creating GraphQL resolvers
 const resolvers = {
   Query: {
-    // Resolver for fetching all users 
+    // Resolver for fetching all users
     users: async () => {
       try {
         // Using the User model to find all users
@@ -15,7 +15,9 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during user fetch:', error);
-        throw new AuthenticationError('An error occurred while fetching users.');
+        throw new AuthenticationError(
+          'An error occurred while fetching users.',
+        );
       }
     },
 
@@ -37,10 +39,32 @@ const resolvers = {
         });
     },
 
-    // Resolver for fetching a school by its id
-    schoolById: async (_, { _id }) => {
-      // Using the School model to find a school by its id
-      return await School.findById(_id);
+    // Resolver for fetching a specific school by ID
+    schoolById: async (_parent, { _id }) => {
+      try {
+        // Use the School model to find the school by its ID
+        // Populate the 'menuItems' field to retrieve associated menu items
+        // Populate the 'users' field to retrieve associated users
+        // Populate the 'dailyMenus' field to retrieve associated daily menus
+        // Nested population to retrieve menu items within each daily menu
+        // Populate 'menuItems' field inside 'dailyMenus'
+        const school = await School.findById(_id)
+          .populate('menuItems')
+          .populate('users')
+          .populate({
+            path: 'dailyMenus',
+            populate: { path: 'menuItems' },
+          });
+
+        // Return the school data
+        return school;
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error(`Error during school fetch for ID ${_id}:`, error);
+        throw new AuthenticationError(
+          'An error occurred while fetching the school.',
+        );
+      }
     },
 
     // Resolver for fetching menu items
