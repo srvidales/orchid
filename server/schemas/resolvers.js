@@ -69,11 +69,15 @@ const resolvers = {
 
     // Resolver for fetching menu items
     menuItems: async () => {
-      // Using the MenuItem model to find all menu items
-      // Sorting them by creation date in descending order
-      return await MenuItem.find().sort({ createdAt: -1 });
-      // Populating the 'school' field, uncomment if needed
-      // return await MenuItem.find().sort({ createdAt: -1 }).populate('school');
+      try {
+        // Using the MenuItem model to find all menu items
+        // Sorting them by creation date in descending order
+        return await MenuItem.find().sort({ createdAt: -1 });
+      } catch (error) {
+        // Log and throw any errors that occur during the query
+        console.error('Error during menu items fetch:', error);
+        throw new AuthenticationError('An error occurred while fetching menu items.');
+      }
     },
 
     // Resolver for fetching daily menus
