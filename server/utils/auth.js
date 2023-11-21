@@ -17,18 +17,26 @@ const loginUser = async (email, password) => {
 
     // Check for invalid credentials
     if (!user && !(await user.isCorrectPassword(password))) {
-      // Invalid credentials
-      return { token: null, user: null };
+      // If invalid credentials, throw an authentication error
+      throw new AuthenticationError('Invalid credentials');
     }
 
     // Valid credentials, generate and return a JWT token
     // Generate a JSON Web Token (JWT) for the authenticated user
     const token = generateToken({ id: user._id, username: user.username });
+
+    // Check if the token is generated successfully
+    if (!token) {
+      // If token generation fails, throw an authentication error
+      throw new AuthenticationError('Invalid credentials');
+    }
+
+    // Return the generated token and user
     return { token, user };
   } catch (error) {
     // Log and throw any errors that occur during login
     console.error(error);
-    throw error;
+    throw new AuthenticationError('An error occurred during login. Please try again.');
   }
 };
 
