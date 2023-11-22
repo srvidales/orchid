@@ -1,147 +1,101 @@
+// Importing necessary dependencies from React and React Bootstrap
 import { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import { LOGIN } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
 
-const Login = () => {
-  // Set the initial state of the login and signup forms
-  const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  const [loginError, setLoginError] = useState(null);
+// Defining the Login component
+export default function Login() {
+  // Setting up state to manage form data (email and password)
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-  // Set the initial state of the signup form
-  const [signupFirstName, setSignupFirstName] = useState('');
-  const [signupLastName, setSignupLastName] = useState('');
-  const [signupUsername, setSignupUsername] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
-  const [signupError, setSignupError] = useState(null);
+  // Using the useMutation hook to handle the login mutation
+  const [loginUser, { error }] = useMutation(LOGIN);
 
-  // Handle Login Function
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // Event handler for input changes (when typing in the email or password fields)
+  const handleChange = (e) => {
+    // Destructuring to get the name and value from the target element
+    const { name, value } = e.target;
 
-    if (loginUsername === 'exampleUser' && loginPassword === 'password') {
-      // Successful login
-      setLoginError(null);
-      console.log('Login successful!');
-      // Redirect to Menu Dashboard.. (TODO: Logic Needed)
-    } else {
-      setLoginError('Invalid username or password');
-      setTimeout(() => setLoginError(null), 3000);
-    }
+    // Updating the form data based on the input changes
+    setFormData({ ...formData, [name]: value });
   };
 
-  // Handle Signup Function
-  const handleSignup = async (e) => {
+  // Event handler for form submission
+  const handleSubmit = async (e) => {
+    // Preventing the default form submission behavior
     e.preventDefault();
+
+    // Checking form validity
+    if (e.currentTarget.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
     try {
-      if (signupUsername && signupPassword && signupFirstName && signupLastName) {
-        // Successful signup 
-        setSignupError(null);
-        console.log('Signup successful!');
-        // Redirect to Menu Dashboard.. (TODO: Logic Needed)
-      } else {
-        setSignupError('All fields are required for signup!');
-        setTimeout(() => setSignupError(null), 3000);
-      }
+      // Making a login mutation request with the form data
+      const { data } = await loginUser({
+        variables: { ...formData },
+      });
+
+      // Logging in the user and storing the token in local storage
+      Auth.login(data.loginUser.token);
     } catch (error) {
-      console.error('Error during signup:', error);
-      setSignupError('An error occurred during signup. Please try again.');
-      setTimeout(() => setSignupError(null), 3000);
+      // Handling errors that may occur during the login process
+      console.error('Error during login:', error);
     }
   };
 
+  // Rendering the login form using React Bootstrap components
   return (
     <Container>
       {/* Login Section */}
       <Row className="mt-5">
         <Col md={{ span: 6, offset: 3 }}>
           <h1>Login</h1>
-          {loginError && <Alert variant="danger">{loginError}</Alert>}
-          <Form onSubmit={handleLogin}>
-            <Form.Group controlId="formBasicUsername">
-              <Form.Label>Username</Form.Label>
+          {/* Displaying an error message if there is an error */}
+          {/* {signupError && <Alert variant="danger">{signupError}</Alert>} */}
+
+          {/* Form for user login */}
+          <Form onSubmit={handleSubmit}>
+            {/* Email input field */}
+            <Form.Group controlId="formBasicSignupEmail">
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your username"
-                value={loginUsername}
-                onChange={(e) => setLoginUsername(e.target.value)}
+                placeholder="Enter your email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter your password"
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-              />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Login
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-
-      {/* Page Divider */}
-      <hr style={{ width: '95%', margin: '20px auto', border: '2px solid black' }} />
-
-      {/* Signup Section */}
-      <Row className="mt-5">
-        <Col md={{ span: 6, offset: 3 }}>
-          <h1>Sign Up</h1>
-          {signupError && <Alert variant="danger">{signupError}</Alert>}
-          <Form onSubmit={handleSignup}>
-            <Form.Group controlId="formBasicSignupFirstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your first name"
-                value={signupFirstName}
-                onChange={(e) => setSignupFirstName(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicSignupLastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your last name"
-                value={signupLastName}
-                onChange={(e) => setSignupLastName(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicSignupUsername">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your username"
-                value={signupUsername}
-                onChange={(e) => setSignupUsername(e.target.value)}
-              />
-            </Form.Group>
-
+            {/* Password input field */}
             <Form.Group controlId="formBasicSignupPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Enter your password"
-                value={signupPassword}
-                onChange={(e) => setSignupPassword(e.target.value)}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
               />
             </Form.Group>
 
+            {/* Submit button */}
             <Button variant="success" type="submit">
-              Sign Up
+              Log In
             </Button>
+
+            {/* Link to navigate to the signup page */}
+            <a href="/signup">Signup instead</a>
           </Form>
         </Col>
       </Row>
     </Container>
   );
-};
-
-export default Login;
+}
