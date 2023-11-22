@@ -14,7 +14,7 @@ const Navbar = () => {
     { title: 'Contact Us', link: '/contact' }, // Contact Us link with '/contact' as the link path
   ];
 
-  // Setermines what gets displayed on the browser when the component is rendered.
+  // Determines what gets displayed on the browser when the component is rendered.
   return (
     <nav className="navbar">
       {/* Render the navbar */}
