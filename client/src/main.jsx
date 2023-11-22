@@ -13,9 +13,10 @@ import './index.css';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
-import Login from './pages/Login.jsx';
 import Menu from './pages/Menu.jsx';
 import Parents from './pages/Parents.jsx';
+import Login from './pages/Login.jsx'
+import Signup from "./pages/Signup.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },
