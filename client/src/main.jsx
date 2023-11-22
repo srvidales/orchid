@@ -4,21 +4,22 @@ import {
   Route,
   Routes,
   RouterProvider,
-} from "react-router-dom";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-import Home from "./pages/Home.jsx";
-import About from "./pages/About.jsx";
-import Contact from "./pages/Contact.jsx";
-import Login from "./pages/Login.jsx";
-import Menu from "./pages/Menu.jsx";
-import Parents from "./pages/Parents.jsx";
+} from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import Home from './pages/Home.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
+import Login from './pages/Login.jsx';
+import Menu from './pages/Menu.jsx';
+import Parents from './pages/Parents.jsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <h1>Error</h1>, // temporary placeholder until have error decided (404)
     children: [
@@ -28,23 +29,23 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <About />,
       },
       {
-        path: "/menu",
+        path: '/menu',
         element: <Menu />,
       },
       {
-        path: "/parents",
+        path: '/parents',
         element: <Parents />,
       },
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
       },
       {
-        path: "/login",
+        path: '/login',
         element: <Login />,
       },
       {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
     <Router>
@@ -64,5 +65,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         {/* <Route path="/" element={<App />} /> */}
       </Routes>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
