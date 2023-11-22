@@ -9,11 +9,6 @@ const Contact = () => {
     email: '',
     cellphone: '',
     message: '',
-    from_firstname: '',
-    from_lastname: '',
-    email: '',
-    cellphone: '',
-    message: '',
     timeSlots: [],
     textMessage: '',
     specialMeal: '',
@@ -27,14 +22,10 @@ const Contact = () => {
       .send(
         'service_of106il',
         'template_edqhx5z',
-        'service_of106il',
-        'template_edqhx5z',
         { ...formState },
-        'fUTN7iOm_VoOcuw60',
         'fUTN7iOm_VoOcuw60',
       )
       .then((response) => {
-        console.log('Success.', response.status, response.text);
         console.log('Success.', response.status, response.text);
         setFormState({
           from_firstname: '',
@@ -43,19 +34,14 @@ const Contact = () => {
           cellphone: '',
           message: '',
           timeSlots: [],
-          textMessage: '',
-          specialMeal: '',
+          textMessage: false,
+          specialMeal: false,
           to_name: 'Whippersnappers Daycare',
         });
         setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
         setTimeout(() => setDisplayMessage(''), 6000);
-        setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
-        setTimeout(() => setDisplayMessage(''), 6000);
       })
       .catch((err) => {
-        console.log('Failed.', err);
-        setDisplayMessage('Unable to send email. Please contact us by phone.');
-        setTimeout(() => setDisplayMessage(''), 6000);
         console.log('Failed.', err);
         setDisplayMessage('Unable to send email. Please contact us by phone.');
         setTimeout(() => setDisplayMessage(''), 6000);
@@ -65,43 +51,45 @@ const Contact = () => {
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setFormState({ ...formState, [name]: value });
-
-    const form = [
-      { controlId: 'from_firstname', label: 'First name' },
-      { controlId: '', label: '' },
-      { controlId: '', label: '' },
-      { controlId: '', label: '' },
-      { controlId: '', label: '' },
-      { controlId: 'from_firstname', label: 'First name' },
-      { controlId: '', label: '' },
-      { controlId: '', label: '' },
-      { controlId: '', label: '' },
-      { controlId: '', label: '' },
-    ];
   };
 
+  // Handle time slots
   const handleCheckBoxChange = (e) => {
     const { name } = e.target;
     console.log(name);
+
     if (formState.timeSlots.includes(name)) {
       const updatedTimes = formState.timeSlots.filter((time) => time !== name);
       setFormState({ ...formState, timeSlots: updatedTimes });
-      return;
+    } else {
+      setFormState({ ...formState, timeSlots: [...formState.timeSlots, name] });
     }
 
-    const { text } = e.target;
-    console.log(text);
-    if (formState.textMessage.includes(text)) {
-      const updatedTextMessage = formState.textMessage.filter(
-        (time) => time !== text,
-      );
-      setFormState({ ...formState, textMessage: updatedTextMessage });
-      return;
+    switch (name) {
+      case 'textMessage':
+        setFormState({ ...formState, textMessage: e.target.checked });
+        break;
+      case 'specialMeal':
+        setFormState({ ...formState, specialMeal: e.target.checked });
+        break;
+      default:
+        break;
     }
+  };
+
+  // ! ---------------------------- ???????????
+
+  const handleTextMessageChange = (e) => {
     setFormState({
       ...formState,
-      timeSlots: [...formState.timeSlots, name],
-      textMessage: [...formState.textMessage, text],
+      textMessage: e.target.checked,
+    });
+  };
+
+  const handleSpecialMealChange = (e) => {
+    setFormState({
+      ...formState,
+      specialMeal: e.target.checked,
     });
   };
 
@@ -122,7 +110,10 @@ const Contact = () => {
             onChange={handleChange}
             name="from_firstname"
           />
-        </FloatingLabel> 
+        </FloatingLabel>
+        <p></p>
+
+        {/* Last Name */}
         <FloatingLabel
           controlId="from_lastname"
           label="Last Name"
@@ -179,6 +170,7 @@ const Contact = () => {
         </FloatingLabel>
         <p></p>
 
+        {/* Text Message and Times */}
         <div>
           {['checkbox'].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
@@ -211,6 +203,8 @@ const Contact = () => {
                 checked={formState.timeSlots.includes('evening') ? true : false}
                 onChange={handleCheckBoxChange}
               />
+
+              {/* Okay to send Text Messages */}
               <p></p>
               <Form.Check
                 inline
@@ -221,8 +215,12 @@ const Contact = () => {
                 checked={
                   formState.timeSlots.includes('textMessage') ? true : false
                 }
-                onChange={handleCheckBoxChange}
+                // checked={formState.textMessage}
+                onChange={handleTextMessageChange}
               />
+              {/* 
+              Special Meals */}
+              <p></p>
               <Form.Check
                 inline
                 label="My child has special needs regarding their meals."
@@ -232,12 +230,14 @@ const Contact = () => {
                 checked={
                   formState.timeSlots.includes('specialMeal') ? true : false
                 }
-                onChange={handleCheckBoxChange}
+                // checked={formState.specialMeal}
+                onChange={handleSpecialMealChange}
               />
             </div>
           ))}
         </div>
         <Button onClick={sendEmail}>Submit</Button>
+
         <Button onClick={() => console.log(formState)}>Check State</Button>
         <p>{displayMessage}</p>
       </div>
@@ -246,55 +246,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-{
-  /* <label htmlFor="from_firstname">Guardian:</label>
-      <input
-        type="text"
-        name="from_firstname"
-        placeholder="First Name"
-        value={formState.from_firstname}
-        onChange={handleChange}
-      />
-      <label htmlFor="from_lastname"></label>
-      <input
-        type="text"
-        name="from_lastname"
-        placeholder="Last Name"
-        value={formState.from_lastname}
-        onChange={handleChange}
-      />  */
-}
-
-// <br></br>
-// <label htmlFor="email">Email: </label>
-// <input
-//   type="text"
-//   name="email"
-//   placeholder="yourname@email.com"
-//   value={formState.email}
-//   onChange={handleChange}
-// />
-// <label htmlFor="cellphone">Cell Phone: </label>
-// <input
-//   type="text"
-//   name="cellphone"
-//   placeholder="Cell Phone (408) 123-4567"
-//   value={formState.cellphone}
-//   onChange={handleChange}
-// />
-
-{
-  /* <p />
-<label htmlFor="message">Send us a message: </label>
-<br></br>
-<textarea
-  type="text"
-  name="message"
-  placeholder="Send us your questions."
-  value={formState.message}
-  onChange={handleChange}
-  rows={4}
-  cols={50}
-/> */
-}
