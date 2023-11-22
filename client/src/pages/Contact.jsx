@@ -34,8 +34,8 @@ const Contact = () => {
           cellphone: '',
           message: '',
           timeSlots: [],
-          textMessage: '',
-          specialMeal: '',
+          textMessage: false,
+          specialMeal: false,
           to_name: 'Whippersnappers Daycare',
         });
         setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
