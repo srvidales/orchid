@@ -114,7 +114,7 @@ export default function Signup() {
             </Form.Group>
 
             {/* School input field */}
-            <Form.Group controlId="formBasicSignupPassword">
+            <Form.Group controlId="formBasicSignupSchool">
               <Form.Label>School</Form.Label>
               <Form.Control
                 type="text"
