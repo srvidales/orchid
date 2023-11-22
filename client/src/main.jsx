@@ -7,9 +7,11 @@ import {
 } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+
+import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
@@ -57,14 +59,22 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Specific Route
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
     <Router>
       <Routes>
-        {/*Define nested routes here?*/}
-        {/* <Route path="/" element={<App />} /> */}
+        {/*Define nested routes here*/}
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   </React.StrictMode>,
 );
+
+// Default Route
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
+//     <RouterProvider router={router} />
+//   </React.StrictMode>,
+// );
