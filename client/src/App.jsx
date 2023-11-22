@@ -37,7 +37,7 @@ const client = new ApolloClient({
 });
 
 function App() {
-  // Moved this to it's own file in the component's folder
+   // Moved this to it's own file in the component's folder
   // const currentPage = useLocation().pathname;
   // console.log(currentPage);
 
