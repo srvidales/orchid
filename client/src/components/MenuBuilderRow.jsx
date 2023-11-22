@@ -18,7 +18,7 @@ export default function MenuBuilderRow({dayOfWeek}) {
         </select>
         <br />
         <select className="selectpicker">
-          <optgroup label="Snack">
+          <optgroup label="Side">
             <option>Mustard</option>
             <option>Ketchup</option>
             <option>Relish</option>
@@ -69,7 +69,7 @@ export default function MenuBuilderRow({dayOfWeek}) {
         </select>
         <br />
         <select className="selectpicker">
-          <optgroup label="Snack">
+          <optgroup label="Side">
             <option>Mustard</option>
             <option>Ketchup</option>
             <option>Relish</option>
