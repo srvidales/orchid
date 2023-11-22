@@ -21,21 +21,6 @@ const Home = () => {
 
   return (
     <div>
-      {/* Moved this to it's own file in the component's folder */}
-      {/* Header
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          marginTop: '20px',
-        }}
-      >
-        <img src="image1.jpg" alt="School Logo" style={{ width: '45%' }} />
-        <img src="image2.jpg" alt="School Photo" style={{ width: '45%' }} />
-      </div>{' '}
-      */}
- 
-
       {/* Clickable Info Cards  */}
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <div onClick={openCostTuitionModal} className="clickable-box">
