@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS to style the app
 import './App.css'; // Import custom CSS for the App component
 
 // Import necessary dependencies from Apollo Client

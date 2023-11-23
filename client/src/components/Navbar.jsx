@@ -10,7 +10,6 @@ const Navbar = () => {
     { title: 'Home', link: '' }, // Home link with an empty link path
     { title: 'About', link: '/about' }, // About link with '/about' as the link path
     { title: 'Menu', link: '/menu' }, // Menu link with '/menu' as the link path
-    { title: 'Parents', link: '/parents' }, // Parents link with '/parents' as the link path
     { title: 'Contact Us', link: '/contact' }, // Contact Us link with '/contact' as the link path
   ];
 
@@ -27,7 +26,7 @@ const Navbar = () => {
             // Based on isActive state, add 'active' class to Button component
             <Button className={isActive ? 'active' : ''}>
               {/* Render the Button component */}
-              {navlink.title} {/* Display the navigation link title */}
+              {navlink.title === 'Menu' && Auth.loggedIn() ? 'Edit Menu' : navlink.title} {/* Display the navigation link title */}
             </Button>
           )}
         </NavLink>
@@ -42,7 +41,7 @@ const Navbar = () => {
             <Button className={isActive ? 'active' : ''}>
               {/* Render the Button component */}
               {/* Display login/signup as the button text */}
-              Login/Signup 
+              Login
             </Button>
           )}
         </NavLink>
@@ -50,7 +49,7 @@ const Navbar = () => {
         // If user is logged in, display logout button
         <Button onClick={() => Auth.logout()}>
           {/* Render the Button component with logout functionality */}
-          LOGOUT
+          Logout
         </Button>
       )}
     </nav>
