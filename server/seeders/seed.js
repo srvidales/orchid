@@ -56,6 +56,8 @@ db.once('open', async () => {
     const randomIndex = Math.floor(Math.random() * school.menuItems.length);
     const menuItem = school.menuItems[randomIndex];
 
+    newDailyMenu.school = school;
+
     // Adding the selected menu item to the daily menu's menuItems array
     newDailyMenu.menuItems.push(menuItem);
 
