@@ -64,6 +64,7 @@ const typeDefs = `
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
     dailyMenus: [DailyMenu]
+    dailyMenusByDate(schoolId: ID!, date: String!): [DailyMenu]
   }
   
   type Mutation {
