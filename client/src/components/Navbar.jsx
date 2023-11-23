@@ -10,7 +10,6 @@ const Navbar = () => {
     { title: 'Home', link: '' }, // Home link with an empty link path
     { title: 'About', link: '/about' }, // About link with '/about' as the link path
     { title: 'Menu', link: '/menu' }, // Menu link with '/menu' as the link path
-    { title: 'Parents', link: '/parents' }, // Parents link with '/parents' as the link path
     { title: 'Contact Us', link: '/contact' }, // Contact Us link with '/contact' as the link path
   ];
 
