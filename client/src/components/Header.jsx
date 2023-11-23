@@ -2,6 +2,10 @@
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 
+// Importing images
+import logoImage from '../assets/images/logo.png';
+import schoolImage from '../assets/images/school.png';
+
 // Creating the Header component without using const
 export default function Header() {
   // Getting the current page path using useLocation hook
@@ -22,10 +26,10 @@ export default function Header() {
         }}
       >
         {/* Image 1 with alt text and styling */}
-        <img src="../../images/logo.png" alt="School Logo" style={{ width: '45%' }} />
+        <img src={logoImage} alt="School Logo" style={{ width: '45%' }} />
 
         {/* Image 2 with alt text and styling */}
-        <img src="../../images/school.png" alt="School Photo" style={{ width: '45%' }} />
+        <img src={schoolImage} alt="School Photo" style={{ width: '45%' }} />
       </div>
       <div>
         {/* Page Divider */}

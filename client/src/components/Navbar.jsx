@@ -49,7 +49,7 @@ const Navbar = () => {
         // If user is logged in, display logout button
         <Button onClick={() => Auth.logout()}>
           {/* Render the Button component with logout functionality */}
-          LOGOUT
+          Logout
         </Button>
       )}
     </nav>
