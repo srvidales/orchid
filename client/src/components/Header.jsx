@@ -22,13 +22,12 @@ export default function Header() {
         }}
       >
         {/* Image 1 with alt text and styling */}
-        <img src="image1.jpg" alt="School Logo" style={{ width: '45%' }} />
+        <img src="../../images/logo.png" alt="School Logo" style={{ width: '45%' }} />
 
         {/* Image 2 with alt text and styling */}
-        <img src="image2.jpg" alt="School Photo" style={{ width: '45%' }} />
+        <img src="../../images/school.png" alt="School Photo" style={{ width: '45%' }} />
       </div>
       <div>
-        <br></br>
         {/* Page Divider */}
         <hr
           style={{

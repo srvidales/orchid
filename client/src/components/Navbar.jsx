@@ -26,7 +26,7 @@ const Navbar = () => {
             // Based on isActive state, add 'active' class to Button component
             <Button className={isActive ? 'active' : ''}>
               {/* Render the Button component */}
-              {navlink.title} {/* Display the navigation link title */}
+              {navlink.title === 'Menu' && Auth.loggedIn() ? 'Edit Menu' : navlink.title} {/* Display the navigation link title */}
             </Button>
           )}
         </NavLink>
@@ -41,7 +41,7 @@ const Navbar = () => {
             <Button className={isActive ? 'active' : ''}>
               {/* Render the Button component */}
               {/* Display login/signup as the button text */}
-              Login/Signup 
+              Login
             </Button>
           )}
         </NavLink>

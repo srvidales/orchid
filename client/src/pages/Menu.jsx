@@ -1,10 +1,11 @@
 import MenuBuilder from "../components/MenuBuilder";
+import MenuView from "../components/MenuView";
+import Auth from '../utils/auth';
 
 const Menu = () => {
   return (
     <div>
-      <h1>Menu</h1>
-      <MenuBuilder />
+      {Auth.loggedIn() ? <MenuBuilder /> : <MenuView />}
     </div>
   );
 };
