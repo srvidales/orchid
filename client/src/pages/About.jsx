@@ -24,14 +24,17 @@ function About() {
   ];
 
   return (
-    <Row
-      xs={1}
-      md={2}
-      className="g-3"
-      style={{ display: 'flex', flexWrap: 'wrap' }}
-    >
+    <Row md={2} className="g-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
       {cardData.map((card, idx) => (
-        <Col key={idx} xs={12} md={6} style={{ flex: '1', margin: '0' }}>
+        <Col
+          key={idx}
+          xs={12}
+          sm={6}
+          md={6}
+          lg={6}
+          xl={6}
+          // style={{ flex: '1', margin: '0' }}
+        >
           <Card>
             <Card.Img variant="top" src="holder.js/100px160" />
             <Card.Body>
