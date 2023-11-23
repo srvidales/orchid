@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Carousel } from 'react-bootstrap';
+import VerticalModal from '../components/VerticalModal.jsx';
 
 const Home = () => {
   // Set the initial state of the modals to false
@@ -33,8 +34,43 @@ const Home = () => {
           Upcoming Events
         </div>
       </div>
+
       {/* Modals */}
-      {showCostTuitionModal && (
+
+      <VerticalModal
+        show={showCostTuitionModal}
+        onHide={closeModals}
+        title="Cost and Tuition"
+        p1="Occaecat deserunt et nulla officia tempor dolor est do tempor non incididunt commodo ad cillum. Duis eu Lorem consectetur fugiat deserunt nostrud. Officia laborum Lorem ea ex consectetur veniam. Sit esse magna est non non. Ex officia velit duis cillum elit occaecat. Deserunt aute ex ex non ex culpa Lorem duis. Commodo fugiat consectetur et occaecat consequat ut magna tempor."
+        p2="Occaecat ad exercitation quis do ex ullamco labore commodo cillum eu amet minim anim. Est amet magna cillum voluptate. In aliquip laboris velit consectetur. Enim dolor magna id ut magna nisi sit incididunt do dolor voluptate dolore sit. Ipsum pariatur proident eiusmod sunt quis eiusmod. Consectetur non velit duis aliquip anim enim quis reprehenderit exercitation cillum esse."
+      />
+
+      <VerticalModal
+        show={showHealthyLessonsModal}
+        onHide={closeModals}
+        title="Healthy Learning"
+        p1="We prioritize the well-being of and development of our littlest
+          learners. Our team understands the importance of fostering healthy
+          habits early on. Through engaging and age-appropriate activities, we
+          integrate healthy lessons into our daily routine, focusing on
+          promoting physical health, nutrition, and overall wellness."
+        p2=" From active playtime that enhances motor skills to introducing
+          nutritious snacks that encourage good eating habits, our curriculum is
+          designed to lay the foundation for a lifetime of well-being. We
+          believe that these healthy lessons not only contribute to the
+          immediate happiness of our little ones but also pave the way for a
+          future filled with vitality and positive habits."
+      />
+
+      <VerticalModal
+        show={showUpcomingEventsModal}
+        onHide={closeModals}
+        title="Upcoming Events"
+        p1="Occaecat deserunt et nulla officia tempor dolor est do tempor non incididunt commodo ad cillum. Duis eu Lorem consectetur fugiat deserunt nostrud. Officia laborum Lorem ea ex consectetur veniam. Sit esse magna est non non. Ex officia velit duis cillum elit occaecat. Deserunt aute ex ex non ex culpa Lorem duis. Commodo fugiat consectetur et occaecat consequat ut magna tempor."
+        p2="Occaecat ad exercitation quis do ex ullamco labore commodo cillum eu amet minim anim. Est amet magna cillum voluptate. In aliquip laboris velit consectetur. Enim dolor magna id ut magna nisi sit incididunt do dolor voluptate dolore sit. Ipsum pariatur proident eiusmod sunt quis eiusmod. Consectetur non velit duis aliquip anim enim quis reprehenderit exercitation cillum esse."
+      />
+
+      {/* {showCostTuitionModal && (
         <div className="modal" onClick={closeModals}>
           <div className="modal-content">
             <span className="close" onClick={closeModals}>
@@ -55,8 +91,9 @@ const Home = () => {
             </p>
           </div>
         </div>
-      )}
-      {showHealthyLessonsModal && (
+      )} */}
+
+      {/* {showHealthyLessonsModal && (
         <div className="modal" onClick={closeModals}>
           <div className="modal-content">
             <span className="close" onClick={closeModals}>
@@ -77,8 +114,9 @@ const Home = () => {
             </p>
           </div>
         </div>
-      )}
-      {showUpcomingEventsModal && (
+      )} */}
+
+      {/* {showUpcomingEventsModal && (
         <div className="modal" onClick={closeModals}>
           <div className="modal-content">
             <span className="close" onClick={closeModals}>
@@ -99,7 +137,8 @@ const Home = () => {
             </p>
           </div>
         </div>
-      )}
+      )} */}
+
       {/* Request Information Card */}
       <div style={{ marginTop: '20px' }}>
         <h2>Request Information</h2>

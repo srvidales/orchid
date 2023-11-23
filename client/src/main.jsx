@@ -17,8 +17,8 @@ import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import Menu from './pages/Menu.jsx';
 import Parents from './pages/Parents.jsx';
-import Login from './pages/Login.jsx'
-import Signup from "./pages/Signup.jsx";
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 
 const router = createBrowserRouter([
   {
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/signup",
+        path: '/signup',
         element: <Signup />,
       },
     ],
@@ -63,14 +63,14 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-    <Router>
-      <Routes>
-        {/*Define nested routes here*/}
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
   </React.StrictMode>,
 );
+//  <Router>
+//       <Routes>
+//         {/*Define nested routes here*/}
+//         <Route path="/" element={<Home />} />
+//       </Routes>
+//     </Router>
 
 // Default Route
 // ReactDOM.createRoot(document.getElementById('root')).render(
