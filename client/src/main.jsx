@@ -1,8 +1,8 @@
 import {
   createBrowserRouter,
-  BrowserRouter as Router,
-  Route,
-  Routes,
+  // BrowserRouter as Router,
+  // Route,
+  // Routes,
   RouterProvider,
 } from 'react-router-dom';
 import React from 'react';
