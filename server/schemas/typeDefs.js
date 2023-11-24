@@ -69,6 +69,7 @@ const typeDefs = `
     menuItems: [MenuItem]
     dailyMenus: [DailyMenu]
     dailyMenusBySchoolAndDate(schoolId: ID!, date: DateTime!): [DailyMenu]
+    dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: DateTime!, meal: MealType!): [DailyMenu]
   }
   
   type Mutation {

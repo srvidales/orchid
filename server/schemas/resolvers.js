@@ -41,6 +41,27 @@ const resolvers = {
       }
     },
 
+    dailyMenusBySchoolDateAndMeal: async (
+      _parent,
+      { schoolId, date, meal },
+    ) => {
+      try {
+        const dailyMenus = await DailyMenu.find({
+          school: schoolId,
+          date: date,
+          meal: meal,
+        })
+          .populate('menuItems')
+          .populate('school');
+        return dailyMenus;
+      } catch (error) {
+        console.error('Error during daily menu fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching daily menu.',
+        );
+      }
+    },
+
     // Resolver for fetching schools with associated menu items and daily menus
     schools: async () => {
       // Using the School model to find all schools
