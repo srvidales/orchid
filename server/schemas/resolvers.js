@@ -7,7 +7,7 @@ const { GraphQLDateTime } = require('graphql-iso-date');
 
 // Creating GraphQL resolvers
 const resolvers = {
-  DateTime: GraphQLDateTime,
+DateTime: GraphQLDateTime,
 
   Query: {
     // Resolver for fetching all users
@@ -113,9 +113,24 @@ const resolvers = {
       try {
         // Using the MenuItem model to find all menu items
         // Sorting them by creation date in descending order
-        return await MenuItem.find().sort({ createdAt: -1 });
+        return await MenuItem.find().populate('school').sort({ createdAt: -1 });
       } catch (error) {
         // Log and throw any errors that occur during the query
+        console.error('Error during menu items fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching menu items.',
+        );
+      }
+    },
+
+    menuItemsBySchool: async (_parent, { schoolId }) => {
+      try {
+        return await MenuItem.find({ school: schoolId })
+          .populate('school')
+          .sort({
+            createdAt: -1,
+          });
+      } catch (error) {
         console.error('Error during menu items fetch:', error);
         throw new AuthenticationError(
           'An error occurred while fetching menu items.',
@@ -131,9 +146,10 @@ const resolvers = {
         const dailyMenus = await DailyMenu.find().sort({ createdAt: -1 });
 
         // Populate the 'menuItems' field for each daily menu
-        const populatedDailyMenus = await DailyMenu.populate(dailyMenus, {
-          path: 'menuItems',
-        });
+        const populatedDailyMenus = await DailyMenu.populate(dailyMenus, [
+          { path: 'menuItems' },
+          { path: 'school' },
+        ]);
 
         // Return the daily menus with populated menu items
         return populatedDailyMenus;

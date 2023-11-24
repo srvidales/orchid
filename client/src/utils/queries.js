@@ -136,3 +136,49 @@ export const GET_DAILY_MENUS = gql`
     }
   }
 `;
+
+export const GET_MENU_ITEMS_BY_SCHOOL = gql`
+  query getMenuItemsBySchool($schoolId: ID!) {
+    menuItemsBySchool(schoolId: $schoolId) {
+      _id
+      name
+      description
+      image
+      category
+      createdAt
+    }
+  }
+`;
+
+export const GET_DAILY_MENUS_BY_SCHOOL_DATE = gql`
+  query DailyMenusBySchoolAndDate($schoolId: ID!, $date: DateTime!) {
+    dailyMenusBySchoolAndDate(schoolId: $schoolId, date: $date) {
+      _id
+      date
+      meal
+      menuItems {
+        name
+        category
+        _id
+      }
+    }
+  }
+`;
+
+export const GET_DAILY_MENUS_BY_SCHOOL_DATE_MEAL = gql`
+  query DailyMenusBySchoolDateAndMeal(
+    $schoolId: ID!
+    $date: DateTime!
+    $meal: MealType!
+  ) {
+    dailyMenusBySchoolDateAndMeal(
+      schoolId: $schoolId
+      date: $date
+      meal: $meal
+    ) {
+      _id
+      date
+      meal
+    }
+  }
+`;

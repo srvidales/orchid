@@ -34,6 +34,11 @@ const menuItemSchema = new Schema({
     enum: ['ENTREE', 'SIDE', 'DRINK', 'SNACK'], // Validation: Category must be one of these values
   },
 
+  school: {
+    type: Schema.Types.ObjectId,
+    ref: 'School',
+  },
+
   // Creation timestamp for the menu item, defaulting to the current date
   createdAt: {
     type: Date,
