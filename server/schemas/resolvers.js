@@ -3,11 +3,9 @@ const { User, MenuItem, School, DailyMenu } = require('../models');
 const bcrypt = require('bcrypt');
 const { generateToken, loginUser } = require('../utils/auth');
 const { AuthenticationError } = require('@apollo/server');
-const { GraphQLDateTime } = require('graphql-iso-date');
 
 // Creating GraphQL resolvers
 const resolvers = {
-DateTime: GraphQLDateTime,
 
   Query: {
     // Resolver for fetching all users

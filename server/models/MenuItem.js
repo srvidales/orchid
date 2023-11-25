@@ -1,6 +1,5 @@
 // Importing necessary modules from Mongoose and a utility function for date formatting
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
 
 // Defining the schema for the MenuItem model
 const menuItemSchema = new Schema({
@@ -43,7 +42,6 @@ const menuItemSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now, // Default value is the current date and time
-    get: (timestamp) => dateFormat(timestamp), // Applying custom date formatting using the dateFormat utility
   },
 });
 
