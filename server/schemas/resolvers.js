@@ -6,6 +6,7 @@ const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
+
   Query: {
     // Resolver for fetching all users
     users: async () => {
@@ -17,6 +18,44 @@ const resolvers = {
         console.error('Error during user fetch:', error);
         throw new AuthenticationError(
           'An error occurred while fetching users.',
+        );
+      }
+    },
+
+    dailyMenusBySchoolAndDate: async (_parent, { schoolId, date }) => {
+      try {
+        const dailyMenus = await DailyMenu.find({
+          school: schoolId,
+          date: date,
+        })
+          .populate('menuItems')
+          .populate('school');
+        return dailyMenus;
+      } catch (error) {
+        console.error('Error during daily menu fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching daily menu.',
+        );
+      }
+    },
+
+    dailyMenusBySchoolDateAndMeal: async (
+      _parent,
+      { schoolId, date, meal },
+    ) => {
+      try {
+        const dailyMenus = await DailyMenu.find({
+          school: schoolId,
+          date: date,
+          meal: meal,
+        })
+          .populate('menuItems')
+          .populate('school');
+        return dailyMenus;
+      } catch (error) {
+        console.error('Error during daily menu fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching daily menu.',
         );
       }
     },
@@ -104,47 +143,7 @@ const resolvers = {
         );
       }
     },
-
-    // Resolver for fetching daily menus for a specific date in a given school
-    dailyMenusByDate: async (_parent, { date, schoolId }) => {
-      try {
-        // Use the School model to find the school by its ID
-        // Populate the 'dailyMenus field to retrieve associated daily menus
-        const school = await School.findById(schoolId).populate('dailyMenus');
-
-        // Check if the school exists
-        if (!school) {
-          throw new AuthenticationError('School not found');
-        }
-
-        // Find the daily menu for the specified date
-        const dailyMenu = school.dailyMenus.findOne({ date: date });
-
-        // Check if the daily menu exists for the specified date
-        if (!dailyMenu) {
-          throw new AuthenticationError(
-            'Daily menu not found for the specified date',
-          );
-        }
-
-        // Populate the 'menuItems' in the found daily menu
-        const populatedDailyMenu = await DailyMenu.populate(dailyMenu, {
-          path: 'menuItems',
-        });
-
-        // Return the dailyMenusByDate as an array
-        return [populatedDailyMenu];
-      } catch (error) {
-        // Log and throw any errors that occur during the query
-        console.error(
-          `Error during dailyMenusByDate fetch for school ID ${schoolId} and date ${date}:`,
-          error,
-        );
-        throw new AuthenticationError(
-          'An error occurred while fetching daily menus for the specified date.',
-        );
-      }
-    },
+    
   },
   Mutation: {
     // Mutation resolver for signupUser

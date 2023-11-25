@@ -1,7 +1,6 @@
 // Import necessary modules
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const dateFormat = require('../utils/dateFormat');
 
 // Define the schema for the User model
 const userSchema = new Schema({

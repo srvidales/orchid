@@ -23,6 +23,11 @@ const dailyMenuSchema = new Schema({
     },
   ],
 
+  school: {
+    type: Schema.Types.ObjectId, // Referencing the ObjectId type from Mongoose
+    ref: 'School', // Reference to the School model
+  },
+
   // Creation timestamp for the daily menu, defaulting to the current date
   createdAt: {
     type: Date,
