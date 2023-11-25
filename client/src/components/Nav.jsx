@@ -8,13 +8,27 @@ const links = [
   { title: 'About', link: '/about' },
   { title: 'Menu', link: '/menu' },
   { title: 'Parents', link: '/parents' },
-  { title: 'Contact Us', link: '/contact' },
+  { title: 'Contact', link: '/contact' },
 ];
 
 const Navbar = () => {
   return (
     <>
-      <BSNavbar expand="lg" sticky="top" className="navbar">
+      <BSNavbar
+        expand="lg"
+        sticky="top"
+        className="navbar"
+        style={{
+          position: 'fixed',
+          zIndex: 10,
+          backgroundColor: 'white',
+          width: '100%',
+          height: 50,
+          left: 0,
+        }}
+        sticky="top"
+        expand="md"
+      >
         <Container>
           <BSNavbar.Brand>Wicked Whippersnapper Daycare</BSNavbar.Brand>
           <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
