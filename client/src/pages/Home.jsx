@@ -26,6 +26,7 @@ const Home = () => {
     setShowUpcomingEventsModal(false);
   };
 
+  // Array to dynamically give information to Card Modals
   const cardData = [
     {
       title: 'Cost & Tuition',
@@ -46,25 +47,6 @@ const Home = () => {
 
   return (
     <div>
-      {/*Patrick's Code. DO NOT DELETE.*/}
-      {/*Patrick's Code. DO NOT DELETE.*/}
-      {/*Patrick's Code. DO NOT DELETE.*/}
-      {/* Clickable Info Cards 
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <div onClick={openCostTuitionModal} className="clickable-box">
-          Cost/Tuition
-        </div>
-        <div onClick={openHealthyLessonsModal} className="clickable-box">
-          Healthy Lessons
-        </div>
-        <div onClick={openUpcomingEventsModal} className="clickable-box">
-          Upcoming Events
-        </div>
-      </div> */}
-      {/*Patrick's Code. DO NOT DELETE.*/}
-      {/*Patrick's Code. DO NOT DELETE.*/}
-      {/*Patrick's Code. DO NOT DELETE.*/}
-
       <Row md={2} className="g-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
         {cardData.map((card, idx) => (
           <Col key={idx} xs={12} sm={4} md={4} lg={4} xl={4}>
@@ -86,7 +68,6 @@ const Home = () => {
       </Row>
 
       {/* Modals */}
-
       <VerticalModal
         show={showCostTuitionModal}
         onHide={closeModals}
