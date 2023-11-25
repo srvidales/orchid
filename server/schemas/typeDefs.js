@@ -1,7 +1,5 @@
 const typeDefs = `
 
-  scalar DateTime
-
   type User {
     _id: ID
     firstName: String!
@@ -22,7 +20,7 @@ const typeDefs = `
 
   type DailyMenu {
     _id: ID
-    date: DateTime
+    date: String
     meal: MealType
     menuItems: [MenuItem]
     school: School
@@ -68,8 +66,8 @@ const typeDefs = `
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
     dailyMenus: [DailyMenu]
-    dailyMenusBySchoolAndDate(schoolId: ID!, date: DateTime!): [DailyMenu]
-    dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: DateTime!, meal: MealType!): [DailyMenu]
+    dailyMenusBySchoolAndDate(schoolId: ID!, date: String!): [DailyMenu]
+    dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: String!, meal: MealType!): [DailyMenu]
   }
   
   type Mutation {
