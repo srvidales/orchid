@@ -1,6 +1,12 @@
 import { useState } from 'react';
-import { Carousel } from 'react-bootstrap';
+// import { Carousel } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import VerticalModal from '../components/VerticalModal.jsx';
+import cost from '../assets/images/contract.png';
+import health from '../assets/images/2D/field-group.png';
+import upcomingevents from '../assets/images/trip-planning.png';
 
 const Home = () => {
   // Set the initial state of the modals to false
@@ -20,9 +26,30 @@ const Home = () => {
     setShowUpcomingEventsModal(false);
   };
 
+  const cardData = [
+    {
+      title: 'Cost & Tuition',
+      imageSrc: cost,
+      modal: openCostTuitionModal,
+    },
+    {
+      title: 'Healthy Lessons',
+      imageSrc: health,
+      modal: openHealthyLessonsModal,
+    },
+    {
+      title: 'Upcoming Events',
+      imageSrc: upcomingevents,
+      modal: openUpcomingEventsModal,
+    },
+  ];
+
   return (
     <div>
-      {/* Clickable Info Cards  */}
+      {/*Patrick's Code. DO NOT DELETE.*/}
+      {/*Patrick's Code. DO NOT DELETE.*/}
+      {/*Patrick's Code. DO NOT DELETE.*/}
+      {/* Clickable Info Cards 
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <div onClick={openCostTuitionModal} className="clickable-box">
           Cost/Tuition
@@ -33,14 +60,37 @@ const Home = () => {
         <div onClick={openUpcomingEventsModal} className="clickable-box">
           Upcoming Events
         </div>
-      </div>
+      </div> */}
+      {/*Patrick's Code. DO NOT DELETE.*/}
+      {/*Patrick's Code. DO NOT DELETE.*/}
+      {/*Patrick's Code. DO NOT DELETE.*/}
+
+      <Row md={2} className="g-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {cardData.map((card, idx) => (
+          <Col key={idx} xs={12} sm={4} md={4} lg={4} xl={4}>
+            <Card>
+              <Card.Body>
+                <Card.Img
+                  variant="top"
+                  src={card.imageSrc}
+                  alt={card.title}
+                  onClick={card.modal}
+                  style={{ cursor: 'pointer' }}
+                />
+                <p></p>
+                <Card.Title>{card.title}</Card.Title>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
       {/* Modals */}
 
       <VerticalModal
         show={showCostTuitionModal}
         onHide={closeModals}
-        title="Cost and Tuition"
+        title="Payments for School"
         p1="Discover a nurturing and enriching environment for your little ones at our daycare, where we prioritize their growth and well-being. Our dedicated team provides exceptional care for infants, fostering a safe and stimulating atmosphere. We strive to offer a valuable and affordable investment in your child's early development. Join us in creating a foundation for lifelong learning and happiness for your precious ones. Monthly tuition is as follows:"
         p2="$800 for infants"
         p3="$700 for toddlers"
@@ -50,7 +100,7 @@ const Home = () => {
       <VerticalModal
         show={showHealthyLessonsModal}
         onHide={closeModals}
-        title="Healthy Learning"
+        title="Wellness Lessons"
         p1="We prioritize the well-being of and development of our littlest
           learners. Our team understands the importance of fostering healthy
           habits early on. Through engaging and age-appropriate activities, we
@@ -67,7 +117,7 @@ const Home = () => {
       <VerticalModal
         show={showUpcomingEventsModal}
         onHide={closeModals}
-        title="Upcoming Events"
+        title="Celebrate Good Times"
         p1="We go beyond traditional child care by hosting a variety of seasonal events within our secure and educational environment. Rest assured, our local daycare center is always buzzing with exciting activities! Join the excitement at Wicked Whippersnappers — where every day brings new opportunities for fun and learning"
         p2="Hannakkuh, Kwanzaa, Christmas, and New Year's"
       />
