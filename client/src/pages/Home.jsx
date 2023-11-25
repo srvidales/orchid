@@ -42,7 +42,9 @@ const Home = () => {
         onHide={closeModals}
         title="Cost and Tuition"
         p1="Discover a nurturing and enriching environment for your little ones at our daycare, where we prioritize their growth and well-being. Our dedicated team provides exceptional care for infants, fostering a safe and stimulating atmosphere. We strive to offer a valuable and affordable investment in your child's early development. Join us in creating a foundation for lifelong learning and happiness for your precious ones. Monthly tuition is as follows:"
-        p2="$800 for infants, $700 for toddlers, $650 for preschoolers"
+        p2="$800 for infants"
+        p3="$700 for toddlers"
+        p4="$650 for preschoolers"
       />
 
       <VerticalModal
@@ -70,81 +72,18 @@ const Home = () => {
         p2="Hannakkuh, Kwanzaa, Christmas, and New Year's"
       />
 
-      {/* {showCostTuitionModal && (
-        <div className="modal" onClick={closeModals}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModals}>
-              &times;
-            </span>
-            <h2>Cost/Tuition</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-              dolores placeat cumque tempore itaque minus distinctio nemo nobis?
-              Consequatur, earum. Eum inventore recusandae veniam. Nobis libero
-              autem quod vero veritatis?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-              dolores placeat cumque tempore itaque minus distinctio nemo nobis?
-              Consequatur, earum. Eum inventore recusandae veniam. Nobis libero
-              autem quod vero veritatis?
-            </p>
-          </div>
-        </div>
-      )} */}
-
-      {/* {showHealthyLessonsModal && (
-        <div className="modal" onClick={closeModals}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModals}>
-              &times;
-            </span>
-            <h2>Healthy Lessons</h2>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Consectetur, eveniet tenetur. Ratione laboriosam error dolore
-              commodi distinctio perspiciatis tempore nam alias accusamus qui,
-              possimus voluptate, reprehenderit, nesciunt enim modi. Molestias!
-            </p>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Consectetur, eveniet tenetur. Ratione laboriosam error dolore
-              commodi distinctio perspiciatis tempore nam alias accusamus qui,
-              possimus voluptate, reprehenderit, nesciunt enim modi. Molestias!
-            </p>
-          </div>
-        </div>
-      )} */}
-
-      {/* {showUpcomingEventsModal && (
-        <div className="modal" onClick={closeModals}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModals}>
-              &times;
-            </span>
-            <h2>Upcoming Events</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptates laudantium facere error, dolore laborum tempora quaerat
-              vero cum exercitationem quia id perspiciatis quidem atque sapiente
-              tenetur consequatur ipsa soluta autem.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptates laudantium facere error, dolore laborum tempora quaerat
-              vero cum exercitationem quia id perspiciatis quidem atque sapiente
-              tenetur consequatur ipsa soluta autem.
-            </p>
-          </div>
-        </div>
-      )} */}
-
       {/* Request Information Card */}
       <div style={{ marginTop: '20px' }}>
         <h2>Request Information</h2>
         <p>Phone: XXX-XXX-XXXX</p>
         <p>Address: School Address</p>
-        <p>About the School: Brief blurb about the school goes here.</p>
+        <p>
+          Every day at our daycare, we witness the blossoming of your child's
+          imagination and the unstoppable surge of their curiosity. At Wicked
+          Whippersnappers Academy, we embrace and applaud every moment of this
+          remarkable journey. Here in Wicked, we empower your child to explore,
+          learn, and celebrate the incredible tapestry of their growing world.
+        </p>
       </div>
     </div>
   );
