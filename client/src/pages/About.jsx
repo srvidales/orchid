@@ -11,7 +11,7 @@ function About() {
     },
     {
       title: 'Vision',
-      text: 'We take pride in empowering and celebrating each milestone of their development.',
+      text: 'We take pride in empowering and celebrating each milestone of their development. Our facility bridges a new space from home to school to help your little ones become individual thinkers and active participants in their community.',
     },
     {
       title: 'Mission',
