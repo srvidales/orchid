@@ -8,7 +8,6 @@ const links = [
   { title: 'Home', link: '' },
   { title: 'About', link: '/about' },
   { title: 'Menu', link: '/menu' },
-  { title: 'Parents', link: '/parents' },
   { title: 'Contact Us', link: '/contact' }
 ];
 
