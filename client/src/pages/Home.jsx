@@ -66,8 +66,8 @@ const Home = () => {
         show={showUpcomingEventsModal}
         onHide={closeModals}
         title="Upcoming Events"
-        p1="Occaecat deserunt et nulla officia tempor dolor est do tempor non incididunt commodo ad cillum. Duis eu Lorem consectetur fugiat deserunt nostrud. Officia laborum Lorem ea ex consectetur veniam. Sit esse magna est non non. Ex officia velit duis cillum elit occaecat. Deserunt aute ex ex non ex culpa Lorem duis. Commodo fugiat consectetur et occaecat consequat ut magna tempor."
-        p2="Occaecat ad exercitation quis do ex ullamco labore commodo cillum eu amet minim anim. Est amet magna cillum voluptate. In aliquip laboris velit consectetur. Enim dolor magna id ut magna nisi sit incididunt do dolor voluptate dolore sit. Ipsum pariatur proident eiusmod sunt quis eiusmod. Consectetur non velit duis aliquip anim enim quis reprehenderit exercitation cillum esse."
+        p1="We go beyond traditional child care by hosting a variety of seasonal events within our secure and educational environment. Rest assured, our local daycare center is always buzzing with exciting activities! Join the excitement at Wicked Whippersnappers — where every day brings new opportunities for fun and learning"
+        p2="Hannakkuh, Kwanzaa, Christmas, and New Year's"
       />
 
       {/* {showCostTuitionModal && (
