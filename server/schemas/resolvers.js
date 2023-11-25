@@ -22,16 +22,22 @@ const resolvers = {
       }
     },
 
+    // Resolver for fetching daily menus by school and date
     dailyMenusBySchoolAndDate: async (_parent, { schoolId, date }) => {
       try {
+        // Use the DailyMenu model to find menus matching the given school and date
+        // Populate the 'menuItems' field to retrieve details for each menu item
+        // Populate the 'school' field to retrieve details for the associated school
         const dailyMenus = await DailyMenu.find({
           school: schoolId,
           date: date,
         })
           .populate('menuItems')
           .populate('school');
+        // Return the array of daily menus
         return dailyMenus;
       } catch (error) {
+        // Log and throw any errors that occur during the query
         console.error('Error during daily menu fetch:', error);
         throw new AuthenticationError(
           'An error occurred while fetching daily menu.',
@@ -39,11 +45,15 @@ const resolvers = {
       }
     },
 
+    // Resolver for fetching daily menus by school, date, and meal
     dailyMenusBySchoolDateAndMeal: async (
       _parent,
       { schoolId, date, meal },
     ) => {
       try {
+        // Use the DailyMenu model to find menus matching the given school, date, and meal
+        // Populate the 'menuItems' field to retrieve details for each menu item
+        // Populate the 'school' field to retrieve details for the associated school
         const dailyMenus = await DailyMenu.find({
           school: schoolId,
           date: date,
@@ -51,8 +61,10 @@ const resolvers = {
         })
           .populate('menuItems')
           .populate('school');
+        // Return the array of daily menus
         return dailyMenus;
       } catch (error) {
+        // Log and throw any errors that occur during the query
         console.error('Error during daily menu fetch:', error);
         throw new AuthenticationError(
           'An error occurred while fetching daily menu.',
