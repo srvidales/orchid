@@ -1,10 +1,9 @@
 // Importing necessary components and hooks from react-router-dom
 import { useLocation } from 'react-router-dom';
-import Navbar from './Navbar';
 import Nav from './Nav';
 
 // Importing images
-import logoImage from '../assets/images/logo.png';
+import logoImage from '../assets/logo/logo.png';
 import schoolImage from '../assets/images/school.png';
 
 // Creating the Header component without using const
