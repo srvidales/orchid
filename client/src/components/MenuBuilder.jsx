@@ -15,7 +15,7 @@ function setToMidnight(date) {
   return newDate;
 }
 
-const schoolId = '6560769abcf9a73f6af407f0';
+const schoolId = '656153dc5bb5fb697f1dc45f';
 
 export default function MenuBuilder() {
   // function formatDate(date) {
@@ -28,17 +28,17 @@ export default function MenuBuilder() {
   //   return formattedDate;
   // }
 
-  const {
-    loadingGetMenuItemsBySchool,
-    getMenuItemsBySchoolData,
-    getMenuItemsBySchoolError,
-  } = useQuery(GET_MENU_ITEMS_BY_SCHOOL, {
-    variables: {
-      schoolId: schoolId,
-    },
-  });
+  // const {
+  //   loadingGetMenuItemsBySchool,
+  //   getMenuItemsBySchoolData,
+  //   getMenuItemsBySchoolError,
+  // } = useQuery(GET_MENU_ITEMS_BY_SCHOOL, {
+  //   variables: {
+  //     schoolId: schoolId,
+  //   },
+  // });
 
-  const {l, d, e } = useQuery(GET_SCHOOL)
+  // const {l, d, e } = useQuery(GET_SCHOOL)
 
   const [value, onChange] = useState(setToMidnight(new Date()));
   console.log(value.toISOString());
