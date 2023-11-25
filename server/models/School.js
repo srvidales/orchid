@@ -1,6 +1,5 @@
 // Importing necessary modules from Mongoose and a utility function for date formatting
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
 
 // Define the schema for the School model
 const schoolSchema = new Schema({
@@ -90,7 +89,6 @@ const schoolSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
   },
 });
 

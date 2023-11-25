@@ -1,6 +1,5 @@
 // Importing necessary modules from Mongoose and a utility function for date formatting
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
 
 // Defining the schema for the DailyMenu model
 const dailyMenuSchema = new Schema({
@@ -8,7 +7,6 @@ const dailyMenuSchema = new Schema({
   date: {
     type: Date,
     // required: "You need to enter a date!", // (Optional) Validation: Date is required
-    get: (timestamp) => dateFormat(timestamp), // Applying custom date formatting using the dateFormat utility
   },
 
   // Type definition for the meal property
@@ -25,11 +23,15 @@ const dailyMenuSchema = new Schema({
     },
   ],
 
+  school: {
+    type: Schema.Types.ObjectId, // Referencing the ObjectId type from Mongoose
+    ref: 'School', // Reference to the School model
+  },
+
   // Creation timestamp for the daily menu, defaulting to the current date
   createdAt: {
     type: Date,
     default: Date.now, // Default value is the current date and time
-    get: (timestamp) => dateFormat(timestamp), // Applying custom date formatting using the dateFormat utility
   },
 });
 

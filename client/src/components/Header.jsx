@@ -1,6 +1,11 @@
 // Importing necessary components and hooks from react-router-dom
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
+import Nav from './Nav';
+
+// Importing images
+import logoImage from '../assets/images/logo.png';
+import schoolImage from '../assets/images/school.png';
 
 // Creating the Header component without using const
 export default function Header() {
@@ -11,7 +16,8 @@ export default function Header() {
   return (
     <div>
       {/* Navbar component with the current page passed as a prop */}
-      <Navbar page={currentPage} />
+      {/* <Navbar page={currentPage} /> */}
+      <Nav page={currentPage} />
 
       {/* Container for the images, with flex layout and space around */}
       <div
@@ -22,13 +28,12 @@ export default function Header() {
         }}
       >
         {/* Image 1 with alt text and styling */}
-        <img src="image1.jpg" alt="School Logo" style={{ width: '45%' }} />
+        <img src={logoImage} alt="School Logo" style={{ width: '45%' }} />
 
         {/* Image 2 with alt text and styling */}
-        <img src="image2.jpg" alt="School Photo" style={{ width: '45%' }} />
+        <img src={schoolImage} alt="School Photo" style={{ width: '45%' }} />
       </div>
       <div>
-        <br></br>
         {/* Page Divider */}
         <hr
           style={{

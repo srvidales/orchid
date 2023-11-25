@@ -6,6 +6,7 @@ const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
+
   Query: {
     // Resolver for fetching all users
     users: async () => {
@@ -17,6 +18,44 @@ const resolvers = {
         console.error('Error during user fetch:', error);
         throw new AuthenticationError(
           'An error occurred while fetching users.',
+        );
+      }
+    },
+
+    dailyMenusBySchoolAndDate: async (_parent, { schoolId, date }) => {
+      try {
+        const dailyMenus = await DailyMenu.find({
+          school: schoolId,
+          date: date,
+        })
+          .populate('menuItems')
+          .populate('school');
+        return dailyMenus;
+      } catch (error) {
+        console.error('Error during daily menu fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching daily menu.',
+        );
+      }
+    },
+
+    dailyMenusBySchoolDateAndMeal: async (
+      _parent,
+      { schoolId, date, meal },
+    ) => {
+      try {
+        const dailyMenus = await DailyMenu.find({
+          school: schoolId,
+          date: date,
+          meal: meal,
+        })
+          .populate('menuItems')
+          .populate('school');
+        return dailyMenus;
+      } catch (error) {
+        console.error('Error during daily menu fetch:', error);
+        throw new AuthenticationError(
+          'An error occurred while fetching daily menu.',
         );
       }
     },
@@ -76,7 +115,9 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during menu items fetch:', error);
-        throw new AuthenticationError('An error occurred while fetching menu items.');
+        throw new AuthenticationError(
+          'An error occurred while fetching menu items.',
+        );
       }
     },
 
@@ -86,21 +127,22 @@ const resolvers = {
         // Using the DailyMenu model to find all daily menus
         // Sorting them by creation date in descending order
         const dailyMenus = await DailyMenu.find().sort({ createdAt: -1 });
-    
+
         // Populate the 'menuItems' field for each daily menu
         const populatedDailyMenus = await DailyMenu.populate(dailyMenus, {
           path: 'menuItems',
         });
-    
+
         // Return the daily menus with populated menu items
         return populatedDailyMenus;
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during daily menus fetch:', error);
-        throw new AuthenticationError('An error occurred while fetching daily menus.');
+        throw new AuthenticationError(
+          'An error occurred while fetching daily menus.',
+        );
       }
     },
-    
   },
   Mutation: {
     // Mutation resolver for signupUser
