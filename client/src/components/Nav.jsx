@@ -24,7 +24,6 @@ const Navbar = () => {
         data-bs-theme="light"
         fixed="top"
       >
-        <Container>
           <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
           <BSNavbar.Collapse
             id="basic-navbar-nav"
@@ -45,7 +44,6 @@ const Navbar = () => {
               </Nav.Link>
             </Nav>
           </BSNavbar.Collapse>
-        </Container>
       </BSNavbar>
     </>
   );
