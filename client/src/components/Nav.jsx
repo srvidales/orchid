@@ -8,21 +8,29 @@ const links = [
   { title: 'About', link: '/about' },
   { title: 'Menu', link: '/menu' },
   { title: 'Parents', link: '/parents' },
-  { title: 'Contact Us', link: '/contact' },
+  { title: 'Contact Us', link: '/contact' }
 ];
 
 const Navbar = () => {
+  const isLoggedIn = Auth.loggedIn(); 
+
   return (
     <>
-      <BSNavbar expand="lg" sticky="top" className="navbar">
+      <BSNavbar
+        expand="lg"
+        sticky="top"
+        className="navbar"
+        bg="light"
+        data-bs-theme="light"
+        fixed="top"
+      >
         <Container>
-          <BSNavbar.Brand>Wicked Whippersnapper Daycare</BSNavbar.Brand>
           <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
           <BSNavbar.Collapse
             id="basic-navbar-nav"
             className="justify-content-end"
           >
-            <Nav className="me-auto align-items-end justify-content-end">
+            <Nav className="me-auto align-items-end justify-content-end" style={{ width: '100%' }}>
               {links.map((navlink, i) => (
                 <Nav.Link key={i}>
                   <NavLink to={navlink.link} className="nav-link">
@@ -30,13 +38,11 @@ const Navbar = () => {
                   </NavLink>
                 </Nav.Link>
               ))}
-              {!Auth.loggedIn() ? (
-                <NavLink to="/login" className="nav-link">
-                  <Button>Login/Signup</Button>
+               <Nav.Link>
+                <NavLink to="/login" className="nav-link" onClick={isLoggedIn ? Auth.logout : null}>
+                  {isLoggedIn ? 'Logout' : 'Login/Sign Up'}
                 </NavLink>
-              ) : (
-                <Button onClick={() => Auth.logout()}>LOGOUT</Button>
-              )}
+              </Nav.Link>
             </Nav>
           </BSNavbar.Collapse>
         </Container>
@@ -46,3 +52,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
