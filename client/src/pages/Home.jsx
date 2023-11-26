@@ -1,9 +1,12 @@
 import { useState } from 'react';
-// import { Carousel } from 'react-bootstrap';
+
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import VerticalModal from '../components/VerticalModal.jsx';
+import Info from '../components/RequestInformation.jsx';
+
 import cost from '../assets/images/contract.png';
 import health from '../assets/images/2D/field-group.png';
 import upcomingevents from '../assets/images/trip-planning.png';
@@ -103,7 +106,24 @@ const Home = () => {
         p2="Hannakkuh, Kwanzaa, Christmas, and New Year's"
       />
 
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      <CarouselComponent />
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+
       {/* Request Information Card */}
+      <Info
+        display={{
+          margin: '100px',
+        }}
+      />
       <div style={{ marginTop: '20px' }}>
         <h2>Request Information</h2>
         <p>Phone: XXX-XXX-XXXX</p>
