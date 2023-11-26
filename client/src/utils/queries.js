@@ -118,6 +118,20 @@ export const GET_MENU_ITEMS = gql`
   }
 `;
 
+export const GET_MENU_ITEMS_BY_SCHOOL_ID = gql`
+  query Schools($id: ID!) {
+    schoolById(_id: $id) {
+      _id
+      name
+      menuItems {
+        _id
+        name
+        category
+      }
+    }
+  }
+`;
+
 export const GET_DAILY_MENUS = gql`
   query getDailyMenus {
     dailyMenus {
