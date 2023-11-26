@@ -1,9 +1,12 @@
 import { useState } from 'react';
-// import { Carousel } from 'react-bootstrap';
+
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import VerticalModal from '../components/VerticalModal.jsx';
+import Info from '../components/RequestInformation.jsx';
+
 import cost from '../assets/images/contract.png';
 import health from '../assets/images/2D/field-group.png';
 import upcomingevents from '../assets/images/trip-planning.png';
@@ -47,7 +50,7 @@ const Home = () => {
 
   return (
     <div>
-      <Row md={2} className="g-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <Row md={2} className="g-4" style={{ display: 'flex', flexWrap: 'wrap' }}>
         {cardData.map((card, idx) => (
           <Col key={idx} xs={12} sm={4} md={4} lg={4} xl={4}>
             <Card>
@@ -60,7 +63,7 @@ const Home = () => {
                   style={{ cursor: 'pointer' }}
                 />
                 <p></p>
-                <Card.Title>{card.title}</Card.Title>
+                <Card.Title onClick={card.modal}>{card.title}</Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -103,19 +106,24 @@ const Home = () => {
         p2="Hannakkuh, Kwanzaa, Christmas, and New Year's"
       />
 
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+      {/*Carousel*/}
+
       {/* Request Information Card */}
-      <div style={{ marginTop: '20px' }}>
-        <h2>Request Information</h2>
-        <p>Phone: XXX-XXX-XXXX</p>
-        <p>Address: School Address</p>
-        <p>
-          Every day at our daycare, we witness the blossoming of your child's
-          imagination and the unstoppable surge of their curiosity. At Wicked
-          Whippersnappers Academy, we embrace and applaud every moment of this
-          remarkable journey. Here in Wicked, we empower your child to explore,
-          learn, and celebrate the incredible tapestry of their growing world.
-        </p>
-      </div>
+      <Info
+        display={{
+          margin: '100px',
+        }}
+      />
     </div>
   );
 };
