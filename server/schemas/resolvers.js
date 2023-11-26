@@ -29,7 +29,15 @@ const resolvers = {
           date: date,
         })
           .populate('menuItems')
-          .populate('school');
+          .populate({
+            path: 'school',
+            populate: {
+              path: 'dailyMenus',
+              populate: {
+                path: 'menuItems',
+              },
+            },
+          });
 
         // Return the array of daily menus
         return dailyMenus;
