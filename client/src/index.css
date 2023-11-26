@@ -10,11 +10,14 @@
 
 a {
   font-weight: 500;
-  color: #ffdd94;
+  color: #152d99;
+  transition: box-shadow 0.3s;
   text-decoration: inherit;
 }
 a:hover {
-  color: #996f15;
+  color: #35597a;
+  box-shadow: #213547;
+  font-size: larger;
 }
 
 body {
