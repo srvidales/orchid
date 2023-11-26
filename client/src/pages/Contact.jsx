@@ -1,9 +1,6 @@
 import emailjs from '@emailjs/browser';
 import { useState } from 'react';
 import { Button, Form, FloatingLabel, Overlay } from 'react-bootstrap';
-import Confetti from 'react-confetti';
-import useWindowSize from 'react-use/lib/useWindowSize';
-import ConfettiOverlay from '../components/ConfettiOverlay';
 
 const Contact = () => {
   const [formState, setFormState] = useState({
