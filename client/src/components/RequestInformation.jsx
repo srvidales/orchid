@@ -1,12 +1,24 @@
-import { Card, Button } from 'react-bootstrap';
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import { IoPhonePortraitSharp } from 'react-icons/io5';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import { MdTextsms } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 function Request() {
   return (
-    <Card style={{ width: '45%' }}>
+    <Card
+      style={{
+        marginTop: '2%',
+        width: '45%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Card.Body>
-        <Card.Title>Wicked Whippersnappers of Rapscallions, CA</Card.Title>
+        <Card.Title>Wicked Whippersnappers Daycare</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
-          <Button>Request Information</Button>
+          Rapscallions, CA
         </Card.Subtitle>
         <Card.Text>
           Every day at our daycare, we witness the blossoming of your child's
@@ -15,9 +27,19 @@ function Request() {
           remarkable journey. Here in Wicked, we empower your child to explore,
           learn, and celebrate the incredible tapestry of their growing world.
         </Card.Text>
-        <Card.Link href="#">Card Link</Card.Link>
-        <Card.Link href="#">Another Link</Card.Link>
-        <Card.Link href="#">Yet Another Link</Card.Link>
+      </Card.Body>
+      <Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Card.Link href="#">
+          <IoPhonePortraitSharp /> 408-123-4567
+        </Card.Link>
+        <Card.Link href="#">
+          <FaMapMarkerAlt /> Location
+        </Card.Link>
+        <Link to="/contact">
+          <Card.Link>
+            <MdTextsms /> Find Out More
+          </Card.Link>
+        </Link>
       </Card.Body>
     </Card>
   );
