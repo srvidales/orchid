@@ -17,6 +17,8 @@ function MyVerticallyCenteredModal(props) {
       <Modal.Body>
         <p>{props.p1}</p>
         <p>{props.p2}</p>
+        <p>{props.p3}</p>
+        <p>{props.p4}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
