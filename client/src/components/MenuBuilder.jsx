@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import MenuBuilderDailyRow from './MenuBuilderRow';
+import PropTypes from 'prop-types';
 
 import { useQuery } from '@apollo/client';
-import {
-  GET_SCHOOL,
-  GET_MENU_ITEMS_BY_SCHOOL,
-  GET_DAILY_MENUS_BY_SCHOOL_DATE,
-} from '../utils/queries';
+import { GET_DAILY_MENUS_BY_SCHOOL_DATE } from '../utils/queries';
+
+MenuBuilder.propTypes = {
+  schoolId: PropTypes.string.isRequired,
+  selectedDate: PropTypes.Date,
+};
 
 function setToMidnight(date) {
   const newDate = new Date(date);
@@ -15,31 +17,10 @@ function setToMidnight(date) {
   return newDate;
 }
 
-const schoolId = '656153dc5bb5fb697f1dc45f';
+// const schoolId = '656153dc5bb5fb697f1dc45f';
 
-export default function MenuBuilder() {
-  // function formatDate(date) {
-  //   const timeZone = 'America/Los_Angeles'; // Specify the time zone
-  //   const formattedDate = new Intl.DateTimeFormat('en-US', {
-  //     timeZone,
-  //     dateStyle: 'full',
-  //     timeStyle: 'long'
-  //   }).format(date);
-  //   return formattedDate;
-  // }
-
-  // const {
-  //   loadingGetMenuItemsBySchool,
-  //   getMenuItemsBySchoolData,
-  //   getMenuItemsBySchoolError,
-  // } = useQuery(GET_MENU_ITEMS_BY_SCHOOL, {
-  //   variables: {
-  //     schoolId: schoolId,
-  //   },
-  // });
-
-  // const {l, d, e } = useQuery(GET_SCHOOL)
-
+export default function MenuBuilder({ schoolId, selectedDate }) {
+  const [menuItems, setMenuItems] = useState([]);
   const [value, onChange] = useState(setToMidnight(new Date()));
   console.log(value.toISOString());
   const {
@@ -52,6 +33,12 @@ export default function MenuBuilder() {
       date: new Date(value),
     },
   });
+
+  useEffect(() => {
+    if (dailyMenusBySchoolAndDateData) {
+      setMenuItems(dailyMenusBySchoolAndDateData);
+    }
+  }, [dailyMenusBySchoolAndDateData]);
 
   return (
     <>
@@ -106,6 +93,7 @@ export default function MenuBuilder() {
                       dayOfWeek={`${value.toLocaleDateString('en-US', {
                         weekday: 'long',
                       })} ${value.toLocaleDateString()}`}
+                      menuItems={menuItems}
                     />
                   </tbody>
                 </table>
@@ -117,5 +105,3 @@ export default function MenuBuilder() {
     </>
   );
 }
-
-//${formatDate(new Date(value))}
