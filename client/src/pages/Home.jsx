@@ -1,6 +1,12 @@
 import { useState } from 'react';
-import { Carousel } from 'react-bootstrap';
+// import { Carousel } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import VerticalModal from '../components/VerticalModal.jsx';
+import cost from '../assets/images/contract.png';
+import health from '../assets/images/2D/field-group.png';
+import upcomingevents from '../assets/images/trip-planning.png';
 
 const Home = () => {
   // Set the initial state of the modals to false
@@ -20,35 +26,62 @@ const Home = () => {
     setShowUpcomingEventsModal(false);
   };
 
+  // Array to dynamically give information to Card Modals
+  const cardData = [
+    {
+      title: 'Cost & Tuition',
+      imageSrc: cost,
+      modal: openCostTuitionModal,
+    },
+    {
+      title: 'Healthy Lessons',
+      imageSrc: health,
+      modal: openHealthyLessonsModal,
+    },
+    {
+      title: 'Upcoming Events',
+      imageSrc: upcomingevents,
+      modal: openUpcomingEventsModal,
+    },
+  ];
+
   return (
     <div>
-      {/* Clickable Info Cards  */}
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <div onClick={openCostTuitionModal} className="clickable-box">
-          Cost/Tuition
-        </div>
-        <div onClick={openHealthyLessonsModal} className="clickable-box">
-          Healthy Lessons
-        </div>
-        <div onClick={openUpcomingEventsModal} className="clickable-box">
-          Upcoming Events
-        </div>
-      </div>
+      <Row md={2} className="g-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {cardData.map((card, idx) => (
+          <Col key={idx} xs={12} sm={4} md={4} lg={4} xl={4}>
+            <Card>
+              <Card.Body>
+                <Card.Img
+                  variant="top"
+                  src={card.imageSrc}
+                  alt={card.title}
+                  onClick={card.modal}
+                  style={{ cursor: 'pointer' }}
+                />
+                <p></p>
+                <Card.Title>{card.title}</Card.Title>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
       {/* Modals */}
-
       <VerticalModal
         show={showCostTuitionModal}
         onHide={closeModals}
-        title="Cost and Tuition"
-        p1="Occaecat deserunt et nulla officia tempor dolor est do tempor non incididunt commodo ad cillum. Duis eu Lorem consectetur fugiat deserunt nostrud. Officia laborum Lorem ea ex consectetur veniam. Sit esse magna est non non. Ex officia velit duis cillum elit occaecat. Deserunt aute ex ex non ex culpa Lorem duis. Commodo fugiat consectetur et occaecat consequat ut magna tempor."
-        p2="Occaecat ad exercitation quis do ex ullamco labore commodo cillum eu amet minim anim. Est amet magna cillum voluptate. In aliquip laboris velit consectetur. Enim dolor magna id ut magna nisi sit incididunt do dolor voluptate dolore sit. Ipsum pariatur proident eiusmod sunt quis eiusmod. Consectetur non velit duis aliquip anim enim quis reprehenderit exercitation cillum esse."
+        title="Payments for School"
+        p1="Discover a nurturing and enriching environment for your little ones at our daycare, where we prioritize their growth and well-being. Our dedicated team provides exceptional care for infants, fostering a safe and stimulating atmosphere. We strive to offer a valuable and affordable investment in your child's early development. Join us in creating a foundation for lifelong learning and happiness for your precious ones. Monthly tuition is as follows:"
+        p2="$800 for infants"
+        p3="$700 for toddlers"
+        p4="$650 for preschoolers"
       />
 
       <VerticalModal
         show={showHealthyLessonsModal}
         onHide={closeModals}
-        title="Healthy Learning"
+        title="Wellness Lessons"
         p1="We prioritize the well-being of and development of our littlest
           learners. Our team understands the importance of fostering healthy
           habits early on. Through engaging and age-appropriate activities, we
@@ -65,86 +98,23 @@ const Home = () => {
       <VerticalModal
         show={showUpcomingEventsModal}
         onHide={closeModals}
-        title="Upcoming Events"
-        p1="Occaecat deserunt et nulla officia tempor dolor est do tempor non incididunt commodo ad cillum. Duis eu Lorem consectetur fugiat deserunt nostrud. Officia laborum Lorem ea ex consectetur veniam. Sit esse magna est non non. Ex officia velit duis cillum elit occaecat. Deserunt aute ex ex non ex culpa Lorem duis. Commodo fugiat consectetur et occaecat consequat ut magna tempor."
-        p2="Occaecat ad exercitation quis do ex ullamco labore commodo cillum eu amet minim anim. Est amet magna cillum voluptate. In aliquip laboris velit consectetur. Enim dolor magna id ut magna nisi sit incididunt do dolor voluptate dolore sit. Ipsum pariatur proident eiusmod sunt quis eiusmod. Consectetur non velit duis aliquip anim enim quis reprehenderit exercitation cillum esse."
+        title="Celebrate Good Times"
+        p1="We go beyond traditional child care by hosting a variety of seasonal events within our secure and educational environment. Rest assured, our local daycare center is always buzzing with exciting activities! Join the excitement at Wicked Whippersnappers — where every day brings new opportunities for fun and learning"
+        p2="Hannakkuh, Kwanzaa, Christmas, and New Year's"
       />
-
-      {/* {showCostTuitionModal && (
-        <div className="modal" onClick={closeModals}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModals}>
-              &times;
-            </span>
-            <h2>Cost/Tuition</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-              dolores placeat cumque tempore itaque minus distinctio nemo nobis?
-              Consequatur, earum. Eum inventore recusandae veniam. Nobis libero
-              autem quod vero veritatis?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-              dolores placeat cumque tempore itaque minus distinctio nemo nobis?
-              Consequatur, earum. Eum inventore recusandae veniam. Nobis libero
-              autem quod vero veritatis?
-            </p>
-          </div>
-        </div>
-      )} */}
-
-      {/* {showHealthyLessonsModal && (
-        <div className="modal" onClick={closeModals}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModals}>
-              &times;
-            </span>
-            <h2>Healthy Lessons</h2>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Consectetur, eveniet tenetur. Ratione laboriosam error dolore
-              commodi distinctio perspiciatis tempore nam alias accusamus qui,
-              possimus voluptate, reprehenderit, nesciunt enim modi. Molestias!
-            </p>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Consectetur, eveniet tenetur. Ratione laboriosam error dolore
-              commodi distinctio perspiciatis tempore nam alias accusamus qui,
-              possimus voluptate, reprehenderit, nesciunt enim modi. Molestias!
-            </p>
-          </div>
-        </div>
-      )} */}
-
-      {/* {showUpcomingEventsModal && (
-        <div className="modal" onClick={closeModals}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModals}>
-              &times;
-            </span>
-            <h2>Upcoming Events</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptates laudantium facere error, dolore laborum tempora quaerat
-              vero cum exercitationem quia id perspiciatis quidem atque sapiente
-              tenetur consequatur ipsa soluta autem.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Voluptates laudantium facere error, dolore laborum tempora quaerat
-              vero cum exercitationem quia id perspiciatis quidem atque sapiente
-              tenetur consequatur ipsa soluta autem.
-            </p>
-          </div>
-        </div>
-      )} */}
 
       {/* Request Information Card */}
       <div style={{ marginTop: '20px' }}>
         <h2>Request Information</h2>
         <p>Phone: XXX-XXX-XXXX</p>
         <p>Address: School Address</p>
-        <p>About the School: Brief blurb about the school goes here.</p>
+        <p>
+          Every day at our daycare, we witness the blossoming of your child's
+          imagination and the unstoppable surge of their curiosity. At Wicked
+          Whippersnappers Academy, we embrace and applaud every moment of this
+          remarkable journey. Here in Wicked, we empower your child to explore,
+          learn, and celebrate the incredible tapestry of their growing world.
+        </p>
       </div>
     </div>
   );
