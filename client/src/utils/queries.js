@@ -171,7 +171,6 @@ export const GET_DAILY_MENUS_BY_SCHOOL_AND_DATE = gql`
       createdAt
     }
   }
-}
 `
 
 export const GET_DAILY_MENUS_BY_SCHOOL_DATE_AND_MEAL = gql`
