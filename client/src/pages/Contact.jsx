@@ -22,6 +22,19 @@ const Contact = () => {
   const [showOverlay, setShowOverlay] = useState(false);
 
   const sendEmail = () => {
+    if (
+      !formState.from_firstname ||
+      !formState.from_lastname ||
+      !formState.email ||
+      !formState.cellphone
+    ) {
+      setDisplayMessage('Please fill out all required fields.');
+      setTimeout(() => {
+        setDisplayMessage('');
+        setShowOverlay(false);
+      }, 8000);
+      return;
+    }
     emailjs
       .send(
         'service_of106il',
@@ -52,7 +65,9 @@ const Contact = () => {
       })
       .catch((err) => {
         console.log('Failed.', err);
-        setDisplayMessage('Unable to send email. Please contact us by phone.');
+        setDisplayMessage(
+          'Unable to send email. Please contact us by phone. (408) 123-4567',
+        );
         setTimeout(() => setDisplayMessage(''), 7000);
       });
   };
@@ -95,10 +110,16 @@ const Contact = () => {
   };
 
   return (
-    <div>
-      <h1>Contact Us</h1>
-
-      <div>
+    <>
+      <div
+        style={{
+          display: 'inline-block',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <h1>Contact Us</h1>
         <FloatingLabel
           controlId="from_firstname"
           label="First Name"
@@ -223,8 +244,15 @@ const Contact = () => {
 
         {/* Display success message below the button */}
         {displayMessage && (
-          <p style={{ color: 'white' }}>
-            <strong>{displayMessage}</strong>
+          <p
+            style={{
+              color: displayMessage.includes('Please fill out')
+                ? '#8B0000'
+                : 'white',
+              fontSize: '26px',
+            }}
+          >
+            <em>{displayMessage}</em>
           </p>
         )}
 
@@ -258,7 +286,7 @@ const Contact = () => {
 
         {/* Check State button for testing */}
       </div>
-    </div>
+    </>
   );
 };
 
