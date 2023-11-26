@@ -22,6 +22,7 @@ const resolvers = {
     dailyMenusBySchool: async (_parent, { schoolId }) => {
       try {
         const dailyMenus = await DailyMenu.find({ school: schoolId })
+          .sort({ date: 1 })
           .populate('menuItems')
           .populate({
             path: 'school',
