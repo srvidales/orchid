@@ -79,7 +79,7 @@ export const GET_SCHOOL = gql`
 `;
 
 export const GET_SCHOOL_BY_ID = gql`
-  query SchoolById($id: ID!) {
+  query schoolById($id: ID!) {
     schoolById(_id: $id) {
       _id
       name
@@ -143,8 +143,31 @@ export const GET_DAILY_MENUS = gql`
   }
 `;
 
+export const GET_DAILY_MENUS_BY_SCHOOL = gql`
+  query getDailyMenusBySchool($schoolId: ID!) {
+    dailyMenusBySchool(schoolId: $schoolId) {
+      _id
+      date
+      meal
+      menuItems {
+        _id
+        name
+        description
+        image
+        category
+        createdAt
+      }
+      school {
+        _id
+        name
+      }
+      createdAt
+    }
+  }
+`;
+
 export const GET_DAILY_MENUS_BY_SCHOOL_AND_DATE = gql`
-  query DailyMenusBySchoolAndDate($schoolId: ID!, $date: String!) {
+  query getDailyMenusBySchoolAndDate($schoolId: ID!, $date: String!) {
     dailyMenusBySchoolAndDate(schoolId: $schoolId, date: $date) {
       _id
       date
@@ -188,7 +211,7 @@ export const GET_DAILY_MENUS_BY_SCHOOL_AND_DATE = gql`
 `;
 
 export const GET_DAILY_MENUS_BY_SCHOOL_DATE_AND_MEAL = gql`
-  query DailyMenusBySchoolDateAndMeal(
+  query getDailyMenusBySchoolDateAndMeal(
     $schoolId: ID!
     $date: String!
     $meal: MealType!

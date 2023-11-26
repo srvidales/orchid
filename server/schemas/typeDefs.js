@@ -66,6 +66,7 @@ const typeDefs = `
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
     dailyMenus: [DailyMenu]
+    dailyMenusBySchool(schoolId: ID!): [DailyMenu]
     dailyMenusBySchoolAndDate(schoolId: ID!, date: String!): [DailyMenu]
     dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: String!, meal: MealType!): [DailyMenu]
   }

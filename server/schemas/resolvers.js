@@ -18,6 +18,35 @@ const resolvers = {
       }
     },
 
+    // Resolver for fetching daily menus by school
+    dailyMenusBySchool: async (_parent, { schoolId }) => {
+      try {
+        const dailyMenus = await DailyMenu.find({ school: schoolId })
+          .populate('menuItems')
+          .populate({
+            path: 'school',
+            populate: {
+              path: 'dailyMenus',
+              populate: {
+                path: 'menuItems',
+              },
+            },
+          });
+
+        const formattedDailyMenus = dailyMenus.map((menu) => ({
+          ...menu.toObject(), 
+          date: menu.date.toISOString(),
+        }));
+
+        return formattedDailyMenus;
+      } catch (error) {
+        console.error('Error during daily menus fetch by school:', error);
+        throw new Error(
+          'An error occurred while fetching daily menus by school.',
+        );
+      }
+    },
+
     // Resolver for fetching daily menus by school and date
     dailyMenusBySchoolAndDate: async (_parent, { schoolId, date }) => {
       try {
@@ -83,6 +112,7 @@ const resolvers = {
         throw new Error('An error occurred while fetching daily menu.');
       }
     },
+
     // Resolver for fetching schools with associated menu items and daily menus
     schools: async () => {
       // Using the School model to find all schools
