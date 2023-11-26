@@ -1,6 +1,9 @@
 import emailjs from '@emailjs/browser';
 import { useState } from 'react';
-import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Overlay } from 'react-bootstrap';
+import Confetti from 'react-confetti';
+import useWindowSize from 'react-use/lib/useWindowSize';
+import ConfettiOverlay from '../components/ConfettiOverlay';
 
 const Contact = () => {
   const [formState, setFormState] = useState({
@@ -16,6 +19,7 @@ const Contact = () => {
   });
 
   const [displayMessage, setDisplayMessage] = useState('');
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const sendEmail = () => {
     emailjs
@@ -38,13 +42,18 @@ const Contact = () => {
           specialMeal: false,
           to_name: 'Whippersnappers Daycare',
         });
-        setDisplayMessage('Thank you for email the Whippersnappers Daycare.');
-        setTimeout(() => setDisplayMessage(''), 6000);
+        setDisplayMessage('Thank you for emailing Whippersnappers Daycare.');
+        setShowOverlay(true);
+
+        setTimeout(() => {
+          setDisplayMessage('');
+          setShowOverlay(false);
+        }, 7000);
       })
       .catch((err) => {
         console.log('Failed.', err);
         setDisplayMessage('Unable to send email. Please contact us by phone.');
-        setTimeout(() => setDisplayMessage(''), 6000);
+        setTimeout(() => setDisplayMessage(''), 7000);
       });
   };
 
@@ -53,10 +62,8 @@ const Contact = () => {
     setFormState({ ...formState, [name]: value });
   };
 
-  // Handle time slots
   const handleCheckBoxChange = (e) => {
     const { name } = e.target;
-    console.log(name);
 
     if (formState.timeSlots.includes(name)) {
       const updatedTimes = formState.timeSlots.filter((time) => time !== name);
@@ -78,14 +85,12 @@ const Contact = () => {
   };
 
   const handleSendTextCheckBoxChange = (e) => {
-    const { checked } = e.target; // Getting the checked property
-    console.log(`OK to send texts? ${checked}`);
+    const { checked } = e.target;
     setFormState({ ...formState, textMessage: checked });
   };
 
   const handleSpecialMealCheckBoxChange = (e) => {
-    const { checked } = e.target; // Getting the checked property
-    console.log(`Child has special dietary needs? ${checked}`);
+    const { checked } = e.target;
     setFormState({ ...formState, specialMeal: checked });
   };
 
@@ -94,7 +99,6 @@ const Contact = () => {
       <h1>Contact Us</h1>
 
       <div>
-        {/* First Name */}
         <FloatingLabel
           controlId="from_firstname"
           label="First Name"
@@ -109,7 +113,6 @@ const Contact = () => {
         </FloatingLabel>
         <p></p>
 
-        {/* Last Name */}
         <FloatingLabel
           controlId="from_lastname"
           label="Last Name"
@@ -124,7 +127,6 @@ const Contact = () => {
         </FloatingLabel>
         <p></p>
 
-        {/* Email */}
         <FloatingLabel controlId="email" label="Email" className="mb-b">
           <Form.Control
             type="text"
@@ -135,7 +137,6 @@ const Contact = () => {
         </FloatingLabel>
         <p></p>
 
-        {/* Cell Phone */}
         <FloatingLabel
           controlId="cellphone"
           label="Cell Phone"
@@ -150,7 +151,6 @@ const Contact = () => {
         </FloatingLabel>
         <p></p>
 
-        {/* Message Box */}
         <FloatingLabel
           controlId="message"
           label="Send us a message."
@@ -166,7 +166,6 @@ const Contact = () => {
         </FloatingLabel>
         <p></p>
 
-        {/* Text Message and Times */}
         <div>
           {['checkbox'].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
@@ -176,7 +175,7 @@ const Contact = () => {
                 name="morning"
                 type={type}
                 id={`inline-${type}-1`}
-                checked={formState.timeSlots.includes('morning') ? true : false}
+                checked={formState.timeSlots.includes('morning')}
                 onChange={handleCheckBoxChange}
               />
               <Form.Check
@@ -185,9 +184,7 @@ const Contact = () => {
                 name="afternoon"
                 type={type}
                 id={`inline-${type}-2`}
-                checked={
-                  formState.timeSlots.includes('afternoon') ? true : false
-                }
+                checked={formState.timeSlots.includes('afternoon')}
                 onChange={handleCheckBoxChange}
               />
               <Form.Check
@@ -196,11 +193,10 @@ const Contact = () => {
                 name="evening"
                 type={type}
                 id={`inline-${type}-3`}
-                checked={formState.timeSlots.includes('evening') ? true : false}
+                checked={formState.timeSlots.includes('evening')}
                 onChange={handleCheckBoxChange}
               />
 
-              {/* Okay to send Text Messages */}
               <p></p>
               <Form.Check
                 inline
@@ -211,8 +207,6 @@ const Contact = () => {
                 checked={formState.textMessage}
                 onChange={handleSendTextCheckBoxChange}
               />
-              {/* 
-              Special Meals */}
               <p></p>
               <Form.Check
                 inline
@@ -226,10 +220,43 @@ const Contact = () => {
             </div>
           ))}
         </div>
-        <Button onClick={sendEmail}>Submit</Button>
 
-        <Button onClick={() => console.log(formState)}>Check State</Button>
-        <p>{displayMessage}</p>
+        {/* Display success message below the button */}
+        {displayMessage && (
+          <p style={{ color: 'white' }}>
+            <strong>{displayMessage}</strong>
+          </p>
+        )}
+
+        {/* Display confetti and success overlay */}
+
+        <Button onClick={sendEmail}>
+          Submit
+          <Overlay show={showOverlay} target={document.body} placement="top">
+            {({ placement, arrowProps, show: _show, popper, ...props }) => (
+              <div
+                {...props}
+                style={{
+                  position: 'fixed',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  backgroundColor: 'green',
+                  padding: '10px',
+                  borderRadius: '5px',
+                  color: 'white',
+                  textAlign: 'center',
+                  zIndex: 1000,
+                }}
+              >
+                {/* <ConfettiOverlay /> */}
+                Form submitted successfully!
+              </div>
+            )}
+          </Overlay>
+        </Button>
+
+        {/* Check State button for testing */}
       </div>
     </div>
   );
