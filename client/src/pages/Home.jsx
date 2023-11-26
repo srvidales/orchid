@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <div>
-      <Row md={2} className="g-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <Row md={2} className="g-4" style={{ display: 'flex', flexWrap: 'wrap' }}>
         {cardData.map((card, idx) => (
           <Col key={idx} xs={12} sm={4} md={4} lg={4} xl={4}>
             <Card>
@@ -111,6 +111,7 @@ const Home = () => {
       {/*Carousel*/}
       {/*Carousel*/}
       {/*Carousel*/}
+
       {/*Carousel*/}
       {/*Carousel*/}
       {/*Carousel*/}
@@ -123,18 +124,6 @@ const Home = () => {
           margin: '100px',
         }}
       />
-      <div style={{ marginTop: '20px' }}>
-        <h2>Request Information</h2>
-        <p>Phone: XXX-XXX-XXXX</p>
-        <p>Address: School Address</p>
-        <p>
-          Every day at our daycare, we witness the blossoming of your child's
-          imagination and the unstoppable surge of their curiosity. At Wicked
-          Whippersnappers Academy, we embrace and applaud every moment of this
-          remarkable journey. Here in Wicked, we empower your child to explore,
-          learn, and celebrate the incredible tapestry of their growing world.
-        </p>
-      </div>
     </div>
   );
 };
