@@ -10,7 +10,7 @@ function Request() {
     <Card
       style={{
         marginTop: '2%',
-        width: '45%',
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -28,7 +28,12 @@ function Request() {
           learn, and celebrate the incredible tapestry of their growing world.
         </Card.Text>
       </Card.Body>
-      <Card.Body style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Card.Body
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
         <Card.Link href="#">
           <IoPhonePortraitSharp /> 408-123-4567
         </Card.Link>
