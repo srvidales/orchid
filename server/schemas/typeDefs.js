@@ -66,8 +66,7 @@ const typeDefs = `
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
     dailyMenus: [DailyMenu]
-    dailyMenusBySchoolAndDate(schoolId: ID!, date: String!): [DailyMenu]
-    dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: String!, meal: MealType!): [DailyMenu]
+    dailyMenusByDate(schoolId: ID!, date: String!): [DailyMenu]
   }
   
   type Mutation {
@@ -91,24 +90,3 @@ const typeDefs = `
 `;
 
 module.exports = typeDefs;
-
-/*
-    type Mutation {
-        login(email: String!, password: String!): Auth
-        addUser(firstName: String!, lastName: String!, email: String!, password: String!, school: ID!): Auth
-        addDailyMenu(): DailyMenu
-        WishList - addMenuItem(name: String!, description: String!, price: Float!, school: ID!): MenuItem
-        WishList - addSchool(name: String!, address: String!, city: String!, state: String!, zip: String!, phone: String!, email: String!): School
-        WishList - removeSchool(_id: ID!): School
-        WishList - removeUser(_id: ID!): User
-        WishList - removeMenuItem(_id: ID!): MenuItem
-        WishList - updateSchool(_id: ID!, name: String, address: String, city: String, state: String, zip: String, phone: String, email: String): School
-        WishList - updateUser(_id: ID!, firstName: String, lastName: String, email: String, password: String): User
-    }
-
-    me: User
-    schools: [School]
-    school(_id: ID!): School
-    user(_id: ID!): User
-
-*/
