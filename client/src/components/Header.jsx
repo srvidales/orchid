@@ -1,48 +1,46 @@
-// Importing necessary components and hooks from react-router-dom
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Nav from './Nav';
-
-// Importing images
+import Image from 'react-bootstrap/Image';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import logoImage from '../assets/logo/logo.png';
 import schoolImage from '../assets/images/school.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Creating the Header component without using const
 export default function Header() {
-  // Getting the current page path using useLocation hook
   const currentPage = useLocation().pathname;
 
-  // Returning the JSX for the Header component
   return (
-    <div>
+    <div className="mt-2">
       {/* Navbar component with the current page passed as a prop */}
-      {/* <Navbar page={currentPage} /> */}
       <Nav page={currentPage} />
 
-      {/* Container for the images, with flex layout and space around */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          marginTop: '20px',
-        }}
-      >
+      {/* Container for the images, with Bootstrap layout classes */}
+      <Container className="mt-3">
         {/* Image 1 with alt text and styling */}
-        <img src={logoImage} alt="School Logo" style={{ width: '45%' }} />
-
-        {/* Image 2 with alt text and styling */}
-        <img src={schoolImage} alt="School Photo" style={{ width: '45%' }} />
-      </div>
-      <div>
-        {/* Page Divider */}
-        <hr
-          style={{
-            width: '95%',
-            margin: '20px auto',
-            border: '2px solid black',
-          }}
-        />
-        <br></br>
-      </div>
+        <Row>
+          <Col xs={12} sm={12} md={6} className="mb-1">
+            <Image
+              src={logoImage}
+              alt="School Logo"
+              style={{ width: '100%' }}
+              className="d-block"
+            />
+          </Col>
+          {/* Image 2 with alt text and styling */}
+          <Col xs={12} sm={12} md={6} className="mb-2">
+            <Image
+              src={schoolImage}
+              alt="School Photo"
+              rounded
+              style={{ width: '100%' }}
+              className="d-none d-md-block"
+            />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
