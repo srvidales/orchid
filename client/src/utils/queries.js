@@ -166,6 +166,20 @@ export const GET_DAILY_MENUS_BY_SCHOOL_AND_DATE = gql`
         zip
         phone
         email
+        dailyMenus {
+          _id
+          date
+          meal
+          menuItems {
+            _id
+            name
+            description
+            image
+            category
+            createdAt
+          }
+          createdAt
+        }
         createdAt
       }
       createdAt

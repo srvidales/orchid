@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { GET_DAILY_MENUS_BY_SCHOOL_AND_DATE } from '../utils/queries';
 
 export default function MenuView() {
+  // State variables
   const [currentWeek, setCurrentWeek] = useState('');
   const [weekdays, setWeekdays] = useState([]);
   const [dates, setDates] = useState([]);
+  const [meals, setMeals] = useState([]);
 
+  // GraphQL query to get daily menus by school and date
+  const { loading, data } = useQuery(GET_DAILY_MENUS_BY_SCHOOL_AND_DATE, {
+    variables: {
+      schoolId: '656308b295c8e42fb3501c94',
+      date: '11/20/23',
+    },
+  });
+
+  // Update the week-related and meal information when the data changes
   useEffect(() => {
     // Get the current date
     const currentDate = new Date();
@@ -63,8 +75,52 @@ export default function MenuView() {
 
     setWeekdays(formattedDays);
     setDates(formattedDates);
-  }, []); // Run this effect only once when the component mounts
 
+    // Check if data is loaded
+    if (
+      !loading &&
+      data &&
+      data.dailyMenusBySchoolAndDate &&
+      data.dailyMenusBySchoolAndDate.length > 0
+    ) {
+      // Query returns only 1 meal
+      const firstMeal = data.dailyMenusBySchoolAndDate[0];
+      if (firstMeal) {
+        // Set up the meal based on the result
+        setMeals(firstMeal.meal);
+      }
+    }
+  }, [data]); // Run this effect when data changes
+
+  // Render menu items for a specific meal
+  const renderMenuItems = (meal) => {
+    // Check if data is still loading
+    if (loading) return <p>Loading...</p>;
+
+    // Check if there's an error in fetching data
+    if (!data || !data.dailyMenusBySchoolAndDate) {
+      return <p>Error fetching data</p>;
+    }
+
+    // Extract menu items for the specified meal
+    const mealItems = data.dailyMenusBySchoolAndDate[0]?.menuItems.filter(
+      (item) => item.category === meal,
+    );
+
+    // Check if there are no menu items for the specified meal
+    if (!mealItems || mealItems.length === 0) {
+      return <p>Bring your own.</p>;
+    }
+
+    // Render menu items
+    return mealItems.map((item) => (
+      <tr key={item._id}>
+        <td>{item.name}</td>
+      </tr>
+    ));
+  };
+
+  // Return JSX
   return (
     <>
       <h2>Menu View</h2>
@@ -72,33 +128,41 @@ export default function MenuView() {
       <table className="table">
         <thead>
           <tr>
+            {/* Render weekdays */}
             {weekdays.map((day, index) => (
               <th key={index}>{day}</th>
             ))}
           </tr>
           <tr>
+            {/* Render dates */}
             {dates.map((date, index) => (
               <td key={index}>{date}</td>
             ))}
           </tr>
         </thead>
         <tbody>
-          {/* Row for breakfast items */}
-          <tr className="breakfast-row">
+          {/* Row for meal items */}
+          <tr className="meal-row">
             <td colSpan="5">
-              <h6>Breakfast</h6>
-              <table className="sub-table">
-                <tbody>
-                  <tr>
-                    <td>Item 1</td>
-                  </tr>
-                  <tr>
-                    <td>Item 2</td>
-                  </tr>
-                  <tr>
-                    <td>Item 3</td>
-                  </tr>
-                </tbody>
+              <h3>Breakfast</h3>
+              <table>
+                <tbody>{renderMenuItems('BREAKFAST')}</tbody>
+              </table>
+            </td>
+          </tr>
+          <tr className="meal-row">
+            <td colSpan="5">
+              <h3>Lunch</h3>
+              <table>
+                <tbody>{renderMenuItems('LUNCH')}</tbody>
+              </table>
+            </td>
+          </tr>
+          <tr className="meal-row">
+            <td colSpan="5">
+              <h3>Snack</h3>
+              <table>
+                <tbody>{renderMenuItems('SNACK')}</tbody>
               </table>
             </td>
           </tr>
