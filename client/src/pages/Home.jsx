@@ -111,7 +111,6 @@ const Home = () => {
       {/*Carousel*/}
       {/*Carousel*/}
       {/*Carousel*/}
-      <CarouselComponent />
       {/*Carousel*/}
       {/*Carousel*/}
       {/*Carousel*/}
