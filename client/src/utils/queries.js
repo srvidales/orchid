@@ -13,6 +13,15 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_SCHOOL_NAMES = gql`
+  query getSchools {
+    schools {
+      _id
+      name
+    }
+  }
+`;
+
 export const GET_SCHOOL = gql`
   query getSchools {
     schools {

@@ -1,13 +1,24 @@
-import MenuBuilder from "../components/MenuBuilder";
-import MenuView from "../components/MenuView";
+import MenuBuilder from '../components/MenuBuilder';
+import MenuView from '../components/MenuView';
 import Auth from '../utils/auth';
+import { useQuery } from '@apollo/client';
+
+import { GET_SCHOOL_NAMES } from '../utils/queries';
 
 const Menu = () => {
-  const schoolId = '6563ed8cb2a2e8bdeee5cbc2';
+  const { loading, data, error } = useQuery(GET_SCHOOL_NAMES);
 
   return (
     <div>
-      {Auth.loggedIn() ? <MenuBuilder schoolId={schoolId} /> : <MenuView />}
+      {Auth.loggedIn() ? (
+        loading ? (
+            <p>Loading...</p>
+        ) : (
+          <MenuBuilder schoolId={data.schools[0]._id} />
+        )
+      ) : (
+        <MenuView />
+      )}
     </div>
   );
 };
