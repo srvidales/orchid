@@ -8,7 +8,6 @@ import { GET_MENU_ITEMS_BY_SCHOOL_ID } from '../utils/queries';
 
 MenuBuilder.propTypes = {
   schoolId: PropTypes.string.isRequired,
-  // selectedDate: PropTypes.Date,
 };
 
 export default function MenuBuilder({ schoolId }) {
@@ -70,7 +69,3 @@ export default function MenuBuilder({ schoolId }) {
     </>
   );
 }
-
-// value.toLocaleDateString('en-US', {
-//   weekday: 'long',
-// })

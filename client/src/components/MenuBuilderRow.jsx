@@ -39,10 +39,6 @@ export default function MenuBuilderRow({ date, items }) {
     );
   };
 
-  // toLocaleDateString('en-US', {
-  //     weekday: 'long',
-  //   })
-
   return (
     <tr>
       <th scope="row">{`${new Date(date).toLocaleDateString('en-US', {
