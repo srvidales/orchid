@@ -86,8 +86,33 @@ const typeDefs = `
       email: String,
       password: String
     ): User
-    addDailyMenu(date: String!, meal: MealType!, menuItems: [ID]!): DailyMenu
-  }
+    deleteUser(userId: ID!, schoolId: ID!): String
+        addSchool(
+      name: String!
+      address: String!
+      city: String!
+      state: String!
+      zip: String!
+      phone: String!
+      email: String!
+    ): School
+    updateSchool(
+      schoolId: ID!
+      name: String
+      address: String
+      city: String
+      state: String
+      zip: String
+      phone: String
+      email: String
+    ): School
+    deleteSchool(schoolId: ID!): String
+    addDailyMenu(
+      school: String!
+      date: String!
+      meal: MealType!
+      menuItems: [ID]!
+    ): DailyMenu  }
 `;
 
 module.exports = typeDefs;

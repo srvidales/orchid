@@ -6,7 +6,6 @@ const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
-
   Query: {
     // Resolver for fetching all users
     users: async () => {
@@ -234,6 +233,40 @@ const resolvers = {
         throw new AuthenticationError(
           'An error occurred during user update. Please try again.',
         );
+      }
+    },
+
+    // Mutation resolver for deleting a user
+    deleteUser: async (_parent, { userId, schoolId }) => {
+      try {
+        // Find the user by ID
+        const user = await User.findById(userId);
+
+        // Check if the user exists
+        if (!user) {
+          throw new Error('User not found.');
+        }
+
+        // Find the school by ID
+        const school = await School.findById(schoolId);
+
+        // Check if the school exists
+        if (!school) {
+          throw new Error('School not found.');
+        }
+
+        // Use $pull to remove the user from the school's user array
+        await School.updateOne({ _id: schoolId }, { $pull: { users: userId } });
+
+        // Delete the user from the database
+        await User.deleteOne({ _id: userId });
+
+        // Return a success message or updated school
+        return 'User deleted from school successfully.';
+      } catch (error) {
+        // Log and throw any errors that occur during user deletion
+        console.error(error);
+        throw new Error('An error occurred during user deletion.');
       }
     },
 
