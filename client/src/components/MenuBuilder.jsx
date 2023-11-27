@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Calendar from 'react-calendar';
-import MenuBuilderDailyRow from './MenuBuilderRow';
+import MenuBuilderRow from './MenuBuilderRow';
 import PropTypes from 'prop-types';
 
 import { useQuery } from '@apollo/client';
@@ -12,18 +12,10 @@ MenuBuilder.propTypes = {
 };
 
 export default function MenuBuilder({ schoolId }) {
-  const [menuItems, setMenuItems] = useState([]);
   const [value, onChange] = useState(new Date().setHours(0, 0, 0, 0));
   const { loading, data, error } = useQuery(GET_MENU_ITEMS_BY_SCHOOL_ID, {
     variables: { id: schoolId },
   });
-
-  useEffect(() => {
-    if (data) {
-      setMenuItems(data);
-      console.log(data);
-    }
-  }, [data]);
 
   return (
     <>
@@ -34,7 +26,6 @@ export default function MenuBuilder({ schoolId }) {
               locale="en-US"
               calendarType="gregory"
               onChange={onChange}
-              value={value}
             />
           </div>
           <div className="col-sm">
@@ -62,11 +53,13 @@ export default function MenuBuilder({ schoolId }) {
               </thead>
               <tbody>
                 {loading ? (
-                  <div>Loading...</div>
+                  <tr>
+                    <td>Loading...</td>
+                  </tr>
                 ) : (
-                  <MenuBuilderDailyRow
-                    dayOfWeek={value}
-                    menuItems={data.schoolById.menuItems}
+                  <MenuBuilderRow
+                    date={new Date(value)}
+                    items={data.schoolById.menuItems}
                   />
                 )}
               </tbody>

@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
 MenuBuilderRow.propTypes = {
-  dayOfWeek: PropTypes.number.isRequired,
-  menuItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default function MenuBuilderRow({ dayOfWeek, menuItems }) {
+export default function MenuBuilderRow({ date, items }) {
   const getSelectedMenuItem = () => {
     // category
     return null;
@@ -24,7 +24,7 @@ export default function MenuBuilderRow({ dayOfWeek, menuItems }) {
             : '---'}
         </option>
         <optgroup label={Category}>
-          {menuItems
+          {items
             .filter((item) => item.category === Category)
             .map((item) => (
               <option
@@ -45,9 +45,9 @@ export default function MenuBuilderRow({ dayOfWeek, menuItems }) {
 
   return (
     <tr>
-      <th scope="row">{`${new Date(dayOfWeek).toLocaleDateString('en-US', {
+      <th scope="row">{`${new Date(date).toLocaleDateString('en-US', {
         weekday: 'long',
-      })} ${new Date(dayOfWeek).toLocaleDateString()}`}</th>
+      })} ${new Date(date).toLocaleDateString()}`}</th>
       <td className="align-top">
         {getAvailableMenuItems('ENTREE')}
         {getAvailableMenuItems('SIDE')}
