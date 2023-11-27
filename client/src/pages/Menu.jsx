@@ -12,9 +12,7 @@ const Menu = () => {
     <div>
       {Auth.loggedIn() ? (
         loading ? (
-          <tr>
-            <td>Loading...</td>
-          </tr>
+            <p>Loading...</p>
         ) : (
           <MenuBuilder schoolId={data.schools[0]._id} />
         )
