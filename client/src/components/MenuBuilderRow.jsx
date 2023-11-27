@@ -13,109 +13,53 @@ export default function MenuBuilderRow({ dayOfWeek, menuItems }) {
 
   const getAvailableMenuItems = (Category) => {
     return (
-      <optgroup label={Category}>
-        {menuItems
-          .filter((item) => item.category === Category)
-          .map((item) => (
-            <option
-              key={item._id}
-              selected={getSelectedMenuItem(Category)?._id === item._id}
-            >
-              {item.name}
-            </option>
-          ))}
-      </optgroup>
+      <select
+        className="selectpicker"
+        defaultValue={''}
+        style={{ minWidth: '300px' }}
+      >
+        <option value="" disabled>
+          {getSelectedMenuItem(Category)
+            ? getSelectedMenuItem(Category).name
+            : '---'}
+        </option>
+        <optgroup label={Category}>
+          {menuItems
+            .filter((item) => item.category === Category)
+            .map((item) => (
+              <option
+                key={item._id}
+                value={getSelectedMenuItem(Category)?._id === item._id}
+              >
+                {item.name}
+              </option>
+            ))}
+        </optgroup>
+      </select>
     );
   };
 
+  // toLocaleDateString('en-US', {
+  //     weekday: 'long',
+  //   })
+
   return (
     <tr>
-      <th scope="row">{new Date(dayOfWeek).toLocaleDateString()}</th>
+      <th scope="row">{`${new Date(dayOfWeek).toLocaleDateString()}`}</th>
       <td className="align-top">
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('ENTREE')
-              ? getSelectedMenuItem('ENTREE').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('ENTREE')}
-        </select>
-        <br />
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('SIDE')
-              ? getSelectedMenuItem('SIDE').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('SIDE')}
-        </select>
-        <br />
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('DRINK')
-              ? getSelectedMenuItem('DRINK').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('DRINK')}
-        </select>
+        {getAvailableMenuItems('ENTREE')}
+        {getAvailableMenuItems('SIDE')}
+        {getAvailableMenuItems('DRINK')}
       </td>
       <td className="align-top">
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('SNACK')
-              ? getSelectedMenuItem('SNACK').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('SNACK')}
-        </select>
-        <br />
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('SNACK')
-              ? getSelectedMenuItem('SNACK').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('SNACK')}
-        </select>
-        <br />
+        {getAvailableMenuItems('SNACK')}
+        {getAvailableMenuItems('SNACK')}
       </td>
       <td className="align-top">
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('ENTREE')
-              ? getSelectedMenuItem('ENTREE').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('ENTREE')}
-        </select>
-        <br />
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('SIDE')
-              ? getSelectedMenuItem('SIDE').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('SIDE')}
-        </select>
-        <br />
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('SIDE')
-              ? getSelectedMenuItem('SIDE').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('SIDE')}
-        </select>
-        <br />
-        <select className="selectpicker">
-          <option value="" disabled selected>
-            {getSelectedMenuItem('DRINK')
-              ? getSelectedMenuItem('DRINK').name
-              : '---'}
-          </option>
-          {getAvailableMenuItems('DRINK')}
-        </select>
-        <br />
+        {getAvailableMenuItems('ENTREE')}
+        {getAvailableMenuItems('SIDE')}
+        {getAvailableMenuItems('SIDE')}
+        {getAvailableMenuItems('DRINK')}
       </td>
       <td className="align-top">
         <button className="btn btn-primary" type="button">

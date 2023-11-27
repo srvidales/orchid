@@ -81,5 +81,3 @@ export default function MenuBuilder({ schoolId }) {
 // value.toLocaleDateString('en-US', {
 //   weekday: 'long',
 // })
-
-// ${value.toLocaleDateString()}

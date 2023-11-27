@@ -3,7 +3,7 @@ import MenuView from "../components/MenuView";
 import Auth from '../utils/auth';
 
 const Menu = () => {
-  const schoolId = '6562e72e2b3d100f15c0d140';
+  const schoolId = '6563d10910620315bab19425';
 
   return (
     <div>
