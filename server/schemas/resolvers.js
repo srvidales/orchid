@@ -18,6 +18,36 @@ const resolvers = {
       }
     },
 
+    // Resolver for fetching daily menus by school
+    dailyMenusBySchool: async (_parent, { schoolId }) => {
+      try {
+        const dailyMenus = await DailyMenu.find({ school: schoolId })
+          .sort({ date: 1 })
+          .populate('menuItems')
+          .populate({
+            path: 'school',
+            populate: {
+              path: 'dailyMenus',
+              populate: {
+                path: 'menuItems',
+              },
+            },
+          });
+
+        const formattedDailyMenus = dailyMenus.map((menu) => ({
+          ...menu.toObject(),
+          date: menu.date.toISOString(),
+        }));
+
+        return formattedDailyMenus;
+      } catch (error) {
+        console.error('Error during daily menus fetch by school:', error);
+        throw new Error(
+          'An error occurred while fetching daily menus by school.',
+        );
+      }
+    },
+
     // Resolver for fetching daily menus by school and date
     dailyMenusBySchoolAndDate: async (_parent, { schoolId, date }) => {
       try {
@@ -141,9 +171,7 @@ const resolvers = {
       try {
         return await MenuItem.find({ school: schoolId })
           .populate('school')
-          .sort({
-            createdAt: -1,
-          });
+          .sort({ createdAt: -1 });
       } catch (error) {
         console.error('Error during menu items fetch:', error);
         throw new Error('An error occurred while fetching menu items.');
@@ -506,7 +534,9 @@ const resolvers = {
         return 'Menu item deleted successfully.';
       } catch (error) {
         console.error(error);
-        throw new AuthenticationError('An error occurred during menu item deletion.');
+        throw new AuthenticationError(
+          'An error occurred during menu item deletion.',
+        );
       }
     },
   },
