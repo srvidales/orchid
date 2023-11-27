@@ -49,17 +49,41 @@ db.once('open', async () => {
 
   // Associating daily menus with schools and menu items
   for (newDailyMenu of dailyMenus) {
+    console.log('Processing newDailyMenu:', newDailyMenu);
+
+    // Ensure that newDailyMenu.meals is an array with items property
+    if (!newDailyMenu.meals || !Array.isArray(newDailyMenu.meals)) {
+      console.error('Error: meals property is not properly defined.');
+      continue; // Skip to the next iteration if there's an issue
+    }
+
+    // Ensure that each meal in newDailyMenu.meals has a type property
+    for (const meal of newDailyMenu.meals) {
+      if (!meal.type) {
+        console.error('Error: Meal does not have a type property.');
+        continue; // Skip to the next iteration if there's an issue
+      }
+    }
+
     // Randomly selecting a school from the list
     const school = schools[Math.floor(Math.random() * schools.length)];
 
-    // Selecting a random menu item from the school's menuItems array
-    const randomIndex = Math.floor(Math.random() * school.menuItems.length);
-    const menuItem = school.menuItems[randomIndex];
+    // Selecting a random menu item for each meal type
+    const entree = menuItems.find((item) => item.category === 'ENTREE');
+    const side = menuItems.find((item) => item.category === 'SIDE');
+    const snack = menuItems.find((item) => item.category === 'SNACK');
+    const drink = menuItems.find((item) => item.category === 'DRINK');
 
     newDailyMenu.school = school;
 
-    // Adding the selected menu item to the daily menu's menuItems array
-    newDailyMenu.menuItems.push(menuItem);
+    // Adding the selected menu items to the daily menu's meals array
+    newDailyMenu.meals
+      .find((meal) => meal.type === 'BREAKFAST')
+      .items.push(entree, drink);
+    newDailyMenu.meals
+      .find((meal) => meal.type === 'LUNCH')
+      .items.push(entree, side, drink);
+    newDailyMenu.meals.find((meal) => meal.type === 'SNACK').items.push(snack);
 
     // Saving the daily menu with the updated menuItems array
     await newDailyMenu.save();
