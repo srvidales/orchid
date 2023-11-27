@@ -35,7 +35,7 @@ const resolvers = {
           });
 
         const formattedDailyMenus = dailyMenus.map((menu) => ({
-          ...menu.toObject(), 
+          ...menu.toObject(),
           date: menu.date.toISOString(),
         }));
 
@@ -175,16 +175,21 @@ const resolvers = {
     dailyMenus: async () => {
       try {
         // Using the DailyMenu model to find all daily menus
-        // Sorting them by creation date in descending order
-        const dailyMenus = await DailyMenu.find().sort({ createdAt: -1 });
+        // Sorting them by date in asc order
+        const dailyMenus = await DailyMenu.find().sort({ date: 1 });
 
         // Populate the 'menuItems' field for each daily menu
         const populatedDailyMenus = await DailyMenu.populate(dailyMenus, {
           path: 'menuItems',
         });
 
+        const formattedDailyMenus = populatedDailyMenus.map((menu) => ({
+          ...menu.toObject(),
+          date: menu.date.toLocaleDateString(),
+        }));
+
         // Return the daily menus with populated menu items
-        return populatedDailyMenus;
+        return formattedDailyMenus;
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during daily menus fetch:', error);
