@@ -1,7 +1,7 @@
 [
   {
-    "name": "Enchanted Unicorn Pizza",
-    "description": "Experience the magic with our enchanted unicorn pizza, adorned with rainbow-colored veggies and a sprinkle of fairy dust (Parmesan cheese). A mystical delight for little ones!",
+    "name": "Venomous Viper Pizza",
+    "description": "Dare to try our dangerously delicious pizza featuring a slithering combination of spicy pepperoni, jalapenos, and a venomous hot sauce. Not for the faint of heart!",
     "image": "pizza.png",
     "category": "ENTREE"
   },
@@ -102,6 +102,24 @@
     "category": "ENTREE"
   },
   {
+  "name": "Forest Feast Risotto",
+  "description": "Immerse yourself in the flavors of the enchanted forest with our Forest Feast Risotto. Each grain of rice is infused with the essence of mystical mushrooms and herbs, creating a delightful and earthy experience.",
+  "image": "forest-risotto.png",
+  "category": "ENTREE"
+  },
+  {
+    "name": "Dragon's Breath Tacos",
+    "description": "Spice up your mealtime adventure with Dragon's Breath Tacos. Filled with fiery ingredients and topped with a smoky dragon's breath salsa, these tacos are sure to ignite your taste buds.",
+    "image": "dragon-tacos.png",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Starlight Noodle Bowl",
+    "description": "Drift into the cosmos with our Starlight Noodle Bowl. Featuring celestial noodles and a medley of star-shaped vegetables, this dish promises a heavenly and flavorful journey.",
+    "image": "noodle-bowl.png",
+    "category": "ENTREE"
+  },
+  {
     "name": "Wickedly Spiced Fries",
     "description": "Indulge in our wickedly spiced fries, seasoned with a devilish blend of spices. A perfect side to add a kick to your meal!",
     "image": "fries.png",
@@ -153,6 +171,12 @@
     "name": "Crisp Fairy Apple Slices",
     "description": "Experience the enchantment of crisp fairy apple slices, lightly dusted with magical cinnamon sugar. A sweet and crunchy side that will make snack time truly magical!",
     "image": "apple-slices.png",
+    "category": "SIDE"
+  },
+  {
+    "name": "Phoenix fire Chicken Wings",
+    "description": "Ignite your taste buds with our Phoenix fire Chicken Wings. These spicy and flavorful wings are glazed with a fiery phoenix sauce, delivering a burst of heat and excitement with every bite. A perfect side for those who crave a daring adventure!",
+    "image": "chicken-wings.png",
     "category": "SIDE"
   },
   {
