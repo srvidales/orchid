@@ -1,89 +1,81 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 MenuBuilderRow.propTypes = {
-  dayOfWeek: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default function MenuBuilderRow({dayOfWeek}) {
+const defaultKeyValuePairs = {
+  b1: '',
+  b2: '',
+  b3: '',
+  s1: '',
+  s2: '',
+  l1: '',
+  l2: '',
+  l3: '',
+  l4: '',
+};
+
+export default function MenuBuilderRow({ date, items }) {
+  const selectKeyValuePairs = { ...defaultKeyValuePairs };
+  
+  const [selectValue, setSelectValue] = useState(selectKeyValuePairs);
+
+  useEffect(() => {
+    setSelectValue({ ...defaultKeyValuePairs });
+  }, [date]);
+
+  const handleChange = (id, event) => {
+    const updatedSelectKeyValuePairs = { ...selectValue, [id]: event.target.value };
+    setSelectValue(updatedSelectKeyValuePairs);
+  };
+
+  const renderSelect = (id, Category) => {
+    return (
+      <select
+        id={id}
+        className="selectpicker"
+        style={{ minWidth: '300px' }}
+        value={selectValue[id]}
+        onChange={(event) => handleChange(id, event)}
+      >
+        <option value="" disabled>
+          ---
+        </option>
+        <optgroup label={Category}>
+          {items
+            .filter((item) => item.category === Category)
+            .map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            ))}
+        </optgroup>
+      </select>
+    );
+  };
+
   return (
     <tr>
-      <th scope="row">{dayOfWeek}</th>
+      <th scope="row">{`${new Date(date).toLocaleDateString('en-US', {
+        weekday: 'long',
+      })} ${new Date(date).toLocaleDateString()}`}</th>
       <td className="align-top">
-        <select className="selectpicker">
-          <optgroup label="Entree">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
-        <select className="selectpicker">
-          <optgroup label="Side">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
-        <select className="selectpicker">
-          <optgroup label="Drink">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
+        {renderSelect('b1', 'ENTREE')}
+        {renderSelect('b2', 'SIDE')}
+        {renderSelect('b3', 'DRINK')}
       </td>
       <td className="align-top">
-        <select className="selectpicker">
-          <optgroup label="Snack">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
-        <select className="selectpicker">
-          <optgroup label="Snack">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
+        {renderSelect('s1', 'SNACK')}
+        {renderSelect('s2', 'SNACK')}
       </td>
       <td className="align-top">
-        <select className="selectpicker">
-          <optgroup label="Entree">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
-        <select className="selectpicker">
-          <optgroup label="Side">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
-        <select className="selectpicker">
-          <optgroup label="Side">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
-        <select className="selectpicker">
-          <optgroup label="Drink">
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-          </optgroup>
-        </select>
-        <br />
+        {renderSelect('l1', 'ENTREE')}
+        {renderSelect('l2', 'SIDE')}
+        {renderSelect('l3', 'SIDE')}
+        {renderSelect('l4', 'DRINK')}
       </td>
       <td className="align-top">
         <button className="btn btn-primary" type="button">

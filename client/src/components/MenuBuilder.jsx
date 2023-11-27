@@ -1,42 +1,78 @@
+import { useState } from 'react';
 import Calendar from 'react-calendar';
-import MenuBuilderDailyRow from './MenuBuilderRow';
+import MenuBuilderRow from './MenuBuilderRow';
+import PropTypes from 'prop-types';
 
-export default function MenuBuilder() {
+import { useQuery } from '@apollo/client';
+import { GET_MENU_ITEMS_BY_SCHOOL_ID } from '../utils/queries';
+
+MenuBuilder.propTypes = {
+  schoolId: PropTypes.string.isRequired,
+};
+
+export default function MenuBuilder({ schoolId }) {
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().setHours(0, 0, 0, 0),
+  );
+  const { loading, data, error } = useQuery(GET_MENU_ITEMS_BY_SCHOOL_ID, {
+    variables: { id: schoolId },
+  });
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
     <>
-      <h2>Menu Builder</h2>
-      <div>
-        <Calendar calendarType="US" />
+      <div className="container">
+        <div className="row">
+          <div className="col-sm">
+            <Calendar
+              locale="en-US"
+              calendarType="gregory"
+              onChange={handleDateChange}
+              value={new Date(selectedDate)}
+            />
+          </div>
+          <div className="col-sm">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">
+                    3 Items
+                    <br />
+                    Breakfast
+                  </th>
+                  <th scope="col">
+                    2 Items
+                    <br />
+                    Snack
+                  </th>
+                  <th scope="col">
+                    4 Items
+                    <br />
+                    Lunch
+                  </th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td>Loading...</td>
+                  </tr>
+                ) : (
+                  <MenuBuilderRow
+                    date={new Date(selectedDate)}
+                    items={data.schoolById.menuItems}
+                  />
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">
-              3 Items
-              <br />
-              Breakfast
-            </th>
-            <th scope="col">
-              2 Items
-              <br />
-              Snack
-            </th>
-            <th scope="col">
-              4 Items
-              <br />
-              Lunch
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <MenuBuilderDailyRow dayOfWeek='Monday'/>
-          <MenuBuilderDailyRow dayOfWeek='Tuesday'/>
-          <MenuBuilderDailyRow dayOfWeek='Wednesday'/>
-          <MenuBuilderDailyRow dayOfWeek='Thursday'/>
-          <MenuBuilderDailyRow dayOfWeek='Friday'/>
-        </tbody>
-      </table>
     </>
   );
 }

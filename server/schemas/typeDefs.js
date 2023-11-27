@@ -15,6 +15,7 @@ const typeDefs = `
     description: String!
     image: String
     category: Category
+    school: School
     createdAt: String
   }
 
@@ -65,6 +66,7 @@ const typeDefs = `
     schools: [School]
     schoolById(_id: ID!): School
     menuItems: [MenuItem]
+    menuItemsBySchool(schoolId: ID!): [MenuItem]    
     dailyMenus: [DailyMenu]
     dailyMenusBySchoolAndDate(schoolId: ID!, date: String!): [DailyMenu]
     dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: String!, meal: MealType!): [DailyMenu]

@@ -36,6 +36,56 @@
     "category": "ENTREE"
   },
   {
+    "name": "Entree 1",
+    "description": "Entree 1",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 2",
+    "description": "Entree 2",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 3",
+    "description": "Entree 3",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 4",
+    "description": "Entree 4",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 5",
+    "description": "Entree 5",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 6",
+    "description": "Entree 6",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 7",
+    "description": "Entree 7",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 8",
+    "description": "Entree 8",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 9",
+    "description": "Entree 9",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Entree 10",
+    "description": "Entree 10",
+    "category": "ENTREE"
+  },
+  {
     "name": "Wickedly Spiced Fries",
     "description": "Indulge in our wickedly spiced fries, seasoned with a devilish blend of spices. A perfect side to add a kick to your meal!",
     "image": "fries.png",
@@ -60,6 +110,56 @@
     "category": "SIDE"
   },
   {
+    "name": "Side 1",
+    "description": "Side 1",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 2",
+    "description": "Side 2",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 3",
+    "description": "Side 3",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 4",
+    "description": "Side 4",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 5",
+    "description": "Side 5",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 6",
+    "description": "Side 6",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 7",
+    "description": "Side 7",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 8",
+    "description": "Side 8",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 9",
+    "description": "Side 9",
+    "category": "SIDE"
+  },
+  {
+    "name": "Side 10",
+    "description": "Side 10",
+    "category": "SIDE"
+  },
+  {
     "name": "Bewitched Blueberry Smoothie",
     "description": "Sip on the magical flavors of our blueberry smoothie with a twist of enchantment. A refreshing drink that will leave you spellbound!",
     "image": "smoothie.png",
@@ -78,6 +178,56 @@
     "category": "DRINK"
   },
   {
+    "name": "Drink 1",
+    "description": "Drink 1",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 2",
+    "description": "Drink 2",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 3",
+    "description": "Drink 3",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 4",
+    "description": "Drink 4",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 5",
+    "description": "Drink 5",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 6",
+    "description": "Drink 6",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 7",
+    "description": "Drink 7",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 8",
+    "description": "Drink 8",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 9",
+    "description": "Drink 9",
+    "category": "DRINK"
+  },
+  {
+    "name": "Drink 10",
+    "description": "Drink 10",
+    "category": "DRINK"
+  },
+  {
     "name": "Sorcerer's Snack Mix",
     "description": "Munch on our sorcerer's snack mix, a magical blend of nuts, pretzels, and dried fruits. A bewitching snack that will keep you enchanted throughout the day!",
     "image": "snack-mix.png",
@@ -87,6 +237,56 @@
     "name": "Enigma Energy Bites",
     "description": "Fuel up with our enigma energy bites, packed with mysterious ingredients to give you a boost of vitality. A perfect snack for those in search of a tasty mystery!",
     "image": "mystery-bites.png",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 1",
+    "description": "Snack 1",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 2",
+    "description": "Snack 2",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 3",
+    "description": "Snack 3",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 4",
+    "description": "Snack 4",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 5",
+    "description": "Snack 5",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 6",
+    "description": "Snack 6",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 7",
+    "description": "Snack 7",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 8",
+    "description": "Snack 8",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 9",
+    "description": "Snack 9",
+    "category": "SNACK"
+  },
+  {
+    "name": "Snack 10",
+    "description": "Snack 10",
     "category": "SNACK"
   }
 ]
