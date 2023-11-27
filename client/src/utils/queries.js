@@ -14,7 +14,7 @@ export const GET_USER = gql`
 `;
 
 export const GET_SCHOOL = gql`
-  query getSchool {
+  query getSchools {
     schools {
       _id
       name
@@ -52,6 +52,25 @@ export const GET_SCHOOL = gql`
           category
           createdAt
         }
+        school {
+          _id
+          address
+          city
+          createdAt
+          email
+          name
+          phone
+          state
+          zip
+          users {
+            _id
+            firstName
+            lastName
+            email
+            password
+            createdAt
+          }
+        }
         createdAt
       }
       createdAt
@@ -60,7 +79,7 @@ export const GET_SCHOOL = gql`
 `;
 
 export const GET_SCHOOL_BY_ID = gql`
-  query getSchoolById($id: ID!) {
+  query schoolById($id: ID!) {
     schoolById(_id: $id) {
       _id
       name
@@ -87,9 +106,6 @@ export const GET_SCHOOL_BY_ID = gql`
         createdAt
       }
       dailyMenus {
-        _id
-        date
-        meal
         menuItems {
           _id
           name
@@ -98,9 +114,32 @@ export const GET_SCHOOL_BY_ID = gql`
           category
           createdAt
         }
+        _id
         createdAt
+        date
+        meal
       }
       createdAt
+    }
+  }
+`;
+
+export const GET_DAILY_MENUS_BY_SCHOOL = gql`
+  query dailyMenusBySchool($schoolId: ID!) {
+    dailyMenusBySchool(schoolId: $schoolId) {
+      _id
+      date
+      meal
+      menuItems {
+        _id
+        name
+        description
+        category
+      }
+      school {
+        _id
+        name
+      }
     }
   }
 `;
@@ -146,19 +185,6 @@ export const GET_DAILY_MENUS = gql`
         category
         createdAt
       }
-      createdAt
-    }
-  }
-`;
-
-export const GET_MENU_ITEMS_BY_SCHOOL = gql`
-  query getMenuItemsBySchool($schoolId: ID!) {
-    menuItemsBySchool(schoolId: $schoolId) {
-      _id
-      name
-      description
-      image
-      category
       createdAt
     }
   }

@@ -1,4 +1,3 @@
-const { AuthenticationError } = require('@apollo/server');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -18,7 +17,7 @@ const loginUser = async (email, password) => {
     // Check for invalid credentials
     if (!user && !(await user.isCorrectPassword(password))) {
       // If invalid credentials, throw an authentication error
-      throw new AuthenticationError('Invalid credentials');
+      throw new Error('Invalid credentials');
     }
 
     // Valid credentials, generate and return a JWT token
@@ -28,7 +27,7 @@ const loginUser = async (email, password) => {
     // Check if the token is generated successfully
     if (!token) {
       // If token generation fails, throw an authentication error
-      throw new AuthenticationError('Invalid credentials');
+      throw new Error('Invalid credentials');
     }
 
     // Return the generated token and user
@@ -36,7 +35,7 @@ const loginUser = async (email, password) => {
   } catch (error) {
     // Log and throw any errors that occur during login
     console.error(error);
-    throw new AuthenticationError(
+    throw new Error(
       'An error occurred during login. Please try again.',
     );
   }

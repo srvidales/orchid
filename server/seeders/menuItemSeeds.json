@@ -6,83 +6,117 @@
     "category": "ENTREE"
   },
   {
-    "name": "Toxic Triple Burger",
-    "description": "Our deadly triple-layered burger is stacked with ghost pepper-infused patties, toxic green relish, and a secret sauce that will leave your taste buds tingling. Handle with caution!",
-    "image": "burger.png",
+    "name": "Safari Skewers",
+    "description": "Embark on a taste safari with our savory skewers inspired by the wild. Each skewer features a colorful array of meats, veggies, and exotic spices. A culinary adventure for little safari explorers!",
+    "image": "skewers.png",
     "category": "ENTREE"
   },
   {
-    "name": "Deadly Dragon Salad",
-    "description": "Embark on a taste adventure with our fiery salad featuring dragon fruit, spicy arugula, and a chili-lime dressing. Warning: May breathe fire!",
-    "image": "salad.png",
+    "name": "Pixie Wings Sandwich",
+    "description": "Fly into a world of flavor with our pixie wings sandwich, featuring butterfly-shaped bread and whimsical fillings. A magical treat for little dreamers!",
+    "image": "sandwich.png",
     "category": "ENTREE"
   },
   {
-    "name": "Sinister Serpent Sushi Roll",
-    "description": "Experience the thrill of our snake-inspired sushi roll with eel, avocado, and a wasabi-infused soy sauce. Beware: It might just bite back!",
-    "image": "sushi.png",
+    "name": "Wizard's Spell Bento Box",
+    "description": "Cast a spell on lunchtime with our wizard-themed bento box, filled with spellbinding treats and enchanting surprises. A mystical adventure for tiny wizards and witches!",
+    "image": "bento.png",
     "category": "ENTREE"
   },
   {
-    "name": "Mystical Manticore Mac 'n' Cheese",
-    "description": "Unleash the mythical flavors with our mac 'n' cheese featuring a blend of three cheeses, spicy chorizo, and a sprinkle of enchanted breadcrumbs. Approach with caution!",
-    "image": "mac-n-cheese.png",
+    "name": "Magical Rainbow Pasta",
+    "description": "Embark on a journey with our magical rainbow pasta, infused with colors from a magical palette. Sprinkled with stardust for an extra touch of enchantment!",
+    "image": "pasta.png",
     "category": "ENTREE"
   },
   {
-    "name": "Chupacabra Chili Bowl",
-    "description": "Brace yourself for the heat of our legendary chili bowl made with ghost pepper-infused beef, fiery beans, and a sprinkle of shredded dragon cheese. Only for the bravest souls!",
-    "image": "chili.png",
+    "name": "Fairy Garden Fruit Salad",
+    "description": "Discover the wonders of our fairy garden fruit salad, featuring a mix of enchanted fruits arranged in a whimsical display. A fruity fairy feast for little sprites!",
+    "image": "fruit-salad.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 1",
-    "description": "Entree 1",
+    "name": "Crystal Lake Salmon",
+    "description": "Dive into the depths of flavor with our Crystal Lake Salmon, glazed with a magical sauce and accompanied by shimmering vegetable crystals. A water-inspired delight!",
+    "image": "salmon.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 2",
-    "description": "Entree 2",
+    "name": "Mystic Forest Flatbread",
+    "description": "Journey through the enchanted forest with our Mystic Forest Flatbread, topped with a medley of mystical mushrooms and forest herbs. An earthy and flavorful experience!",
+    "image": "flatbread.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 3",
-    "description": "Entree 3",
+    "name": "Enchanted Forest Veggie Wraps",
+    "description": "Journey through the enchanted forest with veggie wraps featuring mystical shapes and a magical herb-infused dressing. A colorful and nutritious adventure!",
+    "image": "wraps.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 4",
-    "description": "Entree 4",
+    "name": "Magical Creatures Nuggets",
+    "description": "Meet magical creatures with our nuggets shaped like unicorns, fairies, and dragons. Served with magical dipping sauces for an enchanting meal!",
+    "image": "nuggets.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 5",
-    "description": "Entree 5",
+    "name": "Magical Mushroom Risotto",
+    "description": "Dive into a world of enchantment with our magical mushroom risotto. Each grain of rice is infused with fairy flavors, and the dish is sprinkled with edible star-shaped cheese. A spellbinding delight for young wizards and witches!",
+    "image": "mushroom-risotto.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 6",
-    "description": "Entree 6",
+    "name": "Phoenix Feather Quesadilla",
+    "description": "Savor the magic with our phoenix feather quesadilla, filled with spellbinding ingredients and a touch of fiery salsa. A mystical twist on a classic dish!",
+    "image": "quesadilla.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 7",
-    "description": "Entree 7",
+    "name": "Starlight Smoothie Bowl",
+    "description": "Bask in the glow of our starlight smoothie bowl, featuring celestial fruits and a sprinkle of edible stars. A magical start to the day!",
+    "image": "smoothie-bowl.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 8",
-    "description": "Entree 8",
+    "name": "Dragon Breath Meatballs",
+    "description": "Unleash the power of dragon breath with our flavorful meatballs. Each meatball is infused with mystical spices, and the dish is served with a smoky dragon's breath dipping sauce. A fiery feast fit for brave little adventurers!",
+    "image": "meatballs.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 9",
-    "description": "Entree 9",
+    "name": "Moonlit Meadow Quiche",
+    "description": "Experience the tranquility of a moonlit meadow with our quiche, filled with enchanted herbs and meadow-inspired delights. A savory slice of nature's magic!",
+    "image": "quiche.png",
     "category": "ENTREE"
   },
   {
-    "name": "Entree 10",
-    "description": "Entree 10",
+    "name": "Dragon Tail Hot Dogs",
+    "description": "Lunchtime becomes a dragon adventure with hot dogs shaped like dragon tails. Served with a side of magical condiments for a fiery feast!",
+    "image": "hot-dogs.png",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Stardust Sushi Rolls",
+    "description": "Savor the taste of the cosmos with our Stardust Sushi Rolls, featuring ingredients from distant stars and a sprinkle of edible stardust. A celestial treat for sushi enthusiasts!",
+    "image": "sushi-rolls.png",
+    "category": "ENTREE"
+  },
+  {
+  "name": "Forest Feast Risotto",
+  "description": "Immerse yourself in the flavors of the enchanted forest with our Forest Feast Risotto. Each grain of rice is infused with the essence of mystical mushrooms and herbs, creating a delightful and earthy experience.",
+  "image": "forest-risotto.png",
+  "category": "ENTREE"
+  },
+  {
+    "name": "Dragon's Breath Tacos",
+    "description": "Spice up your mealtime adventure with Dragon's Breath Tacos. Filled with fiery ingredients and topped with a smoky dragon's breath salsa, these tacos are sure to ignite your taste buds.",
+    "image": "dragon-tacos.png",
+    "category": "ENTREE"
+  },
+  {
+    "name": "Starlight Noodle Bowl",
+    "description": "Drift into the cosmos with our Starlight Noodle Bowl. Featuring celestial noodles and a medley of star-shaped vegetables, this dish promises a heavenly and flavorful journey.",
+    "image": "noodle-bowl.png",
     "category": "ENTREE"
   },
   {
@@ -104,59 +138,45 @@
     "category": "SIDE"
   },
   {
-    "name": "Mystic Mushroom Medley",
-    "description": "Savor the mystic flavors of our mushroom medley, sautéed to perfection with a dash of enchantment. A delightful side to accompany any main course!",
-    "image": "mushrooms.png",
+    "name": "Cucumber Fairy Coins",
+    "description": "Embrace the crispness of cucumber fairy coins, sliced into dainty shapes and served with a sprinkle of pixie dust (herbs). A light and hydrating side for little garden explorers!",
+    "image": "cucumber-coins.png",
     "category": "SIDE"
   },
   {
-    "name": "Side 1",
-    "description": "Side 1",
+    "name": "Rainbow Veggie Wands",
+    "description": "Summon the magic of the rainbow with our veggie wands, featuring a colorful mix of vegetable sticks shaped like wands. A fun and nutritious side for little wizards and witches!",
+    "image": "veggie-sticks.png",
     "category": "SIDE"
   },
   {
-    "name": "Side 2",
-    "description": "Side 2",
+    "name": "Mystic Veggie Pockets",
+    "description": "Uncover the magic within our mystic veggie pockets, filled with a medley of enchanted vegetables and a light herb-infused cream. A delightful and portable side for little adventurers on the go!",
+    "image": "veggie-pockets.png",
     "category": "SIDE"
   },
   {
-    "name": "Side 3",
-    "description": "Side 3",
+    "name": "Sunflower Seed Salad",
+    "description": "Bask in the glow of our sunflower seed salad, featuring a mix of vibrant veggies, sunflower seeds, and a sunshine-infused dressing. A crunchy and nutritious side for a bright and magical meal!",
+    "image": "sunflower-salad.png",
     "category": "SIDE"
   },
   {
-    "name": "Side 4",
-    "description": "Side 4",
+    "name": "Fruit Sorbet Surprise",
+    "description": "Cool off with our fruit sorbet surprise, a refreshing blend of magical fruits frozen into delightful shapes. A sweet and fruity side for a magical treat!",
+    "image": "fruit-sorbet.png",
     "category": "SIDE"
   },
   {
-    "name": "Side 5",
-    "description": "Side 5",
+    "name": "Crisp Fairy Apple Slices",
+    "description": "Experience the enchantment of crisp fairy apple slices, lightly dusted with magical cinnamon sugar. A sweet and crunchy side that will make snack time truly magical!",
+    "image": "apple-slices.png",
     "category": "SIDE"
   },
   {
-    "name": "Side 6",
-    "description": "Side 6",
-    "category": "SIDE"
-  },
-  {
-    "name": "Side 7",
-    "description": "Side 7",
-    "category": "SIDE"
-  },
-  {
-    "name": "Side 8",
-    "description": "Side 8",
-    "category": "SIDE"
-  },
-  {
-    "name": "Side 9",
-    "description": "Side 9",
-    "category": "SIDE"
-  },
-  {
-    "name": "Side 10",
-    "description": "Side 10",
+    "name": "Phoenix fire Chicken Wings",
+    "description": "Ignite your taste buds with our Phoenix fire Chicken Wings. These spicy and flavorful wings are glazed with a fiery phoenix sauce, delivering a burst of heat and excitement with every bite. A perfect side for those who crave a daring adventure!",
+    "image": "chicken-wings.png",
     "category": "SIDE"
   },
   {
@@ -166,65 +186,27 @@
     "category": "DRINK"
   },
   {
-    "name": "Elixir of Life Lemonade",
-    "description": "Quench your thirst with our lemonade infused with the mystical Elixir of Life. A drink so revitalizing, it might just grant you eternal refreshment!",
+    "name": "Fizzy Fairy Lemonade",
+    "description": "Sparkle with joy as you sip on our fizzy fairy lemonade, a bubbly and citrusy concoction that will make your taste buds dance. A delightful and effervescent drink for young fairies and wizards!",
     "image": "lemonade.png",
     "category": "DRINK"
   },
   {
-    "name": "Ghostly Green Tea",
-    "description": "Experience the ethereal taste of our green tea, brewed with the essence of ghosts. A hauntingly delightful beverage to soothe your spirit!",
+    "name": "Ghostly Sip",
+    "description": "Unveil the ethereal essence of our spectral spirit sip, a chilling and translucent drink that captures the ghostly whispers of flavors. An otherworldly delight for brave little adventurers!",
     "image": "tea.png",
     "category": "DRINK"
   },
   {
-    "name": "Drink 1",
-    "description": "Drink 1",
+    "name": "Citrus Splash Fizz",
+    "description": "Experience the refreshing burst of sunshine with our citrus splash fizz, a zesty and effervescent drink that will tickle your taste buds. A delightful citrus adventure for young explorers!",
+    "image": "mango-orange-juice.png",
     "category": "DRINK"
   },
   {
-    "name": "Drink 2",
-    "description": "Drink 2",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 3",
-    "description": "Drink 3",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 4",
-    "description": "Drink 4",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 5",
-    "description": "Drink 5",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 6",
-    "description": "Drink 6",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 7",
-    "description": "Drink 7",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 8",
-    "description": "Drink 8",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 9",
-    "description": "Drink 9",
-    "category": "DRINK"
-  },
-  {
-    "name": "Drink 10",
-    "description": "Drink 10",
+    "name": "Moonlit Elixir",
+    "description": "Indulge in the celestial charm of our moonlit elixir, a velvety and enchanting milk drink that whispers of dreams and moonlight. A magical sip for young stargazers and night explorers!",
+    "image": "milk.png",
     "category": "DRINK"
   },
   {
@@ -234,59 +216,27 @@
     "category": "SNACK"
   },
   {
+    "name": "Starlight Berry Parfait",
+    "description": "Gaze into the starry sky with our starlight berry parfait, layers of enchanting berries and yogurt creating a celestial treat. A delightful and healthy side for a magical dining experience!",
+    "image": "berry-parfait.png",
+    "category": "SNACK"
+  },
+  {
     "name": "Enigma Energy Bites",
     "description": "Fuel up with our enigma energy bites, packed with mysterious ingredients to give you a boost of vitality. A perfect snack for those in search of a tasty mystery!",
     "image": "mystery-bites.png",
     "category": "SNACK"
   },
   {
-    "name": "Snack 1",
-    "description": "Snack 1",
+    "name": "Enchanted Garden Sticks",
+    "description": "Munch on the magic of the enchanted garden with veggie sticks shaped like mystical plants. Dip into a magical hummus for a delicious and wholesome snack!",
+    "image": "veggie-sticks.png",
     "category": "SNACK"
   },
   {
-    "name": "Snack 2",
-    "description": "Snack 2",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 3",
-    "description": "Snack 3",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 4",
-    "description": "Snack 4",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 5",
-    "description": "Snack 5",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 6",
-    "description": "Snack 6",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 7",
-    "description": "Snack 7",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 8",
-    "description": "Snack 8",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 9",
-    "description": "Snack 9",
-    "category": "SNACK"
-  },
-  {
-    "name": "Snack 10",
-    "description": "Snack 10",
+    "name": "Cursed Cajun Popcorn",
+    "description": "Experience the curse of flavor with our Cajun-spiced popcorn, a tantalizing snack that will haunt your taste buds in the most delicious way!",
+    "image": "popcorn.png",
     "category": "SNACK"
   }
 ]

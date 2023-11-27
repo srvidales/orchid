@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import logoImage from '../assets/images/logo.png';
+import logoImage from '../assets/logo/logo.png';
 import schoolImage from '../assets/images/school.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
