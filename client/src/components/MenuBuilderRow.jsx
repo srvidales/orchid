@@ -45,7 +45,9 @@ export default function MenuBuilderRow({ dayOfWeek, menuItems }) {
 
   return (
     <tr>
-      <th scope="row">{`${new Date(dayOfWeek).toLocaleDateString()}`}</th>
+      <th scope="row">{`${new Date(dayOfWeek).toLocaleDateString('en-US', {
+        weekday: 'long',
+      })} ${new Date(dayOfWeek).toLocaleDateString()}`}</th>
       <td className="align-top">
         {getAvailableMenuItems('ENTREE')}
         {getAvailableMenuItems('SIDE')}
