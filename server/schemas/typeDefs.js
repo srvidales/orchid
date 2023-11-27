@@ -112,7 +112,15 @@ const typeDefs = `
       date: String!
       meal: MealType!
       menuItems: [ID]!
-    ): DailyMenu  }
+    ): DailyMenu  
+    updateDailyMenu(
+      dailyMenuId: ID!
+      date: String
+      meal: MealType
+      menuItems: [ID]
+    ): DailyMenu
+    deleteDailyMenu(dailyMenuId: ID!): String
+  }
 `;
 
 module.exports = typeDefs;

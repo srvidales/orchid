@@ -2,7 +2,6 @@
 const { User, MenuItem, School, DailyMenu } = require('../models');
 const bcrypt = require('bcrypt');
 const { generateToken, loginUser } = require('../utils/auth');
-const { AuthenticationError } = require('@apollo/server');
 
 // Creating GraphQL resolvers
 const resolvers = {
@@ -15,9 +14,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during user fetch:', error);
-        throw new AuthenticationError(
-          'An error occurred while fetching users.',
-        );
+        throw new Error('An error occurred while fetching users.');
       }
     },
 
@@ -32,9 +29,7 @@ const resolvers = {
         return dailyMenus;
       } catch (error) {
         console.error('Error during daily menu fetch:', error);
-        throw new AuthenticationError(
-          'An error occurred while fetching daily menu.',
-        );
+        throw new Error('An error occurred while fetching daily menu.');
       }
     },
 
@@ -53,9 +48,7 @@ const resolvers = {
         return dailyMenus;
       } catch (error) {
         console.error('Error during daily menu fetch:', error);
-        throw new AuthenticationError(
-          'An error occurred while fetching daily menu.',
-        );
+        throw new Error('An error occurred while fetching daily menu.');
       }
     },
 
@@ -99,9 +92,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error(`Error during school fetch for ID ${_id}:`, error);
-        throw new AuthenticationError(
-          'An error occurred while fetching the school.',
-        );
+        throw new Error('An error occurred while fetching the school.');
       }
     },
 
@@ -114,9 +105,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during menu items fetch:', error);
-        throw new AuthenticationError(
-          'An error occurred while fetching menu items.',
-        );
+        throw new Error('An error occurred while fetching menu items.');
       }
     },
 
@@ -137,9 +126,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during the query
         console.error('Error during daily menus fetch:', error);
-        throw new AuthenticationError(
-          'An error occurred while fetching daily menus.',
-        );
+        throw new Error('An error occurred while fetching daily menus.');
       }
     },
   },
@@ -173,9 +160,7 @@ const resolvers = {
       } catch (error) {
         console.error('Error during user signup:', error);
         // Handle the error and throw it or return an error message
-        throw new AuthenticationError(
-          'An error occurred during signup. Please try again.',
-        );
+        throw new Error('An error occurred during signup. Please try again.');
       }
     },
 
@@ -188,7 +173,7 @@ const resolvers = {
         // Check if the login was successful
         if (!result || !result.token || !result.user) {
           // If not successful, throw an authentication error
-          throw new AuthenticationError('Invalid credentials');
+          throw new Error('Invalid credentials');
         }
 
         // If successful, return the token and user information
@@ -196,7 +181,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during login
         console.error(error);
-        throw new AuthenticationError('Invalid credentials');
+        throw new Error('Invalid credentials');
       }
     },
 
@@ -230,7 +215,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during updating user
         console.error(error);
-        throw new AuthenticationError(
+        throw new Error(
           'An error occurred during user update. Please try again.',
         );
       }
@@ -281,9 +266,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during school creation
         console.error(error);
-        throw new AuthenticationError(
-          'An error occurred during school creation.',
-        );
+        throw new Error('An error occurred during school creation.');
       }
     },
 
@@ -302,9 +285,7 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during school update
         console.error(error);
-        throw new AuthenticationError(
-          'An error occurred during school update.',
-        );
+        throw new Error('An error occurred during school update.');
       }
     },
 
@@ -360,8 +341,58 @@ const resolvers = {
       } catch (error) {
         // Log and throw any errors that occur during daily menu creation
         console.error(error);
-        throw new AuthenticationError(
+        throw new Error(
           'An error occurred during daily menu creation. Please try again.',
+        );
+      }
+    },
+
+    // Mutation resolver for updating a daily menu
+    updateDailyMenu: async (
+      _parent,
+      { dailyMenuId, date, meal, menuItems },
+    ) => {
+      try {
+        // Find the daily menu by ID
+        const dailyMenu = await DailyMenu.findByIdAndUpdate(
+          dailyMenuId,
+          {
+            // Only update the fields that are provided
+            ...(date && { date }),
+            ...(meal && { meal }),
+            ...(menuItems && { menuItems }),
+          },
+          { new: true }, // Return the updated document after the update is applied
+        ).populate('menuItems');
+
+        // Return the updated daily menu
+        return dailyMenu;
+      } catch (error) {
+        console.error(error);
+        throw new Error('An error occurred during daily menu update.');
+      }
+    },
+
+    // Mutation resolver for deleting a daily menu
+    deleteDailyMenu: async (_parent, { dailyMenuId }) => {
+      try {
+        // Find the daily menu by ID
+        const dailyMenu = await DailyMenu.findById(dailyMenuId);
+
+        // Check if the daily menu exists
+        if (!dailyMenu) {
+          throw new Error('Daily Menu not found.');
+        }
+
+        // Delete the daily menu from the database
+        await DailyMenu.deleteOne({ _id: dailyMenuId });
+
+        // Return a success message
+        return 'Daily Menu deleted successfully.';
+      } catch (error) {
+        console.error(error);
+        throw new Error(
+          'An error occurred during Daily Menu deletion.',
         );
       }
     },
