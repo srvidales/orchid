@@ -87,7 +87,7 @@ const typeDefs = `
       password: String
     ): User
     deleteUser(userId: ID!, schoolId: ID!): String
-        addSchool(
+    addSchool(
       name: String!
       address: String!
       city: String!
@@ -120,6 +120,20 @@ const typeDefs = `
       menuItems: [ID]
     ): DailyMenu
     deleteDailyMenu(dailyMenuId: ID!): String
+    addMenuItem(
+      name: String!, 
+      description: String!, 
+      image: String, 
+      category: String!
+    ): MenuItem
+    updateMenuItem(
+      itemId: ID!, 
+      name: String, 
+      description: String, 
+      image: String, 
+      category: String
+    ): MenuItem
+    deleteMenuItem(itemId: ID!): String
   }
 `;
 

@@ -391,9 +391,75 @@ const resolvers = {
         return 'Daily Menu deleted successfully.';
       } catch (error) {
         console.error(error);
-        throw new Error(
-          'An error occurred during Daily Menu deletion.',
+        throw new Error('An error occurred during Daily Menu deletion.');
+      }
+    },
+
+    // Mutation resolver for adding a menu item
+    addMenuItem: async (_parent, { name, description, image, category }) => {
+      try {
+        // Create a new menu item in the database
+        const menuItem = await MenuItem.create({
+          name,
+          description,
+          image,
+          category,
+        });
+
+        // Return the newly created menu item
+        return menuItem;
+      } catch (error) {
+        console.error(error);
+        throw new Error('An error occurred during menu item creation.');
+      }
+    },
+
+    // Mutation resolver for updating a menu item
+    updateMenuItem: async (
+      _parent,
+      { itemId, name, description, image, category },
+    ) => {
+      try {
+        // Find the menu item by ID and update its fields
+        const updatedMenuItem = await MenuItem.findByIdAndUpdate(
+          itemId,
+          {
+            // Only update the fields that are provided
+            ...(name && { name }),
+            ...(description && { description }),
+            ...(image && { image }),
+            ...(category && { category }),
+          },
+          { new: true }, // Return the updated document after the update is applied
         );
+
+        // Return the updated menu item
+        return updatedMenuItem;
+      } catch (error) {
+        console.error(error);
+        throw new Error('An error occurred during menu item update.');
+      }
+    },
+
+    // Mutation resolver for deleting a menu item
+    deleteMenuItem: async (_parent, { itemId }) => {
+      try {
+        // Find the menu item by ID
+        const menuItem = await MenuItem.findById(itemId);
+
+        // Check if the menu item exists
+        if (!menuItem) {
+          throw new Error('Menu item not found.');
+        }
+
+        // Delete the menu item from the database
+        await MenuItem.deleteOne({ _id: itemId });
+
+        // Return a success message
+        return 'Menu item deleted successfully.';
+      } catch (error) {
+        console.error(error);
+        throw new AuthenticationError('An error occurred during menu item deletion.');
       }
     },
   },
