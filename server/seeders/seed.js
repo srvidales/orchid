@@ -40,6 +40,9 @@ db.once('open', async () => {
     // Randomly selecting a school from the list
     const school = schools[Math.floor(Math.random() * schools.length)];
 
+    newMenuItem.school = school;
+    await newMenuItem.save();
+
     // Adding the current menu item to the selected school's menuItems array
     school.menuItems.push(newMenuItem);
 

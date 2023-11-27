@@ -124,6 +124,33 @@ export const GET_SCHOOL_BY_ID = gql`
   }
 `;
 
+export const GET_MENU_ITEMS = gql`
+  query getMenuItems {
+    menuItems {
+      _id
+      name
+      description
+      image
+      category
+      createdAt
+    }
+  }
+`;
+
+export const GET_MENU_ITEMS_BY_SCHOOL_ID = gql`
+  query Schools($id: ID!) {
+    schoolById(_id: $id) {
+      _id
+      name
+      menuItems {
+        _id
+        name
+        category
+      }
+    }
+  }
+`;
+
 export const GET_DAILY_MENUS = gql`
   query getDailyMenus {
     dailyMenus {
@@ -143,77 +170,38 @@ export const GET_DAILY_MENUS = gql`
   }
 `;
 
-export const GET_DAILY_MENUS_BY_SCHOOL = gql`
-  query getDailyMenusBySchool($schoolId: ID!) {
-    dailyMenusBySchool(schoolId: $schoolId) {
+export const GET_MENU_ITEMS_BY_SCHOOL = gql`
+  query getMenuItemsBySchool($schoolId: ID!) {
+    menuItemsBySchool(schoolId: $schoolId) {
       _id
-      date
-      meal
-      menuItems {
-        _id
-        name
-        description
-        image
-        category
-        createdAt
-      }
-      school {
-        _id
-        name
-      }
+      name
+      description
+      image
+      category
       createdAt
     }
   }
 `;
 
-export const GET_DAILY_MENUS_BY_SCHOOL_AND_DATE = gql`
-  query getDailyMenusBySchoolAndDate($schoolId: ID!, $date: String!) {
+export const GET_DAILY_MENUS_BY_SCHOOL_DATE = gql`
+  query DailyMenusBySchoolAndDate($schoolId: ID!, $date: DateTime!) {
     dailyMenusBySchoolAndDate(schoolId: $schoolId, date: $date) {
       _id
       date
       meal
       menuItems {
-        _id
         name
-        description
-        image
         category
-        createdAt
-      }
-      school {
         _id
-        name
-        address
-        city
-        state
-        zip
-        phone
-        email
-        dailyMenus {
-          _id
-          date
-          meal
-          menuItems {
-            _id
-            name
-            description
-            image
-            category
-            createdAt
-          }
-          createdAt
-        }
-        createdAt
       }
-      createdAt
     }
   }
 `;
 
-export const GET_DAILY_MENUS_BY_SCHOOL_DATE_AND_MEAL = gql`
-  query getDailyMenusBySchoolDateAndMeal(
+export const GET_DAILY_MENUS_BY_SCHOOL_DATE_MEAL = gql`
+  query DailyMenusBySchoolDateAndMeal(
     $schoolId: ID!
-    $date: String!
+    $date: DateTime!
     $meal: MealType!
   ) {
     dailyMenusBySchoolDateAndMeal(
@@ -224,53 +212,6 @@ export const GET_DAILY_MENUS_BY_SCHOOL_DATE_AND_MEAL = gql`
       _id
       date
       meal
-      menuItems {
-        _id
-        name
-        description
-        image
-        category
-        createdAt
-      }
-      school {
-        _id
-        name
-        address
-        city
-        state
-        zip
-        phone
-        email
-        dailyMenus {
-          _id
-          date
-          meal
-          menuItems {
-            _id
-            name
-            description
-            image
-            category
-            createdAt
-          }
-          createdAt
-        }
-        createdAt
-      }
-      createdAt
-    }
-  }
-`;
-
-export const GET_MENU_ITEMS = gql`
-  query getMenuItems {
-    menuItems {
-      _id
-      name
-      description
-      image
-      category
-      createdAt
     }
   }
 `;
