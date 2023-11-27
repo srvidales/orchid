@@ -63,7 +63,7 @@ const Home = () => {
                   style={{ cursor: 'pointer' }}
                 />
                 <p></p>
-                <Card.Title>{card.title}</Card.Title>
+                <Card.Title onClick={card.modal}>{card.title}</Card.Title>
               </Card.Body>
             </Card>
           </Col>
