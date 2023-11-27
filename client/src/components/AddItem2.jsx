@@ -6,7 +6,6 @@ import {
   Dropdown,
   Container,
   Row,
-  Col,
 } from 'react-bootstrap';
 
 const Item = () => {
@@ -23,6 +22,10 @@ const Item = () => {
     setFormState({ ...formState, [name]: value });
   };
 
+  const handleDropdownEditorChange = (name, value) => {
+    setFormState({ ...formState, [name]: value });
+  };
+
   const handleCheckBoxChange = (e) => {
     const { name } = e.target;
 
@@ -35,32 +38,11 @@ const Item = () => {
         mealChosen: [...formState.mealChosen, name],
       });
     }
-
-    // switch (name) {
-    //   case 'meal':
-    //     setFormState({ ...formState, meal: e.target.checked });
-    //     break;
-    //   case 'course':
-    //     setFormState({ ...formState, course: e.target.checked });
-    //     break;
-    //   default:
-    //     break;
-    // }
   };
-
-  // const handleSendTextCheckBoxChange = (e) => {
-  //   const { checked } = e.target;
-  //   setFormState({ ...formState, meal: checked });
-  // };
-
-  // const handleSpecialMealCheckBoxChange = (e) => {
-  //   const { checked } = e.target;
-  //   setFormState({ ...formState, course: checked });
-  // };
 
   return (
     <>
-      <Container>
+      <Container style={{ width: '50%' }}>
         <Row>
           <div
             style={{
@@ -71,7 +53,7 @@ const Item = () => {
               padding: '1%',
             }}
           >
-            <h2>Meal Editor</h2>
+            <h2>Add Menu Item</h2>
             <FloatingLabel
               controlId="item_name"
               label="Item Name"
@@ -85,15 +67,35 @@ const Item = () => {
               />
             </FloatingLabel>
             <p></p>
+
             <div className="d-inline-block mx-2">
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-autoclose-true">
                   Option
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Add</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Update</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Remove</Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => handleDropdownEditorChange('option', 'add')}
+                    href="#/action-1"
+                  >
+                    Add
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() =>
+                      handleDropdownEditorChange('option', 'update')
+                    }
+                    href="#/action-1"
+                  >
+                    Update
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() =>
+                      handleDropdownEditorChange('option', 'remove')
+                    }
+                    href="#/action-1"
+                  >
+                    Remove
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
