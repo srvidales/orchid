@@ -270,6 +270,76 @@ const resolvers = {
       }
     },
 
+    // Mutation resolver for adding a school
+    addSchool: async (_parent, schoolInfo) => {
+      try {
+        // Create a new school in the database
+        const newSchool = await School.create(schoolInfo);
+
+        // Return the newly created school
+        return newSchool;
+      } catch (error) {
+        // Log and throw any errors that occur during school creation
+        console.error(error);
+        throw new AuthenticationError(
+          'An error occurred during school creation.',
+        );
+      }
+    },
+
+    // Mutation resolver for updating a school
+    updateSchool: async (_parent, { schoolId, ...updatedFields }) => {
+      try {
+        // Find the school by ID and update its fields
+        const updatedSchool = await School.findByIdAndUpdate(
+          schoolId,
+          { $set: updatedFields },
+          { new: true },
+        );
+
+        // Return the updated school
+        return updatedSchool;
+      } catch (error) {
+        // Log and throw any errors that occur during school update
+        console.error(error);
+        throw new AuthenticationError(
+          'An error occurred during school update.',
+        );
+      }
+    },
+
+    // Mutation resolver for deleting a school
+    deleteSchool: async (_parent, { schoolId }) => {
+      try {
+        // Find the school by ID
+        const school = await School.findById(schoolId);
+
+        // Check if the school exists
+        if (!school) {
+          throw new Error('School not found.');
+        }
+
+        // Get the user IDs associated with the school
+        const userIDs = school.users.map((user) => user.toString());
+
+        // Remove the school reference from all associated users
+        await User.updateMany(
+          { _id: { $in: userIDs } },
+          { $pull: { schools: schoolId } },
+        );
+
+        // Delete the school and all of its users from the database
+        await School.deleteOne({ _id: schoolId });
+
+        // Return a success message
+        return 'School and its users deleted successfully.';
+      } catch (error) {
+        // Log and throw any errors that occur during school deletion
+        console.error(error);
+        throw new Error('An error occurred during school deletion.');
+      }
+    },
+
     // Mutation resolver for adding a daily menu
     addDailyMenu: async (_parent, { date, meal, menuItems }) => {
       try {
