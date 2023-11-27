@@ -11,10 +11,16 @@ MenuBuilder.propTypes = {
 };
 
 export default function MenuBuilder({ schoolId }) {
-  const [value, onChange] = useState(new Date().setHours(0, 0, 0, 0));
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().setHours(0, 0, 0, 0),
+  );
   const { loading, data, error } = useQuery(GET_MENU_ITEMS_BY_SCHOOL_ID, {
     variables: { id: schoolId },
   });
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   return (
     <>
@@ -24,7 +30,8 @@ export default function MenuBuilder({ schoolId }) {
             <Calendar
               locale="en-US"
               calendarType="gregory"
-              onChange={onChange}
+              onChange={handleDateChange}
+              value={new Date(selectedDate)}
             />
           </div>
           <div className="col-sm">
@@ -57,7 +64,7 @@ export default function MenuBuilder({ schoolId }) {
                   </tr>
                 ) : (
                   <MenuBuilderRow
-                    date={new Date(value)}
+                    date={new Date(selectedDate)}
                     items={data.schoolById.menuItems}
                   />
                 )}

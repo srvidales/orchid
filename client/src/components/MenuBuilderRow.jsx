@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 MenuBuilderRow.propTypes = {
@@ -5,32 +6,49 @@ MenuBuilderRow.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+const defaultKeyValuePairs = {
+  b1: '',
+  b2: '',
+  b3: '',
+  s1: '',
+  s2: '',
+  l1: '',
+  l2: '',
+  l3: '',
+  l4: '',
+};
+
 export default function MenuBuilderRow({ date, items }) {
-  const getSelectedMenuItem = () => {
-    // category
-    return null;
+  const selectKeyValuePairs = { ...defaultKeyValuePairs };
+  
+  const [selectValue, setSelectValue] = useState(selectKeyValuePairs);
+
+  useEffect(() => {
+    setSelectValue({ ...defaultKeyValuePairs });
+  }, [date]);
+
+  const handleChange = (id, event) => {
+    const updatedSelectKeyValuePairs = { ...selectValue, [id]: event.target.value };
+    setSelectValue(updatedSelectKeyValuePairs);
   };
 
-  const getAvailableMenuItems = (Category) => {
+  const renderSelect = (id, Category) => {
     return (
       <select
+        id={id}
         className="selectpicker"
-        defaultValue={''}
         style={{ minWidth: '300px' }}
+        value={selectValue[id]}
+        onChange={(event) => handleChange(id, event)}
       >
         <option value="" disabled>
-          {getSelectedMenuItem(Category)
-            ? getSelectedMenuItem(Category).name
-            : '---'}
+          ---
         </option>
         <optgroup label={Category}>
           {items
             .filter((item) => item.category === Category)
             .map((item) => (
-              <option
-                key={item._id}
-                value={getSelectedMenuItem(Category)?._id === item._id}
-              >
+              <option key={item._id} value={item._id}>
                 {item.name}
               </option>
             ))}
@@ -45,19 +63,19 @@ export default function MenuBuilderRow({ date, items }) {
         weekday: 'long',
       })} ${new Date(date).toLocaleDateString()}`}</th>
       <td className="align-top">
-        {getAvailableMenuItems('ENTREE')}
-        {getAvailableMenuItems('SIDE')}
-        {getAvailableMenuItems('DRINK')}
+        {renderSelect('b1', 'ENTREE')}
+        {renderSelect('b2', 'SIDE')}
+        {renderSelect('b3', 'DRINK')}
       </td>
       <td className="align-top">
-        {getAvailableMenuItems('SNACK')}
-        {getAvailableMenuItems('SNACK')}
+        {renderSelect('s1', 'SNACK')}
+        {renderSelect('s2', 'SNACK')}
       </td>
       <td className="align-top">
-        {getAvailableMenuItems('ENTREE')}
-        {getAvailableMenuItems('SIDE')}
-        {getAvailableMenuItems('SIDE')}
-        {getAvailableMenuItems('DRINK')}
+        {renderSelect('l1', 'ENTREE')}
+        {renderSelect('l2', 'SIDE')}
+        {renderSelect('l3', 'SIDE')}
+        {renderSelect('l4', 'DRINK')}
       </td>
       <td className="align-top">
         <button className="btn btn-primary" type="button">
