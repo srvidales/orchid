@@ -17,8 +17,13 @@ export default memo(function MenuView({ schoolId }) {
 
   // Group daily menu data by date using a custom utility function
   const MenusByDate = Object.groupBy(dailyMenuData, ({ date }) => {
-    // Format the date using .toLocaleDateString()
-    const formattedDate = new Date(date).toLocaleDateString();
+    // Format the date using a custom date format
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(new Date(date));
     return formattedDate;
   });
 
@@ -56,14 +61,14 @@ export default memo(function MenuView({ schoolId }) {
   const renderMenuItems = (dateKey) => (
     <div style={{ width: '22%' }} className="border" key={dateKey}>
       <div>
-        <h3>{new Date(dateKey).toLocaleDateString()}</h3>
+        <h3>{dateKey}</h3>
       </div>
       <div>
         {MenusByDate[dateKey].map((dayData, index) => (
           <div key={index}>
             <div style={{ textAlign: 'center' }}>
               <h4>{dayData.meal}</h4>
-              <p>{dayData.menuItems[0].name}</p>
+              <h5>{dayData.menuItems[0].name}</h5>
             </div>
           </div>
         ))}
