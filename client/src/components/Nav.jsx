@@ -47,15 +47,14 @@ const Navbar = () => {
                   : navlink.title}
               </NavLink>
             ))}
-            {/* <Nav.Link> */}
             <NavLink
+              key="login-logout"
               to="/login"
               className="nav-link"
               onClick={isLoggedIn ? Auth.logout : null}
             >
               {isLoggedIn ? 'Logout' : 'Login'}
             </NavLink>
-            {/* </Nav.Link> */}
           </Nav>
         </BSNavbar.Collapse>
       </BSNavbar>
