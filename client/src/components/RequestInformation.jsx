@@ -41,9 +41,7 @@ function Request() {
           <FaMapMarkerAlt /> Location
         </Card.Link>
         <Link to="/contact">
-          <Card.Link>
-            <MdTextsms /> Find Out More
-          </Card.Link>
+          <MdTextsms /> Find Out More
         </Link>
       </Card.Body>
     </Card>
