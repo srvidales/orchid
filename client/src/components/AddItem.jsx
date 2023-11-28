@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
 const AddInventory = () => {
@@ -16,6 +16,14 @@ const AddInventory = () => {
     setFormState({ ...formState, [name]: value });
   };
 
+  const clearForm = () => {
+    setFormState({
+      item_name: '',
+      mealChosen: '',
+      course: '',
+    });
+  };
+
   const addItem = () => {
     if (!formState.item_name || !formState.mealChosen || !formState.course) {
       setDisplayMessage('Please fill out all fields.');
@@ -25,19 +33,14 @@ const AddInventory = () => {
       return;
     }
 
-    // Placeholder function for adding an item (replace with our logic)
-    addNewItem({
-      item_name: formState.item_name,
-      mealChosen: formState.mealChosen,
-      course: formState.course,
-    });
+    // // Placeholder function for adding an item (replace with our logic)
+    // addNewItem({
+    //   item_name: formState.item_name,
+    //   mealChosen: formState.mealChosen,
+    //   course: formState.course,
+    // });
 
-    // Clear form state and show success message
-    setFormState({
-      item_name: '',
-      mealChosen: '',
-      course: '',
-    });
+    clearForm();
     setDisplayMessage('Success in adding an item!');
 
     // Reset the success message after 10 seconds
@@ -55,11 +58,11 @@ const AddInventory = () => {
     }
   };
 
-  // Placeholder function, replace with our actual logic to add an item
-  const addNewItem = (itemData) => {
-    // Perform the action to add an item (make the API call, update state)
-    console.log('Adding item:', itemData);
-  };
+  // // Placeholder function, replace with our actual logic to add an item
+  // const addNewItem = (itemData) => {
+  //   // Perform the action to add an item (make the API call, update state)
+  //   console.log('Adding item:', itemData);
+  // };
 
   return (
     <>
@@ -99,11 +102,9 @@ const AddInventory = () => {
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
               </Form.Select>
-              {/* </div>
 
-            <div className="d-inline-block mx-3"> */}
               <Form.Select
-                value={formState.mealChosen}
+                value={formState.course}
                 name="course"
                 onChange={handleChange}
               >
@@ -113,9 +114,10 @@ const AddInventory = () => {
                 <option value="Snack">Drink</option>
                 <option value="Snack">Snack</option>
               </Form.Select>
+
               <div className="d-inline-block mx-3">
-                <Button>Clear Added Item</Button>
-                <Button>Submit Added Item</Button>
+                <Button onClick={clearForm}>Clear Added Item</Button>
+                <Button onClick={addItem}>Submit Added Item</Button>
                 <Button onClick={() => console.log(formState)}>
                   Check State
                 </Button>
@@ -124,7 +126,6 @@ const AddInventory = () => {
           </div>
         </Row>
       </Container>
-
       {/* Display success message below the button */}
       {displayMessage && (
         <p
