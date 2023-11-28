@@ -19,15 +19,15 @@
 }
 
 .menuBuilder {
-  background-color: #f8f9fa; /* Adjust background color as needed */
-  padding: 20px; /* Adjust padding as needed */
-  border-radius: 8px; /* Add border-radius for rounded corners */
+  background-color: #f8f9fa; 
+  padding: 20px; 
+  border-radius: 8px; 
 }
 
 .menu-options {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adjust the gap between select elements as needed */
+  gap: 10px; 
 }
 
 /* Add media query for smaller screens */
