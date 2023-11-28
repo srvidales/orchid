@@ -8,11 +8,11 @@ const links = [
   { title: 'Home', link: '' },
   { title: 'About', link: '/about' },
   { title: 'Menu', link: '/menu' },
-  { title: 'Contact Us', link: '/contact' }
+  { title: 'Contact Us', link: '/contact' },
 ];
 
 const Navbar = () => {
-  const isLoggedIn = Auth.loggedIn(); 
+  const isLoggedIn = Auth.loggedIn();
 
   return (
     <>
@@ -24,31 +24,43 @@ const Navbar = () => {
         data-bs-theme="light"
         fixed="top"
       >
-          <BSNavbar.Brand><img src={navbarLogoImage} alt="Navbar Logo" style={{ height: '100px', width: '100%', paddingLeft:'18px' }}/></BSNavbar.Brand>
-          <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
-          <BSNavbar.Collapse
-            id="basic-navbar-nav"
-            className="justify-content-end"
+        <BSNavbar.Brand>
+          <img
+            src={navbarLogoImage}
+            alt="Navbar Logo"
+            style={{ height: '100px', width: '100%', paddingLeft: '18px' }}
+          />
+        </BSNavbar.Brand>
+        <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
+        <BSNavbar.Collapse
+          id="basic-navbar-nav"
+          className="justify-content-end"
+        >
+          <Nav
+            className="me-auto align-items-end justify-content-end"
+            style={{ width: '100%', paddingRight: '18px' }}
           >
-            <Nav className="me-auto align-items-end justify-content-end" style={{ width: '100%', paddingRight:'18px' }}>
-              {links.map((navlink, i) => (
-                <Nav.Link key={i}>
-                  <NavLink to={navlink.link} className="nav-link">
-                    {navlink.title}
-                  </NavLink>
-                </Nav.Link>
-              ))}
-               <Nav.Link>
-                <NavLink to="/login" className="nav-link" onClick={isLoggedIn ? Auth.logout : null}>
-                  {isLoggedIn ? 'Logout' : 'Login'}
-                </NavLink>
-              </Nav.Link>
-            </Nav>
-          </BSNavbar.Collapse>
+            {links.map((navlink, i) => (
+              <NavLink to={navlink.link} className="nav-link">
+                {navlink.title === 'Menu' && Auth.loggedIn()
+                  ? 'Edit Menu'
+                  : navlink.title}
+              </NavLink>
+            ))}
+            {/* <Nav.Link> */}
+            <NavLink
+              to="/login"
+              className="nav-link"
+              onClick={isLoggedIn ? Auth.logout : null}
+            >
+              {isLoggedIn ? 'Logout' : 'Login'}
+            </NavLink>
+            {/* </Nav.Link> */}
+          </Nav>
+        </BSNavbar.Collapse>
       </BSNavbar>
     </>
   );
 };
 
 export default Navbar;
-
