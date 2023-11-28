@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  Button,
-  Form,
-  FloatingLabel,
-  Dropdown,
-  Container,
-  Row,
-} from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
 const Item = () => {
   const [formState, setFormState] = useState({
@@ -23,6 +16,51 @@ const Item = () => {
     setFormState({ ...formState, [name]: value });
   };
 
+  const addItem = () => {
+    if (!formState.item_name || !formState.mealChosen || !formState.course) {
+      setDisplayMessage('Please fill out all fields.');
+      setTimeout(() => {
+        setDisplayMessage('');
+      }, 10000);
+      return;
+    }
+
+    // Placeholder function for adding an item (replace with our logic)
+    addNewItem({
+      item_name: formState.item_name,
+      mealChosen: formState.mealChosen,
+      course: formState.course,
+    });
+
+    // Clear form state and show success message
+    setFormState({
+      item_name: '',
+      mealChosen: '',
+      course: '',
+    });
+    setDisplayMessage('Success in adding an item!');
+
+    // Reset the success message after 10 seconds
+    setTimeout(() => {
+      setDisplayMessage('');
+    }, 10000);
+
+    try {
+    } catch (err) {
+      console.log('Failed.', err);
+      setDisplayMessage('Unable to add item');
+
+      // Reset the success message after 10 seconds
+      setTimeout(() => setDisplayMessage(''), 10000);
+    }
+  };
+
+  // Placeholder function, replace with our actual logic to add an item
+  const addNewItem = (itemData) => {
+    // Perform the action to add an item (make the API call, update state)
+    console.log('Adding item:', itemData);
+  };
+
   return (
     <>
       <Container style={{ maxWidth: '50%' }}>
@@ -37,7 +75,6 @@ const Item = () => {
               padding: '1%',
             }}
           >
-            {/* <h2>Add Menu Item</h2> */}
             <FloatingLabel
               controlId="item_name"
               label="Item Name"
@@ -84,13 +121,6 @@ const Item = () => {
                 </Button>
               </div>
             </div>
-            {/* <div>
-              <Button>Clear Added Item</Button>
-              <Button>Submit Added Item</Button>
-              <Button onClick={() => console.log(formState)}>
-                Check State
-              </Button>
-            </div> */}
           </div>
         </Row>
       </Container>
