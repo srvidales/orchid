@@ -19,7 +19,6 @@ export default memo(function MenuView({ schoolId }) {
   const MenusByDate = Object.groupBy(dailyMenuData, ({ date }) => {
     // Format the date using a custom date format
     const formattedDate = new Intl.DateTimeFormat('en-US', {
-      weekday: 'long',
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -58,23 +57,32 @@ export default memo(function MenuView({ schoolId }) {
   const currentWeek = getCurrentWeek();
 
   // Render menu items for a given date
-  const renderMenuItems = (dateKey) => (
-    <div style={{ width: '22%' }} className="border" key={dateKey}>
-      <div>
-        <h3>{dateKey}</h3>
-      </div>
-      <div>
-        {MenusByDate[dateKey].map((dayData, index) => (
-          <div key={index}>
-            <div style={{ textAlign: 'center' }}>
-              <h4>{dayData.meal}</h4>
-              <h5>{dayData.menuItems[0].name}</h5>
+  const renderMenuItems = (dateKey) => {
+    const dateObject = new Date(dateKey);
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      weekday: 'long',
+    }).format(dateObject);
+
+    return (
+      <div style={{ width: '22%' }} className="border" key={dateKey}>
+        <div>
+          <h3>{formattedDate}</h3>
+        </div>
+        <div>
+          {MenusByDate[dateKey].map((dayData, index) => (
+            <div key={index}>
+              <div style={{ textAlign: 'center' }}>
+                <h4>{dayData.meal}</h4>
+                <h5>{dayData.menuItems[0].name}</h5>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <>
