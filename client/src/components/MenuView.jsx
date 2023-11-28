@@ -107,9 +107,24 @@ export default memo(function MenuView({ schoolId }) {
 
   return (
     <>
-      <h1>Menu View</h1>
-      <h2>Current Week:</h2>
-      <h3>{currentWeek}</h3>
+      <h1
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          padding: '10px',
+          margin: '10px',
+        }}
+      >
+        Weekly Menu
+      </h1>
+      <h2
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          padding: '10px',
+          margin: '17px',
+        }}
+      >
+        {currentWeek}
+      </h2>
       <div className="d-flex flex-wrap justify-content-center">
         {weekdayKeysArray
           .filter((dateKey) => {
