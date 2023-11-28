@@ -71,7 +71,7 @@ export default memo(function MenuView({ schoolId }) {
     const formattedDate = new Intl.DateTimeFormat('en-US', {
       month: 'short',
       day: 'numeric',
-      weekday: 'long',
+      weekday: 'short',
     }).format(dateObject);
 
     // Styles for the container and date heading
@@ -103,10 +103,8 @@ export default memo(function MenuView({ schoolId }) {
           {MenusByDate[dateKey].map((dayData, index) => (
             <div key={index} className="text-center">
               <div style={{ marginBottom: '10px' }}>
-                <h3 style={{ fontSize: '1em', margin: '0' }}>{dayData.meal}</h3>
-                <p style={{ fontSize: '0.9em', margin: '0' }}>
-                  {dayData.menuItems[0].name}
-                </p>
+                <h3 style={{ fontSize: '1em' }}>{dayData.meal}</h3>
+                <p style={{ fontSize: '0.9em' }}>{dayData.menuItems[0].name}</p>
               </div>
             </div>
           ))}
@@ -117,9 +115,25 @@ export default memo(function MenuView({ schoolId }) {
 
   return (
     <>
-      <h1>Menu View</h1>
-      <h2>{currentWeek}</h2>
-      <div className="d-flex flex-wrap justify-content-center">
+      <h1
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          padding: '10px',
+          margin: '10px',
+        }}
+      >
+        Weekly Menu
+      </h1>
+      <h2
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          padding: '10px',
+          margin: '17px',
+        }}
+      >
+        {currentWeek}
+      </h2>
+      <div className="d-flex flex-wrap justify-content-center align-items-center">
         {weekdayKeysArray
           .filter((dateKey) => {
             const dateObject = new Date(dateKey);

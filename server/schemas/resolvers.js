@@ -21,6 +21,7 @@ const resolvers = {
     // Resolver for fetching daily menus by school
     dailyMenusBySchool: async (_parent, { schoolId }) => {
       try {
+        // Fetch daily menus for the given school, sorted by date in descending order
         const dailyMenus = await DailyMenu.find({ school: schoolId })
           .sort({ date: -1 })
           .populate('menuItems')
@@ -34,6 +35,7 @@ const resolvers = {
             },
           });
 
+        // Format the dates to ISO string
         const formattedDailyMenus = dailyMenus.map((menu) => ({
           ...menu.toObject(),
           date: menu.date.toISOString(),
@@ -41,6 +43,7 @@ const resolvers = {
 
         return formattedDailyMenus;
       } catch (error) {
+        // Handle errors during the fetch
         console.error('Error during daily menus fetch by school:', error);
         throw new Error(
           'An error occurred while fetching daily menus by school.',

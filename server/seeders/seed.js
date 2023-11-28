@@ -52,8 +52,8 @@ db.once('open', async () => {
 
   // Associating daily menus with schools and menu items
   for (newDailyMenu of dailyMenus) {
-    // Randomly selecting a school from the list
-    const school = schools[Math.floor(Math.random() * schools.length)];
+    // Always selecting the last school in the array
+    const school = schools[2];
 
     // Selecting a random menu item from the school's menuItems array
     const randomIndex = Math.floor(Math.random() * school.menuItems.length);
