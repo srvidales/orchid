@@ -1,101 +1,145 @@
-// Importing necessary dependencies from React and React Bootstrap
 import { useState } from 'react';
-import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
-import { LOGIN } from '../utils/mutations';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
+import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
-// Defining the Login component
-export default function Login() {
-  // Setting up state to manage form data (email and password)
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+const AddInventory = () => {
+  const [formState, setFormState] = useState({
+    item_name: '',
+    mealChosen: '',
+    course: '',
   });
 
-  // Using the useMutation hook to handle the login mutation
-  const [loginUser, { error }] = useMutation(LOGIN); // ADDMENUITEM
+  const [displayMessage, setDisplayMessage] = useState('');
 
-  // Event handler for input changes (when typing in the email or password fields)
-  const handleChange = (e) => {
-    // Destructuring to get the name and value from the target element
-    const { name, value } = e.target; // { name, category } *Entree/Side/Drink/Snack*
-
-    // Updating the form data based on the input changes
-    setFormData({ ...formData, [name]: value }); // { name, category??? dunno}
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    console.log(name, value);
+    setFormState({ ...formState, [name]: value });
   };
 
-  // Event handler for form submission // Save button, but not line 41 - loginUser to ADDITEM
-  const handleSubmit = async (e) => {
-    // Preventing the default form submission behavior
-    e.preventDefault();
-
-    // Checking form validity
-    if (e.currentTarget.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
+  const addItem = () => {
+    if (!formState.item_name || !formState.mealChosen || !formState.course) {
+      setDisplayMessage('Please fill out all fields.');
+      setTimeout(() => {
+        setDisplayMessage('');
+      }, 10000);
+      return;
     }
+
+    // Placeholder function for adding an item (replace with our logic)
+    addNewItem({
+      item_name: formState.item_name,
+      mealChosen: formState.mealChosen,
+      course: formState.course,
+    });
+
+    // Clear form state and show success message
+    setFormState({
+      item_name: '',
+      mealChosen: '',
+      course: '',
+    });
+    setDisplayMessage('Success in adding an item!');
+
+    // Reset the success message after 10 seconds
+    setTimeout(() => {
+      setDisplayMessage('');
+    }, 10000);
 
     try {
-      // Making a login mutation request with the form data
-      const { data } = await loginUser({
-        variables: { ...formData },
-      });
+    } catch (err) {
+      console.log('Failed.', err);
+      setDisplayMessage('Unable to add item');
 
-      // Logging in the user and storing the token in local storage
-      Auth.login(data.loginUser.token);
-    } catch (error) {
-      // Handling errors that may occur during the login process
-      console.error('Error during login:', error);
+      // Reset the success message after 10 seconds
+      setTimeout(() => setDisplayMessage(''), 10000);
     }
   };
 
-  // Rendering the login form using React Bootstrap components
-  return (
-    <Container>
-      {/* Login Section */}
-      <Row className="mt-5">
-        <Col md={{ span: 6, offset: 3 }}>
-          <h1>Login</h1>
-          {/* Displaying an error message if there is an error */}
-          {/* {signupError && <Alert variant="danger">{signupError}</Alert>} */}
+  // Placeholder function, replace with our actual logic to add an item
+  const addNewItem = (itemData) => {
+    // Perform the action to add an item (make the API call, update state)
+    console.log('Adding item:', itemData);
+  };
 
-          {/* Form for user login */}
-          <Form onSubmit={handleSubmit}>
-            {/* Email input field */}
-            <Form.Group controlId="formBasicSignupEmail">
-              <Form.Label>Email</Form.Label>
+  return (
+    <>
+      <Container style={{ maxWidth: '50%' }}>
+        <Row>
+          <div
+            className="d-inline-block mx-3"
+            style={{
+              display: 'inline-block',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100vh',
+              padding: '1%',
+            }}
+          >
+            <FloatingLabel
+              controlId="item_name"
+              label="Item Name"
+              className="mb-3"
+            >
               <Form.Control
                 type="text"
-                placeholder="Enter your email"
-                name="email"
-                value={formData.email}
+                value={formState.item_name}
                 onChange={handleChange}
+                name="item_name"
               />
-            </Form.Group>
+            </FloatingLabel>
 
-            {/* Password input field */}
-            <Form.Group controlId="formBasicSignupPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter your password"
-                name="password"
-                value={formData.password}
+            <div>
+              <Form.Select
+                value={formState.mealChosen}
+                name="mealChosen"
                 onChange={handleChange}
-              />
-            </Form.Group>
+              >
+                <option value="">Please Choose a Meal Time</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Snack">Snack</option>
+              </Form.Select>
+              {/* </div>
 
-            {/* Submit button */}
-            <Button variant="success" type="submit">
-              Log In
-            </Button>
+            <div className="d-inline-block mx-3"> */}
+              <Form.Select
+                value={formState.mealChosen}
+                name="course"
+                onChange={handleChange}
+              >
+                <option value="">Course</option>
+                <option value="Breakfast">Entree</option>
+                <option value="Lunch">Side</option>
+                <option value="Snack">Drink</option>
+                <option value="Snack">Snack</option>
+              </Form.Select>
+              <div className="d-inline-block mx-3">
+                <Button>Clear Added Item</Button>
+                <Button>Submit Added Item</Button>
+                <Button onClick={() => console.log(formState)}>
+                  Check State
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Row>
+      </Container>
 
-            {/* Link to navigate to the signup page */}
-            <a href="/signup">Signup instead</a>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+      {/* Display success message below the button */}
+      {displayMessage && (
+        <p
+          style={{
+            color: displayMessage.includes('Please fill out')
+              ? '#8B0000'
+              : 'white',
+            fontSize: '26px',
+          }}
+        >
+          <em>{displayMessage}</em>
+        </p>
+      )}
+    </>
   );
-}
+};
+
+export default AddInventory;
