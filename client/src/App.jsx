@@ -10,7 +10,9 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import { Outlet } from 'react-router-dom'; // Import React Router's Outlet component to render child components
+import Navbar from './components/Nav'; // Import the custom Navbar component
 import Header from './components/Header'; // Import the custom Header component
+import Footer from './components/Footer'; // Import the custom Footer component
 
 // Construct the main GraphQL API endpoint for the app
 const httpLink = createHttpLink({
@@ -40,14 +42,20 @@ const client = new ApolloClient({
 function App() {
   return (
     // Wrap the entire app with ApolloProvider to provide the Apollo Client to all components
+    <div className="app-container">
     <ApolloProvider client={client}>
       <div>
+        {/* Render the Navbar component first */}
+        <Navbar />
         {/* Render the Header component */}
         <Header />
         {/* Render the child components defined in React Router */}
         <Outlet />
+        {/* Render the Footer component */}
+        <Footer />
       </div>
     </ApolloProvider>
+    </div>
   );
 }
 

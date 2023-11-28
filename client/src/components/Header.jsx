@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Nav from './Nav';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,9 +13,6 @@ export default function Header() {
 
   return (
     <div className="mt-2">
-      {/* Navbar component with the current page passed as a prop */}
-      <Nav page={currentPage} />
-
       {/* Container for the images, with Bootstrap layout classes */}
       <Container className="mt-3">
         {/* Image 1 with alt text and styling */}
@@ -30,7 +26,12 @@ export default function Header() {
             />
           </Col>
           {/* Image 2 with alt text and styling */}
-          <Col xs={12} sm={12} md={6} className="mb-2">
+          <Col
+            xs={12}
+            sm={12}
+            md={6}
+            className="mb-2 d-flex align-items-center justify-content-center"
+          >
             <Image
               src={schoolImage}
               alt="School Photo"
