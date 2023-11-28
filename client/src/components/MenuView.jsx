@@ -35,11 +35,15 @@ export default memo(function MenuView({ schoolId }) {
   // Create a function to format the current week in mm/dd/yy - mm/dd/yy
   const getCurrentWeek = () => {
     const today = new Date();
+    
     const startOfWeek = new Date(
-      today.setDate(today.getDate() - today.getDay()),
+      today.setDate(
+        today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1),
+      ),
     );
+
     const endOfWeek = new Date(
-      today.setDate(today.getDate() - today.getDay() + 6),
+      today.setDate(today.getDate() - today.getDay() + 5),
     );
 
     return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
