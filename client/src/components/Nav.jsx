@@ -3,12 +3,14 @@ import { Navbar as BSNavbar, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import Auth from '../utils/auth';
 import navbarLogoImage from '../assets/logo/navbar-logo.png';
+import ColoredBar from './ColoredBar';
+import './nav.css';
 
 const links = [
   { title: 'Home', link: '' },
   { title: 'About', link: '/about' },
   { title: 'Menu', link: '/menu' },
-  { title: 'Contact Us', link: '/contact' },
+  { title: 'Contact', link: '/contact' },
 ];
 
 const Navbar = () => {
@@ -16,6 +18,9 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Colored bar above the navbar */}
+      <ColoredBar zIndex={2000} />
+
       <BSNavbar
         expand="lg"
         sticky="top"
@@ -41,20 +46,21 @@ const Navbar = () => {
             style={{ width: '100%', paddingRight: '18px' }}
           >
             {links.map((navlink, i) => (
-              <NavLink key={i} to={navlink.link} className="nav-link">
-                {navlink.title === 'Menu' && Auth.loggedIn()
-                  ? 'Edit Menu'
-                  : navlink.title}
-              </NavLink>
+              <Nav.Link key={i}>
+                <NavLink to={navlink.link} className="nav-link">
+                  {navlink.title}
+                </NavLink>
+              </Nav.Link>
             ))}
-            <NavLink
-              key="login-logout"
-              to="/login"
-              className="nav-link"
-              onClick={isLoggedIn ? Auth.logout : null}
-            >
-              {isLoggedIn ? 'Logout' : 'Login'}
-            </NavLink>
+            <Nav.Link>
+              <NavLink
+                to="/login"
+                className="nav-link"
+                onClick={isLoggedIn ? Auth.logout : null}
+              >
+                {isLoggedIn ? 'Logout' : 'Login'}
+              </NavLink>
+            </Nav.Link>
           </Nav>
         </BSNavbar.Collapse>
       </BSNavbar>

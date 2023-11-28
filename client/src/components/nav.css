@@ -1,0 +1,25 @@
+.navbar {
+  position: sticky;
+  background-color: white;
+  z-index: 1000;
+  border-bottom-left-radius: 8px; 
+  border-bottom-right-radius: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    height: 2rem;
+    width: 100px;
+    text-decoration: none;
+    color: #000; 
+    transition: none;
+    background-color: transparent;
+}
+
+.nav-link:hover {
+    background-color: #677ba7; 
+    color: #000; 
+    border-radius: 4px;
+}
