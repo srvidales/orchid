@@ -72,6 +72,7 @@ export default memo(function MenuView({ schoolId }) {
       marginBottom: '20px',
       padding: '10px',
       marginRight: '10px',
+      backgroundColor: 'rgba(255, 255, 255, 0.8)'
     };
 
     const dateHeadingStyle = {
