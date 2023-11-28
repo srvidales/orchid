@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
-const AddInventory = () => {
+const DeleteInventory = () => {
   const [formState, setFormState] = useState({
     item_name: '',
     mealChosen: '',
@@ -16,15 +16,7 @@ const AddInventory = () => {
     setFormState({ ...formState, [name]: value });
   };
 
-  const clearForm = () => {
-    setFormState({
-      item_name: '',
-      mealChosen: '',
-      course: '',
-    });
-  };
-
-  const addItem = () => {
+  const deleteItem = () => {
     if (!formState.item_name || !formState.mealChosen || !formState.course) {
       setDisplayMessage('Please fill out all fields.');
       setTimeout(() => {
@@ -33,15 +25,20 @@ const AddInventory = () => {
       return;
     }
 
-    // // Placeholder function for adding an item (replace with our logic)
-    // addNewItem({
-    //   item_name: formState.item_name,
-    //   mealChosen: formState.mealChosen,
-    //   course: formState.course,
-    // });
+    // Placeholder function for updating an item (replace with our logic)
+    deleteNewItem({
+      item_name: formState.item_name,
+      mealChosen: formState.mealChosen,
+      course: formState.course,
+    });
 
-    clearForm();
-    setDisplayMessage('Success in adding an item!');
+    // Clear form state and show success message
+    setFormState({
+      item_name: '',
+      mealChosen: '',
+      course: '',
+    });
+    setDisplayMessage('Success in updating an item!');
 
     // Reset the success message after 10 seconds
     setTimeout(() => {
@@ -51,18 +48,18 @@ const AddInventory = () => {
     try {
     } catch (err) {
       console.log('Failed.', err);
-      setDisplayMessage('Unable to add item');
+      setDisplayMessage('Unable to delete item');
 
       // Reset the success message after 10 seconds
       setTimeout(() => setDisplayMessage(''), 10000);
     }
   };
 
-  // // Placeholder function, replace with our actual logic to add an item
-  // const addNewItem = (itemData) => {
-  //   // Perform the action to add an item (make the API call, update state)
-  //   console.log('Adding item:', itemData);
-  // };
+  // Placeholder function, replace with our actual logic to delete an item
+  const deleteNewItem = (itemData) => {
+    // Perform the action to delete an item (make the API call, delete state)
+    console.log('Updating item:', itemData);
+  };
 
   return (
     <>
@@ -102,9 +99,11 @@ const AddInventory = () => {
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
               </Form.Select>
+              {/* </div>
 
+            <div className="d-inline-block mx-3"> */}
               <Form.Select
-                value={formState.course}
+                value={formState.mealChosen}
                 name="course"
                 onChange={handleChange}
               >
@@ -114,10 +113,9 @@ const AddInventory = () => {
                 <option value="Snack">Drink</option>
                 <option value="Snack">Snack</option>
               </Form.Select>
-
               <div className="d-inline-block mx-3">
-                <Button onClick={clearForm}>Clear Added Item</Button>
-                <Button onClick={addItem}>Submit Added Item</Button>
+                <Button>Clear deleted Item</Button>
+                <Button>Submit deleted Item</Button>
                 <Button onClick={() => console.log(formState)}>
                   Check State
                 </Button>
@@ -126,6 +124,7 @@ const AddInventory = () => {
           </div>
         </Row>
       </Container>
+
       {/* Display success message below the button */}
       {displayMessage && (
         <p
@@ -143,4 +142,4 @@ const AddInventory = () => {
   );
 };
 
-export default AddInventory;
+export default DeleteInventory;

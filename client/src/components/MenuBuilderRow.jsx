@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { CREATE_SCHOOL_DAILY_MENU } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
+import AddInventory from '../components/AddItem';
+
 MenuBuilderRow.propTypes = {
   schoolId: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
@@ -86,36 +88,40 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
   };
 
   return (
-    <tr>
-      <th scope="row">{`${new Date(date).toLocaleDateString('en-US', {
-        weekday: 'long',
-      })} ${new Date(date).toLocaleDateString()}`}</th>
-      <td className="align-top">
-        {renderSelect('b1', 'ENTREE')}
-        {renderSelect('b2', 'SIDE')}
-        {renderSelect('b3', 'DRINK')}
-      </td>
-      <td className="align-top">
-        {renderSelect('s1', 'SNACK')}
-        {renderSelect('s2', 'SNACK')}
-      </td>
-      <td className="align-top">
-        {renderSelect('l1', 'ENTREE')}
-        {renderSelect('l2', 'SIDE')}
-        {renderSelect('l3', 'SIDE')}
-        {renderSelect('l4', 'DRINK')}
-      </td>
-      <td className="align-top">
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={handleSaveClick}
-        >
-          Save
-        </button>
-        {loading ? <p>Saving...</p> : null}
-      </td>
-    </tr>
+    <>
+      <tr>
+        <th scope="row">{`${new Date(date).toLocaleDateString('en-US', {
+          weekday: 'long',
+        })} ${new Date(date).toLocaleDateString()}`}</th>
+        <td className="align-top">
+          {renderSelect('b1', 'ENTREE')}
+          {renderSelect('b2', 'SIDE')}
+          {renderSelect('b3', 'DRINK')}
+        </td>
+        <td className="align-top">
+          {renderSelect('s1', 'SNACK')}
+          {renderSelect('s2', 'SNACK')}
+        </td>
+        <td className="align-top">
+          {renderSelect('l1', 'ENTREE')}
+          {renderSelect('l2', 'SIDE')}
+          {renderSelect('l3', 'SIDE')}
+          {renderSelect('l4', 'DRINK')}
+        </td>
+        <td className="align-top">
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={handleSaveClick}
+          >
+            Save
+          </button>
+          {loading ? <p>Saving...</p> : null}
+        </td>
+      </tr>
+
+      <AddInventory />
+    </>
   );
 
   async function newDailyMenu(meal, menuItems) {

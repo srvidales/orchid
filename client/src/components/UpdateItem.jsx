@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
-const Item = () => {
+const UpdateInventory = () => {
   const [formState, setFormState] = useState({
     item_name: '',
     mealChosen: '',
@@ -16,7 +16,7 @@ const Item = () => {
     setFormState({ ...formState, [name]: value });
   };
 
-  const addItem = () => {
+  const updateItem = () => {
     if (!formState.item_name || !formState.mealChosen || !formState.course) {
       setDisplayMessage('Please fill out all fields.');
       setTimeout(() => {
@@ -25,8 +25,8 @@ const Item = () => {
       return;
     }
 
-    // Placeholder function for adding an item (replace with our logic)
-    addNewItem({
+    // Placeholder function for updating an item (replace with our logic)
+    updateNewItem({
       item_name: formState.item_name,
       mealChosen: formState.mealChosen,
       course: formState.course,
@@ -38,7 +38,7 @@ const Item = () => {
       mealChosen: '',
       course: '',
     });
-    setDisplayMessage('Success in adding an item!');
+    setDisplayMessage('Success in updating an item!');
 
     // Reset the success message after 10 seconds
     setTimeout(() => {
@@ -48,17 +48,17 @@ const Item = () => {
     try {
     } catch (err) {
       console.log('Failed.', err);
-      setDisplayMessage('Unable to add item');
+      setDisplayMessage('Unable to update item');
 
       // Reset the success message after 10 seconds
       setTimeout(() => setDisplayMessage(''), 10000);
     }
   };
 
-  // Placeholder function, replace with our actual logic to add an item
-  const addNewItem = (itemData) => {
-    // Perform the action to add an item (make the API call, update state)
-    console.log('Adding item:', itemData);
+  // Placeholder function, replace with our actual logic to update an item
+  const updateNewItem = (itemData) => {
+    // Perform the action to update an item (make the API call, update state)
+    console.log('Updating item:', itemData);
   };
 
   return (
@@ -114,8 +114,8 @@ const Item = () => {
                 <option value="Snack">Snack</option>
               </Form.Select>
               <div className="d-inline-block mx-3">
-                <Button>Clear Added Item</Button>
-                <Button>Submit Added Item</Button>
+                <Button>Clear Updated Item</Button>
+                <Button>Submit Updated Item</Button>
                 <Button onClick={() => console.log(formState)}>
                   Check State
                 </Button>
@@ -142,4 +142,4 @@ const Item = () => {
   );
 };
 
-export default Item;
+export default UpdateInventory;
