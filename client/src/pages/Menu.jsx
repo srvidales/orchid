@@ -1,5 +1,6 @@
 import MenuBuilder from '../components/MenuBuilder';
 import MenuView from '../components/MenuView';
+import Add from '../components/Add';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 
@@ -12,7 +13,7 @@ const Menu = () => {
     <div>
       {Auth.loggedIn() ? (
         loading ? (
-            <p>Loading...</p>
+          <p>Loading...</p>
         ) : (
           <MenuBuilder schoolId={data.schools[0]._id} />
         )
