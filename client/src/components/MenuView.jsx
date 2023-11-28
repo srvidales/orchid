@@ -65,17 +65,38 @@ export default memo(function MenuView({ schoolId }) {
       weekday: 'long',
     }).format(dateObject);
 
+    // Styles for the container and date heading
+    const containerStyle = {
+      minWidth: '125px',
+      width: '18%',
+      marginBottom: '20px',
+      padding: '10px',
+      marginRight: '10px',
+    };
+
+    const dateHeadingStyle = {
+      fontSize: '1.2em',
+      marginBottom: '10px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    };
+
     return (
-      <div style={{ width: '22%' }} className="border" key={dateKey}>
+      <div style={containerStyle} className="border" key={dateKey}>
         <div>
-          <h3>{formattedDate}</h3>
+          <h2 className="text-center" style={dateHeadingStyle}>
+            {formattedDate}
+          </h2>
         </div>
         <div>
           {MenusByDate[dateKey].map((dayData, index) => (
-            <div key={index}>
-              <div style={{ textAlign: 'center' }}>
-                <h4>{dayData.meal}</h4>
-                <h5>{dayData.menuItems[0].name}</h5>
+            <div key={index} className="text-center">
+              <div style={{ marginBottom: '10px' }}>
+                <h3 style={{ fontSize: '1em', margin: '0' }}>{dayData.meal}</h3>
+                <p style={{ fontSize: '0.9em', margin: '0' }}>
+                  {dayData.menuItems[0].name}
+                </p>
               </div>
             </div>
           ))}
