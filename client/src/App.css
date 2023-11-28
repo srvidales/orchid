@@ -2,9 +2,15 @@
 
 #root {
   max-width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+
+.app-container {
+  background-color: #4a67a7;
+  text-align: center;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .active {
@@ -14,6 +20,7 @@
 
 .navbar {
   position: sticky;
+  top: 2rem; 
 }
 
 .logo {

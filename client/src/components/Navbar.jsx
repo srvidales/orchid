@@ -60,3 +60,4 @@ const Navbar = () => {
 };
 
 export default Navbar; // Export the Navbar component
+

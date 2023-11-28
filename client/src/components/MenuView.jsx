@@ -51,21 +51,24 @@ export default memo(function MenuView({ schoolId }) {
 
   return (
     <>
-      <h1>Menu View</h1>
-      <h2>Current Week:</h2>
-      <h3>{getCurrentWeek()}</h3>
+      <h1 className="text-center mt-4 mb-4">Menu View</h1>
       <div className="d-flex flex-wrap justify-content-center">
-        {weekdayKeysArray.map((dateKey) => (
-          <div style={{ width: '18%' }} className="border" key={dateKey}>
+        {/* Iterate over each date in the grouped result */}
+        {objectKeyArry.map((item) => (
+          <div style={{ minWidth: '125px', width: '18%', marginBottom: '20px', padding: '10px', marginRight: '10px' }} className="border" key={item}>
             <div>
-              <h3>{dateKey}</h3>
+              {/* Display the date as a heading */}
+              <h2 className="text-center" style={{ fontSize: '1.2em', marginBottom: '10px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item}</h2>
             </div>
             <div>
-              {MenusByDate[dateKey].map((dayData, index) => (
-                <div key={index}>
-                  <div style={{ textAlign: 'center' }}>
-                    <h4>{dayData.meal}</h4>
-                    <p>{dayData.menuItems[0].name}</p>
+              {/* Iterate over each day's data for the current date */}
+              {result[item].map((dayData, index) => (
+                <div key={index} className="text-center">
+                  <div style={{ marginBottom: '10px' }}>
+                    {/* Display the meal type as a sub-heading */}
+                    <h3 style={{ fontSize: '1em', margin: '0' }}>{dayData.meal}</h3>
+                    {/* Display the first menu item for the current meal */}
+                    <p style={{ fontSize: '0.9em', margin: '0' }}>{dayData.menuItems[0].name}</p>
                   </div>
                 </div>
               ))}
