@@ -5,12 +5,18 @@ import { GET_DAILY_MENUS_BY_SCHOOL } from '../utils/queries';
 // Component to display daily menus
 export default memo(function MenuView({ schoolId }) {
   console.log('School ID Given:', schoolId);
+
   // GraphQL hook to fetch data
   const { data, error } = useQuery(GET_DAILY_MENUS_BY_SCHOOL, {
     variables: { schoolId },
   });
 
   console.log('#2', data);
+
+  // Check for errors and log them if present
+  if (error) {
+    console.error('Error fetching data:', error);
+  }
 
   // Extract daily menu data or default to an empty array
   const dailyMenuData = data?.dailyMenusBySchool || [];
@@ -34,6 +40,7 @@ export default memo(function MenuView({ schoolId }) {
     return dayOfWeek >= 1 && dayOfWeek <= 5; // Monday (1) to Friday (5)
   };
 
+  // Use the formatted date keys for filtering
   const weekdayKeysArray = Object.keys(MenusByDate).filter(filterWeekdays);
 
   // Create a function to format the current week in mm/dd/yy - mm/dd/yy
@@ -50,7 +57,9 @@ export default memo(function MenuView({ schoolId }) {
       today.setDate(today.getDate() - today.getDay() + 5),
     );
 
-    return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
+    return `${startOfWeek.toLocaleDateString(
+      'en-US',
+    )} - ${endOfWeek.toLocaleDateString('en-US')}`;
   };
 
   // Get the current week's date range
@@ -72,7 +81,7 @@ export default memo(function MenuView({ schoolId }) {
       marginBottom: '20px',
       padding: '10px',
       marginRight: '10px',
-      backgroundColor: 'rgba(255, 255, 255, 0.8)'
+      backgroundColor: 'rgba(255, 255, 255, 0.8)',
     };
 
     const dateHeadingStyle = {
@@ -109,13 +118,15 @@ export default memo(function MenuView({ schoolId }) {
   return (
     <>
       <h1>Menu View</h1>
-      <h2>Current Week:</h2>
-      <h3>{currentWeek}</h3>
+      <h2>{currentWeek}</h2>
       <div className="d-flex flex-wrap justify-content-center">
         {weekdayKeysArray
           .filter((dateKey) => {
             const dateObject = new Date(dateKey);
-            return currentWeek.includes(dateObject.toLocaleDateString());
+            return (
+              dateObject >= new Date(currentWeek.split(' - ')[0]) &&
+              dateObject <= new Date(currentWeek.split(' - ')[1])
+            );
           })
           .sort((a, b) => new Date(a) - new Date(b))
           .map(renderMenuItems)}
