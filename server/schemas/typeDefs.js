@@ -72,6 +72,13 @@ const typeDefs = `
     dailyMenusBySchoolAndDate(schoolId: ID!, date: String!): [DailyMenu]
     dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: String!, meal: MealType!): [DailyMenu]
   }
+
+  input CreateSchoolDailyMenuInput {
+    schoolId: ID!
+    date: String
+    meal: MealType
+    menuItems: [ID]
+  }
   
   type Mutation {
     signupUser(
@@ -137,6 +144,7 @@ const typeDefs = `
       category: String
     ): MenuItem
     deleteMenuItem(itemId: ID!): String
+    createSchoolDailyMenu(input: CreateSchoolDailyMenuInput!): DailyMenu
   }
 `;
 
