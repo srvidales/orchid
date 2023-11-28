@@ -14,12 +14,10 @@ const Menu = () => {
         loading ? (
           <p>Loading...</p>
         ) : (
-          <p>No schools</p>
+          <MenuBuilder schoolId={data?.schools[0]?._id} />
         )
-      ) : data ? (
-        <MenuView schoolId={data?.schools[0]?._id} />
       ) : (
-        <p>No schools</p>
+        <MenuView schoolId={data?.schools[0]?._id} />
       )}
     </div>
   );
