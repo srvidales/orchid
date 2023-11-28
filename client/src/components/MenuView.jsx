@@ -11,7 +11,6 @@ export default memo(function MenuView({ schoolId }) {
   });
 
   console.log('#2', data);
-
   // Extract daily menu data or default to an empty array
   const dailyMenuData = data?.dailyMenusBySchool || [];
 
@@ -35,7 +34,7 @@ export default memo(function MenuView({ schoolId }) {
   // Create a function to format the current week in mm/dd/yy - mm/dd/yy
   const getCurrentWeek = () => {
     const today = new Date();
-    
+
     const startOfWeek = new Date(
       today.setDate(
         today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1),
@@ -48,27 +47,23 @@ export default memo(function MenuView({ schoolId }) {
 
     return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
   };
-
   return (
     <>
-      <h1 className="text-center mt-4 mb-4">Menu View</h1>
+      <h1>Menu View</h1>
+      <h2>Current Week:</h2>
+      <h3>{getCurrentWeek()}</h3>
       <div className="d-flex flex-wrap justify-content-center">
-        {/* Iterate over each date in the grouped result */}
-        {objectKeyArry.map((item) => (
-          <div style={{ minWidth: '125px', width: '18%', marginBottom: '20px', padding: '10px', marginRight: '10px' }} className="border" key={item}>
+        {weekdayKeysArray.map((dateKey) => (
+          <div style={{ width: '18%' }} className="border" key={dateKey}>
             <div>
-              {/* Display the date as a heading */}
-              <h2 className="text-center" style={{ fontSize: '1.2em', marginBottom: '10px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item}</h2>
+              <h3>{dateKey}</h3>
             </div>
             <div>
-              {/* Iterate over each day's data for the current date */}
-              {result[item].map((dayData, index) => (
-                <div key={index} className="text-center">
-                  <div style={{ marginBottom: '10px' }}>
-                    {/* Display the meal type as a sub-heading */}
-                    <h3 style={{ fontSize: '1em', margin: '0' }}>{dayData.meal}</h3>
-                    {/* Display the first menu item for the current meal */}
-                    <p style={{ fontSize: '0.9em', margin: '0' }}>{dayData.menuItems[0].name}</p>
+              {MenusByDate[dateKey].map((dayData, index) => (
+                <div key={index}>
+                  <div style={{ textAlign: 'center' }}>
+                    <h4>{dayData.meal}</h4>
+                    <p>{dayData.menuItems[0].name}</p>
                   </div>
                 </div>
               ))}
