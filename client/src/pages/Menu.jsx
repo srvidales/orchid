@@ -1,6 +1,5 @@
 import MenuBuilder from '../components/MenuBuilder';
 import MenuView from '../components/MenuView';
-import Add from '../components/Add';
 import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_SCHOOL_NAMES } from '../utils/queries';
