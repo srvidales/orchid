@@ -52,15 +52,14 @@ const Navbar = () => {
                 </NavLink>
               </Nav.Link>
             ))}
-            <Nav.Link>
-              <NavLink
-                to="/login"
-                className="nav-link"
-                onClick={isLoggedIn ? Auth.logout : null}
-              >
-                {isLoggedIn ? 'Logout' : 'Login'}
-              </NavLink>
-            </Nav.Link>
+
+            <NavLink
+              to="/login"
+              className="nav-link"
+              onClick={isLoggedIn ? Auth.logout : null}
+            >
+              {isLoggedIn ? 'Logout' : 'Login'}
+            </NavLink>
           </Nav>
         </BSNavbar.Collapse>
       </BSNavbar>
