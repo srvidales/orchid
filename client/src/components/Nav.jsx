@@ -41,7 +41,7 @@ const Navbar = () => {
             style={{ width: '100%', paddingRight: '18px' }}
           >
             {links.map((navlink, i) => (
-              <NavLink to={navlink.link} className="nav-link">
+              <NavLink key={i} to={navlink.link} className="nav-link">
                 {navlink.title === 'Menu' && Auth.loggedIn()
                   ? 'Edit Menu'
                   : navlink.title}
