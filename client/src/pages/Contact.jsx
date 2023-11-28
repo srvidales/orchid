@@ -112,8 +112,7 @@ const Contact = () => {
         style={{
           display: 'inline-block',
           justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
+          alignItems: 'center'
         }}
       >
         <h1>Contact Us</h1>

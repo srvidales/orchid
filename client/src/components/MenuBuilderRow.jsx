@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CREATE_SCHOOL_DAILY_MENU } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
@@ -48,10 +48,6 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
 
   const [selectValue, setSelectValue] = useState(selectKeyValuePairs);
 
-  useEffect(() => {
-    setSelectValue({ ...defaultKeyValuePairs });
-  }, [date]);
-
   const handleChange = (id, event) => {
     const updatedSelectKeyValuePairs = {
       ...selectValue,
@@ -60,52 +56,56 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
     setSelectValue(updatedSelectKeyValuePairs);
   };
 
-  const renderSelect = (id, Category) => {
-    return (
-      <select
-        id={id}
-        className="selectpicker"
-        style={{ minWidth: '300px' }}
-        value={selectValue[id]}
-        onChange={(event) => handleChange(id, event)}
-      >
-        <option value="" disabled>
-          ---
-        </option>
-        <optgroup label={Category}>
-          {items
-            .filter((item) => item.category === Category)
-            .map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
-        </optgroup>
-      </select>
-    );
-  };
+  const renderSection = (title, ids, category) => (
+    <div className="menu-section">
+      <h3>{title}</h3>
+      <div className="menu-options">
+        {ids.map((id) => (
+          <div key={id} className="select-wrapper">
+            {renderSelect(id, category)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderSelect = (id, category) => (
+    <select
+      key={id}
+      id={id}
+      className="selectpicker"
+      style={{ minWidth: '300px' }}
+      value={selectValue[id]}
+      onChange={(event) => handleChange(id, event)}
+    >
+      <option value="" disabled>
+        ---
+      </option>
+      <optgroup label={category}>
+        {items
+          .filter((item) => item.category === category)
+          .map((item) => (
+            <option key={item._id} value={item._id}>
+              {item.name}
+            </option>
+          ))}
+      </optgroup>
+    </select>
+  );
 
   return (
-    <tr>
-      <th scope="row">{`${new Date(date).toLocaleDateString('en-US', {
-        weekday: 'long',
-      })} ${new Date(date).toLocaleDateString()}`}</th>
-      <td className="align-top">
-        {renderSelect('b1', 'ENTREE')}
-        {renderSelect('b2', 'SIDE')}
-        {renderSelect('b3', 'DRINK')}
-      </td>
-      <td className="align-top">
-        {renderSelect('s1', 'SNACK')}
-        {renderSelect('s2', 'SNACK')}
-      </td>
-      <td className="align-top">
-        {renderSelect('l1', 'ENTREE')}
-        {renderSelect('l2', 'SIDE')}
-        {renderSelect('l3', 'SIDE')}
-        {renderSelect('l4', 'DRINK')}
-      </td>
-      <td className="align-top">
+    <div className="menu-builder-row">
+      <div className="date-info">
+        <p>
+          {`${new Date(date).toLocaleDateString('en-US', {
+            weekday: 'long',
+          })} ${new Date(date).toLocaleDateString()}`}
+        </p>
+      </div>
+      {renderSection('Breakfast', ['b1', 'b2', 'b3'], 'ENTREE')}
+      {renderSection('Snack', ['s1', 's2'], 'SNACK')}
+      {renderSection('Lunch', ['l1', 'l2', 'l3', 'l4'], 'ENTREE')}
+      <div className="save-button">
         <button
           className="btn btn-primary"
           type="button"
@@ -114,8 +114,8 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           Save
         </button>
         {loading ? <p>Saving...</p> : null}
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 
   async function newDailyMenu(meal, menuItems) {
