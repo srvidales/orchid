@@ -15,11 +15,11 @@
     text-decoration: none;
     color: #000; 
     transition: none;
-    background-color: transparent; /* Set initial background color to transparent */
+    background-color: transparent;
 }
 
 .nav-link:hover {
-    background-color: #677ba7; /* Set the background color on hover */
-    color: #000; /* Set the color on hover */
+    background-color: #677ba7; 
+    color: #000; 
     border-radius: 4px;
 }
