@@ -33,13 +33,6 @@ const AddInventory = () => {
       return;
     }
 
-    // // Placeholder function for adding an item (replace with our logic)
-    // addNewItem({
-    //   item_name: formState.item_name,
-    //   mealChosen: formState.mealChosen,
-    //   course: formState.course,
-    // });
-
     clearForm();
     setDisplayMessage('Success in adding an item!');
 
@@ -57,12 +50,6 @@ const AddInventory = () => {
       setTimeout(() => setDisplayMessage(''), 10000);
     }
   };
-
-  // // Placeholder function, replace with our actual logic to add an item
-  // const addNewItem = (itemData) => {
-  //   // Perform the action to add an item (make the API call, update state)
-  //   console.log('Adding item:', itemData);
-  // };
 
   return (
     <>
@@ -126,7 +113,6 @@ const AddInventory = () => {
           </div>
         </Row>
       </Container>
-      {/* Display success message below the button */}
       {displayMessage && (
         <p
           style={{
