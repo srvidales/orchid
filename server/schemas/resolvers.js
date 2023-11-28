@@ -539,6 +539,36 @@ const resolvers = {
         );
       }
     },
+
+    createSchoolDailyMenu: async (_, { input }) => {
+      try {
+        // Destructuring input fields
+        const { schoolId, date, meal, menuItems } = input;
+
+        // Create a new DailyMenu document
+        const newDailyMenu = new DailyMenu({
+          date: date,
+          meal: meal,
+          menuItems: menuItems,
+          school: schoolId,
+          createdAt: new Date(),
+        });
+
+        // Save the new DailyMenu document to the database
+        const savedDailyMenu = await newDailyMenu.save();
+
+        // Associate the DailyMenu with the specified School
+        await School.findByIdAndUpdate(schoolId, {
+          $push: { dailyMenus: savedDailyMenu._id },
+        });
+
+        // Return the saved DailyMenu
+        return savedDailyMenu;
+      } catch (error) {
+        // Handle errors, such as invalid input or database errors
+        throw new Error(error.message);
+      }
+    },
   },
 };
 

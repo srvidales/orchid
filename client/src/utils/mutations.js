@@ -69,3 +69,19 @@ mutation addDailyMenu($date: String!, $meal: MealType!, $menuItems: [ID]!) {
   }
 }
 `
+export const CREATE_SCHOOL_DAILY_MENU = gql`
+mutation CreateSchoolDailyMenu($input: CreateSchoolDailyMenuInput!) {
+  createSchoolDailyMenu(input: $input) {
+    _id
+    date
+    meal
+    menuItems {
+      _id
+    }
+    school {
+      _id
+    }
+    createdAt
+  }
+}
+`

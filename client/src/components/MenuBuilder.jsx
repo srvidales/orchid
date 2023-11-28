@@ -64,6 +64,7 @@ export default function MenuBuilder({ schoolId }) {
                   </tr>
                 ) : (
                   <MenuBuilderRow
+                    schoolId={schoolId}
                     date={new Date(selectedDate)}
                     items={data.schoolById.menuItems}
                   />
