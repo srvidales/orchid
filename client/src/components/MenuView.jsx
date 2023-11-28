@@ -3,7 +3,8 @@ import { useQuery } from '@apollo/client';
 import { GET_DAILY_MENUS } from '../utils/queries';
 
 // Component to display daily menus
-export default function MenuView() {
+export default function MenuView({ schoolId }) {
+  console.log('School ID Given:', schoolId);
   // GraphQL hook to fetch data
   const { data, loading, error } = useQuery(GET_DAILY_MENUS);
 

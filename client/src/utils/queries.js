@@ -200,7 +200,7 @@ export const GET_DAILY_MENUS = gql`
 `;
 
 export const GET_DAILY_MENUS_BY_SCHOOL_DATE = gql`
-  query DailyMenusBySchoolAndDate($schoolId: ID!, $date: DateTime!) {
+  query getDailyMenusBySchoolAndDate($schoolId: ID!, $date: DateTime!) {
     dailyMenusBySchoolAndDate(schoolId: $schoolId, date: $date) {
       _id
       date
