@@ -16,6 +16,8 @@ const Menu = () => {
         ) : (
           <MenuBuilder schoolId={data?.schools[0]?._id} />
         )
+      ) : data ? (
+        <MenuView schoolId={data?.schools[0]?._id} />
       ) : (
         <MenuView schoolId={data?.schools[0]?._id} />
       )}
