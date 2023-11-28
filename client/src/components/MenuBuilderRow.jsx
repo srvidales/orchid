@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { CREATE_SCHOOL_DAILY_MENU } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
 
 MenuBuilderRow.propTypes = {
+  schoolId: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
@@ -18,9 +21,31 @@ const defaultKeyValuePairs = {
   l4: '',
 };
 
-export default function MenuBuilderRow({ date, items }) {
+export default function MenuBuilderRow({ schoolId, date, items }) {
+  const [createDailyMenu, { loading, error }] = useMutation(
+    CREATE_SCHOOL_DAILY_MENU,
+  );
+
+  const handleSaveClick = async () => {
+    if (Object.values(selectValue).every((value) => value !== '')) {
+      await newDailyMenu('BREAKFAST', [
+        selectValue.b1,
+        selectValue.b2,
+        selectValue.b3,
+      ]);
+      await newDailyMenu('SNACK', [selectValue.s1, selectValue.s2]);
+      await newDailyMenu('LUNCH', [
+        selectValue.l1,
+        selectValue.l2,
+        selectValue.l3,
+      ]);
+    } else {
+      alert('Please select an item for each menu item.');
+    }
+  };
+
   const selectKeyValuePairs = { ...defaultKeyValuePairs };
-  
+
   const [selectValue, setSelectValue] = useState(selectKeyValuePairs);
 
   useEffect(() => {
@@ -28,7 +53,10 @@ export default function MenuBuilderRow({ date, items }) {
   }, [date]);
 
   const handleChange = (id, event) => {
-    const updatedSelectKeyValuePairs = { ...selectValue, [id]: event.target.value };
+    const updatedSelectKeyValuePairs = {
+      ...selectValue,
+      [id]: event.target.value,
+    };
     setSelectValue(updatedSelectKeyValuePairs);
   };
 
@@ -78,10 +106,34 @@ export default function MenuBuilderRow({ date, items }) {
         {renderSelect('l4', 'DRINK')}
       </td>
       <td className="align-top">
-        <button className="btn btn-primary" type="button">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={handleSaveClick}
+        >
           Save
         </button>
+        {loading ? <p>Saving...</p> : null}
       </td>
     </tr>
   );
+
+  async function newDailyMenu(meal, menuItems) {
+    try {
+      const response = await createDailyMenu({
+        variables: {
+          input: {
+            schoolId,
+            date,
+            meal,
+            menuItems,
+          },
+        },
+      });
+
+      console.log('Create successful', response.data);
+    } catch (err) {
+      console.error('Error creating daily menu', err);
+    }
+  }
 }
