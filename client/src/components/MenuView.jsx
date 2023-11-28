@@ -35,7 +35,7 @@ export default memo(function MenuView({ schoolId }) {
   // Create a function to format the current week in mm/dd/yy - mm/dd/yy
   const getCurrentWeek = () => {
     const today = new Date();
-    
+
     const startOfWeek = new Date(
       today.setDate(
         today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1),
@@ -49,29 +49,34 @@ export default memo(function MenuView({ schoolId }) {
     return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
   };
 
+  // Get the current week's date range
+  const currentWeek = getCurrentWeek();
+
   return (
     <>
       <h1>Menu View</h1>
       <h2>Current Week:</h2>
-      <h3>{getCurrentWeek()}</h3>
+      <h3>{currentWeek}</h3>
       <div className="d-flex flex-wrap justify-content-center">
-        {weekdayKeysArray.map((dateKey) => (
-          <div style={{ width: '18%' }} className="border" key={dateKey}>
-            <div>
-              <h3>{dateKey}</h3>
-            </div>
-            <div>
-              {MenusByDate[dateKey].map((dayData, index) => (
-                <div key={index}>
-                  <div style={{ textAlign: 'center' }}>
-                    <h4>{dayData.meal}</h4>
-                    <p>{dayData.menuItems[0].name}</p>
+        {weekdayKeysArray
+          .filter((dateKey) => currentWeek.includes(dateKey))
+          .map((dateKey) => (
+            <div style={{ width: '22%' }} className="border" key={dateKey}>
+              <div>
+                <h3>{dateKey}</h3>
+              </div>
+              <div>
+                {MenusByDate[dateKey].map((dayData, index) => (
+                  <div key={index}>
+                    <div style={{ textAlign: 'center' }}>
+                      <h4>{dayData.meal}</h4>
+                      <p>{dayData.menuItems[0].name}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );
