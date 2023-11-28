@@ -13,15 +13,13 @@ const Menu = () => {
       {Auth.loggedIn() ? (
         loading ? (
           <p>Loading...</p>
-        ) : data ? (
-          <MenuBuilder schoolId={data?.schools[0]?._id} />
         ) : (
-          <p>No schools</p>
+          <MenuBuilder schoolId={data?.schools[0]?._id} />
         )
       ) : data ? (
         <MenuView schoolId={data?.schools[0]?._id} />
       ) : (
-        <p>No schools</p>
+        <MenuView schoolId={data?.schools[0]?._id} />
       )}
     </div>
   );

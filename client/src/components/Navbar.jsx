@@ -7,12 +7,21 @@ import Auth from '../utils/auth'; // Import the Auth utility
 const Navbar = () => {
   // Array of navigation links
   const links = [
-    { title: 'Home', link: '' }, // Home link with an empty link path
+    { title: 'Home', link: '/' }, // Home link with an empty link path
     { title: 'About', link: '/about' }, // About link with '/about' as the link path
     { title: 'Menu', link: '/menu' }, // Menu link with '/menu' as the link path
     { title: 'Contact Us', link: '/contact' }, // Contact Us link with '/contact' as the link path
   ];
-
+  //  {({ isActive }) => (
+  //             // Based on isActive state, add 'active' class to Button component
+  //             <span className={isActive ? 'active' : ''}>
+  //               {/* Render the Button component */}
+  //               {navlink.title === 'Menu' && Auth.loggedIn()
+  //                 ? 'Edit Menu'
+  //                 : navlink.title}{' '}
+  //               {/* Display the navigation link title */}
+  //             </span>
+  //           )}
   // Determines what gets displayed on the browser when the component is rendered.
   return (
     <nav className="navbar">
@@ -22,13 +31,7 @@ const Navbar = () => {
         // The 'i' index is being used as a unique identifier for each rendered NavLink component within the mapping process.
         <NavLink to={navlink.link} key={i}>
           {/* Create NavLink components with the link path and a unique key */}
-          {({ isActive }) => (
-            // Based on isActive state, add 'active' class to Button component
-            <Button className={isActive ? 'active' : ''}>
-              {/* Render the Button component */}
-              {navlink.title === 'Menu' && Auth.loggedIn() ? 'Edit Menu' : navlink.title} {/* Display the navigation link title */}
-            </Button>
-          )}
+          Hello
         </NavLink>
       ))}
       {/* Check if user is logged in or not */}
@@ -38,11 +41,11 @@ const Navbar = () => {
           {/* Render NavLink component with '/login' as the link path */}
           {({ isActive }) => (
             // Based on isActive state, add 'active' class to Button component
-            <Button className={isActive ? 'active' : ''}>
+            <span className={isActive ? 'active' : ''}>
               {/* Render the Button component */}
               {/* Display login/signup as the button text */}
               Login
-            </Button>
+            </span>
           )}
         </NavLink>
       ) : (
@@ -56,4 +59,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; // Export the Navbar component 
+export default Navbar; // Export the Navbar component
