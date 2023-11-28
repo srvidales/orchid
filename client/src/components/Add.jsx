@@ -23,25 +23,12 @@ const Item = () => {
     setFormState({ ...formState, [name]: value });
   };
 
-  const handleCheckBoxChange = (e) => {
-    const { name } = e.target;
-
-    if (formState.mealChosen.includes(name)) {
-      const updatedMeal = formState.mealChosen.filter((meal) => meal !== name);
-      setFormState({ ...formState, mealChosen: updatedMeal });
-    } else {
-      setFormState({
-        ...formState,
-        mealChosen: [...formState.mealChosen, name],
-      });
-    }
-  };
-
   return (
     <>
-      <Container style={{ width: '50%' }}>
+      <Container style={{ maxWidth: '50%' }}>
         <Row>
           <div
+            className="d-inline-block mx-3"
             style={{
               display: 'inline-block',
               justifyContent: 'center',
@@ -50,7 +37,7 @@ const Item = () => {
               padding: '1%',
             }}
           >
-            <h2>Add Menu Item</h2>
+            {/* <h2>Add Menu Item</h2> */}
             <FloatingLabel
               controlId="item_name"
               label="Item Name"
@@ -63,7 +50,8 @@ const Item = () => {
                 name="item_name"
               />
             </FloatingLabel>
-            <div className="d-inline-block mx-2">
+
+            <div>
               <Form.Select
                 value={formState.mealChosen}
                 name="mealChosen"
@@ -74,9 +62,9 @@ const Item = () => {
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
               </Form.Select>
-            </div>
+              {/* </div>
 
-            <div className="d-inline-block mx-2">
+            <div className="d-inline-block mx-3"> */}
               <Form.Select
                 value={formState.mealChosen}
                 name="course"
@@ -88,15 +76,21 @@ const Item = () => {
                 <option value="Snack">Drink</option>
                 <option value="Snack">Snack</option>
               </Form.Select>
+              <div className="d-inline-block mx-3">
+                <Button>Clear Added Item</Button>
+                <Button>Submit Added Item</Button>
+                <Button onClick={() => console.log(formState)}>
+                  Check State
+                </Button>
+              </div>
             </div>
-
-            <div>
+            {/* <div>
               <Button>Clear Added Item</Button>
               <Button>Submit Added Item</Button>
               <Button onClick={() => console.log(formState)}>
                 Check State
               </Button>
-            </div>
+            </div> */}
           </div>
         </Row>
       </Container>
