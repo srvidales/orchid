@@ -6,8 +6,7 @@ import { GET_SCHOOL_NAMES } from '../utils/queries';
 
 const Menu = () => {
   const { loading, data, error } = useQuery(GET_SCHOOL_NAMES);
-  console.log('data from Menu:', data);
-
+  // console.log('data from Menu:', data);
   return (
     <div>
       {Auth.loggedIn() ? (
@@ -16,8 +15,6 @@ const Menu = () => {
         ) : (
           <MenuBuilder schoolId={data?.schools[0]?._id} />
         )
-      ) : data ? (
-        <MenuView schoolId={data?.schools[0]?._id} />
       ) : (
         <MenuView schoolId={data?.schools[0]?._id} />
       )}
