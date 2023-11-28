@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { CREATE_SCHOOL_DAILY_MENU } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
+import AddInventory from '../components/AddItem';
+
 MenuBuilderRow.propTypes = {
   schoolId: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
