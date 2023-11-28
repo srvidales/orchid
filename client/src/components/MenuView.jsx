@@ -19,10 +19,24 @@ export default function MenuView({ schoolId }) {
   const objectKeyArry = Object.keys(result);
   console.log(result);
 
+  // Create a function to format the current week in mm/dd/yy - mm/dd/yy
+  const getCurrentWeek = () => {
+    const today = new Date();
+    const startOfWeek = new Date(
+      today.setDate(today.getDate() - today.getDay()),
+    );
+    const endOfWeek = new Date(
+      today.setDate(today.getDate() - today.getDay() + 6),
+    );
+
+    return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
+  };
+
   // Return JSX
   return (
     <>
       <h1>Menu View</h1>
+      <h2>Current Week: {getCurrentWeek()}</h2>
       <div className="d-flex flex-wrap justify-content-center">
         {/* Iterate over each date in the grouped result */}
         {objectKeyArry.map((item) => (
