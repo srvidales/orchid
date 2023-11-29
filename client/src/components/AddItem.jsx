@@ -97,18 +97,7 @@ const AddInventory = () => {
                 name="description"
               />
             </FloatingLabel>
-
             <div>
-              <Form.Select
-                value={formState.description}
-                name="description"
-                onChange={handleChange}
-              >
-                <option value="">Please Choose a Meal Time</option>
-                <option value="ENTREE">Entree</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Snack">Snack</option>
-              </Form.Select>
               <Form.Select
                 value={formState.category}
                 name="category"
