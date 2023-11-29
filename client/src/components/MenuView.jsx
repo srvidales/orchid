@@ -1,19 +1,16 @@
+// Import necessary modules and components
 import { memo } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_DAILY_MENUS_BY_SCHOOL } from '../utils/queries';
 
-// Component to display daily menus
+// Component to display daily menus, using React.memo for performance optimization
 export default memo(function MenuView({ schoolId }) {
-  console.log('School ID Given:', schoolId);
-
-  // GraphQL hook to fetch data
+  // Use GraphQL hook to fetch data for daily menus
   const { data, error } = useQuery(GET_DAILY_MENUS_BY_SCHOOL, {
     variables: { schoolId },
   });
 
-  console.log('From the Query:', data);
-
-  // Check for errors and log them if present
+  // Log any errors that occurred during data fetching
   if (error) {
     console.error('Error fetching data:', error);
   }
@@ -22,8 +19,8 @@ export default memo(function MenuView({ schoolId }) {
   const dailyMenuDataSchool = data?.dailyMenusBySchool || {};
   const dailyMenuData = dailyMenuDataSchool?.dailyMenus || [];
 
+  // Group daily menu data by date
   const groupedData = Object.groupBy(dailyMenuData, ({ date }) => date);
-  console.log('Daily Menu Data:', groupedData);
 
   // Filter out weekends (Saturday and Sunday)
   const filterWeekdays = (menu) => {
@@ -33,22 +30,18 @@ export default memo(function MenuView({ schoolId }) {
 
   // Use the filter function to get only weekdays
   const weekdaysOnly = Object.keys(groupedData).filter(filterWeekdays);
-  console.log('Weekdays Only:', weekdaysOnly);
 
-  // Create a function to format the current week in mm/dd/yy - mm/dd/yy
+  // Function to format the current week's date range
   const getCurrentWeek = () => {
     const today = new Date();
-
     const startOfWeek = new Date(
       today.setDate(
         today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1),
       ),
     );
-
     const endOfWeek = new Date(
       today.setDate(today.getDate() - today.getDay() + 5),
     );
-
     return `${startOfWeek.toLocaleDateString(
       'en-US',
     )} - ${endOfWeek.toLocaleDateString('en-US')}`;
@@ -92,23 +85,23 @@ export default memo(function MenuView({ schoolId }) {
           </h2>
         </div>
         <div>
-          {groupedData[dateKey].map((dayData, index) => 
-          (
+          {groupedData[dateKey].map((dayData, index) => (
             <div key={index} className="text-center">
               <div style={{ marginBottom: '10px' }}>
                 <h3 style={{ fontSize: '1em' }}>{dayData.meal}</h3>
                 <p style={{ fontSize: '0.9em' }}>{dayData.menuItems[0].name}</p>
               </div>
             </div>
-          )
-          )}
+          ))}
         </div>
       </div>
     );
   };
 
+  // Render the main component
   return (
     <>
+      {/* Header for the weekly menu */}
       <h1
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -118,6 +111,7 @@ export default memo(function MenuView({ schoolId }) {
       >
         Weekly Menu
       </h1>
+      {/* Display the current week's date range */}
       <h2
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -127,23 +121,20 @@ export default memo(function MenuView({ schoolId }) {
       >
         {currentWeek}
       </h2>
+      {/* Display menu items for weekdays within the current week */}
       <div className="d-flex flex-wrap justify-content-center align-items-center">
         {weekdaysOnly
           .filter((dateKey) => {
-            console.log('dkey',dateKey);
             const dateObject = new Date(dateKey);
             const start = new Date(currentWeek.split('-')[0]);
             const end = new Date(currentWeek.split('-')[1]);
-
-            // console.log(new Date(currentWeek.split('-')[0]));
-            // console.log('dateobj', dateObject.getTime() / 1000);
             return (
               dateObject.getTime() / 1000 >= start.getTime() / 1000 &&
               dateObject.getTime() / 1000 <= end.getTime() / 1000
             );
           })
           .sort((a, b) => new Date(a) - new Date(b))
-          .map( renderMenuItems)}
+          .map(renderMenuItems)}
       </div>
     </>
   );
