@@ -132,15 +132,13 @@ const typeDefs = `
     deleteDailyMenu(dailyMenuId: ID!): String
     addMenuItem(
       name: String!, 
-      description: String!, 
-      image: String, 
+      description: String!,  
       category: String!
     ): MenuItem
     updateMenuItem(
       itemId: ID!, 
       name: String, 
       description: String, 
-      image: String, 
       category: String
     ): MenuItem
     deleteMenuItem(itemId: ID!): String
