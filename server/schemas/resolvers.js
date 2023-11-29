@@ -178,7 +178,7 @@ const resolvers = {
 
         const formattedDailyMenus = populatedDailyMenus.map((menu) => ({
           ...menu.toObject(),
-          date: menu.date.toLocaleDateString(),
+          date: new Date(menu.date).toLocaleDateString(),
         }));
 
         // Return the daily menus with populated menu items

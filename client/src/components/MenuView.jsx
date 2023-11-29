@@ -6,14 +6,9 @@ import { GET_DAILY_MENUS_BY_SCHOOL } from '../utils/queries';
 // Component to display daily menus, using React.memo for performance optimization
 export default memo(function MenuView({ schoolId }) {
   // Use GraphQL hook to fetch data for daily menus
-  const { data, error } = useQuery(GET_DAILY_MENUS_BY_SCHOOL, {
+  const { data } = useQuery(GET_DAILY_MENUS_BY_SCHOOL, {
     variables: { schoolId },
   });
-
-  // Log any errors that occurred during data fetching
-  if (error) {
-    console.error('Error fetching data:', error);
-  }
 
   // Extract daily menu data or default to an empty array
   const dailyMenuDataSchool = data?.dailyMenusBySchool || {};
