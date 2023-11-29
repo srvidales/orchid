@@ -28,7 +28,7 @@ db.once('open', async () => {
     for (const newUser of users) {
       // Randomly selecting a school from the list
       const school = schools[i];
-      
+
       // Adding the new user to the selected school's 'users' array
       school.users.push(newUser);
       
@@ -41,7 +41,6 @@ db.once('open', async () => {
       // Randomly selecting a school from the list
       const school = schools[i];
       
-            
       // Adding the current menu item to the selected school's menuItems array
       school.menuItems.push(newMenuItem);
       

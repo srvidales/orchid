@@ -1,62 +1,62 @@
 [
   {
-    "name": "Venomous Viper Pizza",
-    "description": "Dare to try our dangerously delicious pizza featuring a slithering combination of spicy pepperoni, jalapenos, and a venomous hot sauce. Not for the faint of heart!",
+    "name": "Xiuhcoatl Pizza",
+    "description": "Experience the bold flavors of our signature Xiuhcoatl Pizza, featuring a unique blend of spicy pepperoni, jalapenos, and a fiery hot sauce. A taste adventure for the daring!",
     "category": "ENTREE"
   },
   {
-    "name": "Safari Skewers",
-    "description": "Embark on a taste safari with our savory skewers inspired by the wild. Each skewer features a colorful array of meats, veggies, and exotic spices. A culinary adventure for little safari explorers!",
+    "name": "Boitatá Brochettes",
+    "description": "Savor the spirit of Brazilian folklore with our Boitatá Brochettes, a culinary homage to the mythical serpent. Each skewer weaves a vibrant tale of meats, veggies, and enchanting spices, capturing the magic of the Boitatá in every bite.",
     "category": "ENTREE"
   },
   {
-    "name": "Pixie Wings Sandwich",
-    "description": "Fly into a world of flavor with our pixie wings sandwich, featuring butterfly-shaped bread and whimsical fillings. A magical treat for little dreamers!",
+    "name": "Fae Delight",
+    "description": "Indulge in butterfly-shaped bread filled with a spellbinding concoction, capturing the taste of Avalon in each delightful bite—a culinary homage to the enchanting faerie tales of England.",
     "category": "ENTREE"
   },
   {
-    "name": "Wizard's Spell Bento Box",
-    "description": "Cast a spell on lunchtime with our wizard-themed bento box, filled with spellbinding treats and enchanting surprises. A mystical adventure for tiny wizards and witches!",
+    "name": "Kitsune Feast",
+    "description": "A culinary celebration named after the mythical trickster fox of Japanese folklore. This feast features an enticing blend of sushi, tempura, and delightful surprises, inviting you to savor the mischievous magic inspired by the enchanting world of kitsune tales.",
     "category": "ENTREE"
   },
   {
-    "name": "Magical Rainbow Pasta",
-    "description": "Embark on a journey with our magical rainbow pasta, infused with colors from a magical palette. Sprinkled with stardust for an extra touch of enchantment!",
+    "name": "Mystic Spirals",
+    "description": "Savor the allure of our Mystic Spirals pasta, expertly crafted with premium ingredients, including semolina and fresh eggs, delivering an authentic taste of Sardinian culinary tradition.",
     "category": "ENTREE"
   },
   {
-    "name": "Fairy Garden Fruit Salad",
-    "description": "Discover the wonders of our fairy garden fruit salad, featuring a mix of enchanted fruits arranged in a whimsical display. A fruity fairy feast for little sprites!",
+    "name": "Pomona's Harvest",
+    "description": "A heavenly fruit salad that showcases the immortal flavors of grapes and golden apples, paying homage to the legendary abundance attributed to Pomona, the fruit goddess in Greek mythology.",
     "category": "ENTREE"
   },
   {
-    "name": "Crystal Lake Salmon",
-    "description": "Dive into the depths of flavor with our Crystal Lake Salmon, glazed with a magical sauce and accompanied by shimmering vegetable crystals. A water-inspired delight!",
+    "name": "Aurora Catch",
+    "description": "Featuring glazed salmon accompanied by shimmering northern lights vegetables, this dish captures the enchanting flavors inspired by Iñupiat folklore and culinary traditions.",
     "category": "ENTREE"
   },
   {
-    "name": "Mystic Forest Flatbread",
-    "description": "Journey through the enchanted forest with our Mystic Forest Flatbread, topped with a medley of mystical mushrooms and forest herbs. An earthy and flavorful experience!",
+    "name": "Enki's Feast",
+    "description": "Embark on a Mesopotamian journey with our Enki's Feast Flatbread, topped with a divine medley of mystical mushrooms and sacred herbs. An earthly and flavorful tribute!",
     "category": "ENTREE"
   },
   {
-    "name": "Enchanted Forest Veggie Wraps",
-    "description": "Journey through the enchanted forest with veggie wraps featuring mystical shapes and a magical herb-infused dressing. A colorful and nutritious adventure!",
+    "name": "Iberian Delight",
+    "description": "Iberian Delight Wraps showcase a harmonious blend of flavors, including a delightful herb-infused dressing, inspired by the rich culinary traditions and mythical essence of Spain.",
     "category": "ENTREE"
   },
   {
-    "name": "Magical Creatures Nuggets",
-    "description": "Meet magical creatures with our nuggets shaped like unicorns, fairies, and dragons. Served with magical dipping sauces for an enchanting meal!",
+    "name": "Creatures Nuggets",
+    "description": "The Creatures Nuggets feature shapes inspired by legendary beasts from South American folklore, including Chupacabras, Chimeras, and Thunderbirds, creating a mythical and flavorful dining experience.",
     "category": "ENTREE"
   },
   {
-    "name": "Magical Mushroom Risotto",
-    "description": "Dive into a world of enchantment with our magical mushroom risotto. Each grain of rice is infused with fairy flavors, and the dish is sprinkled with edible star-shaped cheese. A spellbinding delight for young wizards and witches!",
+    "name": "Mystic Arborisotto",
+    "description": "Enjoy an delicious blend of Arborio rice and forest-harvested mushrooms in our Mystic Arborisotto, inspired by the myth of Ceres, the goddess of agriculture, bringing a divine touch to this flavorful feast.",
     "category": "ENTREE"
   },
   {
-    "name": "Phoenix Feather Quesadilla",
-    "description": "Savor the magic with our phoenix feather quesadilla, filled with spellbinding ingredients and a touch of fiery salsa. A mystical twist on a classic dish!",
+    "name": "Quetzalcoatl's Delight",
+    "description": "Celebrate the magic of Mexican myth with our Quetzalcoatl's Delight Quesadilla, filled with spellbinding ingredients and a touch of fiery salsa. A mystical twist on a classic dish!",
     "category": "ENTREE"
   },
   {
@@ -65,8 +65,8 @@
     "category": "ENTREE"
   },
   {
-    "name": "Dragon Breath Meatballs",
-    "description": "Unleash the power of dragon breath with our flavorful meatballs. Each meatball is infused with mystical spices, and the dish is served with a smoky dragon's breath dipping sauce. A fiery feast fit for brave little adventurers!",
+    "name": "Dragon Meatballs",
+    "description": "Unleash the power of dragon with our flavorful meatballs. Each meatball is infused with mystical spices, and the dish is served with a smoky dragon's breath dipping sauce. A fiery feast fit for brave little adventurers!",
     "category": "ENTREE"
   },
   {
@@ -75,7 +75,7 @@
     "category": "ENTREE"
   },
   {
-    "name": "Dragon Tail Hot Dogs",
+    "name": "Dragon Tail Dogs",
     "description": "Lunchtime becomes a dragon adventure with hot dogs shaped like dragon tails. Served with a side of magical condiments for a fiery feast!",
     "category": "ENTREE"
   },
@@ -85,9 +85,10 @@
     "category": "ENTREE"
   },
   {
-  "name": "Forest Feast Risotto",
-  "description": "Immerse yourself in the flavors of the enchanted forest with our Forest Feast Risotto. Each grain of rice is infused with the essence of mystical mushrooms and herbs, creating a delightful and earthy experience.",
-  "category": "ENTREE"
+    "name": "Forest Feast Risotto",
+    "description": "Immerse yourself in the flavors of the enchanted forest with our Forest Feast Risotto. Each grain of rice is infused with the essence of mystical mushrooms and herbs, creating a delightful and earthy experience.",
+    "image": "forest-risotto.png",
+    "category": "ENTREE"
   },
   {
     "name": "Dragon's Breath Tacos",
@@ -105,12 +106,12 @@
     "category": "SIDE"
   },
   {
-    "name": "Enchanted Onion Rings",
+    "name": "Enchanted Rings",
     "description": "Delight in the magic of our enchanted onion rings, dipped in a spellbinding batter and fried to golden perfection. An irresistible side for any occasion!",
     "category": "SIDE"
   },
   {
-    "name": "Sizzling Potion Brussel Sprouts",
+    "name": "Sizzling Potion Sprouts",
     "description": "Experience the sizzle of our potion-infused brussel sprouts, a bewitching side dish that will cast a spell on your taste buds!",
     "category": "SIDE"
   },
@@ -140,12 +141,12 @@
     "category": "SIDE"
   },
   {
-    "name": "Crisp Fairy Apple Slices",
+    "name": "Crisp Fairy Slices",
     "description": "Experience the enchantment of crisp fairy apple slices, lightly dusted with magical cinnamon sugar. A sweet and crunchy side that will make snack time truly magical!",
     "category": "SIDE"
   },
   {
-    "name": "Phoenix fire Chicken Wings",
+    "name": "Phoenix Wings",
     "description": "Ignite your taste buds with our Phoenix fire Chicken Wings. These spicy and flavorful wings are glazed with a fiery phoenix sauce, delivering a burst of heat and excitement with every bite. A perfect side for those who crave a daring adventure!",
     "category": "SIDE"
   },
