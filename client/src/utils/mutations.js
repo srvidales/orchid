@@ -38,19 +38,6 @@ export const LOGIN = gql`
   }
 `;
 
-export const UPDATE_USER = gql`
-mutation updateUser($userId: ID!, $firstName: String, $lastName: String, $email: String, $password: String) {
-  updateUser(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
-    _id
-    firstName
-    lastName
-    email
-    password
-    createdAt
-  }
-}
-`
-
 export const ADD_DAILY_MENU = gql`
 mutation addDailyMenu($date: String!, $meal: MealType!, $menuItems: [ID]!) {
   addDailyMenu(date: $date, meal: $meal, menuItems: $menuItems) {
