@@ -69,18 +69,19 @@ const AddInventory = () => {
 
   return (
     <>
-      <Container style={{ maxWidth: '50%' }}>
-        <Row>
-          <div
-            className="d-inline-block mx-3"
-            style={{
-              display: 'inline-block',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100vh',
-              padding: '1%',
-            }}
-          >
+      <Container style={{ maxWidth: '90%' }}>
+        <Row
+          className="d-inline-block mx-3"
+          style={{
+            display: 'inline-block',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            padding: '1%',
+          }}
+        >
+          <div>
+            <h4>Add Menu Item</h4>
             <FloatingLabel controlId="name" label="Item Name" className="mb-3">
               <Form.Control
                 type="text"
@@ -130,9 +131,9 @@ const AddInventory = () => {
               <div className="d-inline-block mx-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
-                <Button onClick={() => console.log(formState)}>
+                {/* <Button onClick={() => console.log(formState)}>
                   Check State
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
