@@ -23,60 +23,68 @@ db.once('open', async () => {
   const dailyMenus = await DailyMenu.create(dailyMenuSeeds);
   const users = await User.create(userSeeds);
 
-  // Associating users with schools
-  for (newUser of users) {
-    // Randomly selecting a school from the list
-    const school = schools[Math.floor(Math.random() * schools.length)];
+  for (let i = 0; i < schools.length; i++) {
+    // Associating users with schools
+    for (const newUser of users) {
+      // Randomly selecting a school from the list
+      const school = schools[i];
+      
+      // Adding the new user to the selected school's 'users' array
+      school.users.push(newUser);
+      
+      // Saving the school with the updated 'users' array
+      await school.save();
+    }
+    
+    // // Associating menu items with schools
+    for (const newMenuItem of menuItems) {
+      // Randomly selecting a school from the list
+      const school = schools[i];
+      
+            
+      // Adding the current menu item to the selected school's menuItems array
+      school.menuItems.push(newMenuItem);
+      
+      // Saving the school with the updated menuItems array
+      await school.save();
+    }
+    
+    // // Associating daily menus with schools and menu items
+    for (const newDailyMenu of dailyMenus) {
+      // Select a school in the array
+      const school = schools[i];
 
-    // Adding the new user to the selected school's 'users' array
-    school.users.push(newUser);
+      // Selecting a random menu item from the school's menuItems array
+      const randomIndex = Math.floor(Math.random() * school.menuItems.length);
+      const menuItem = school.menuItems[randomIndex];
 
-    // Saving the school with the updated 'users' array
-    await school.save();
-  }
+      // Assigning the selected school to the current daily menu
+      newDailyMenu.school = school;
 
-  // Associating menu items with schools
-  for (newMenuItem of menuItems) {
-    // Randomly selecting a school from the list
-    const school = schools[Math.floor(Math.random() * schools.length)];
+      // Checking if the selected menu item (Entrée) already exists in the daily menu
+      const entreeAlreadyExists = newDailyMenu.menuItems.some(
+        (item) => item === menuItem,
+      );
 
-    newMenuItem.school = school;
-    await newMenuItem.save();
+      // If the selected Entrée doesn't exist, add it to the daily menu's menuItems array
+      if (!entreeAlreadyExists) {
+        newDailyMenu.menuItems.push(menuItem);
 
-    // Adding the current menu item to the selected school's menuItems array
-    school.menuItems.push(newMenuItem);
+        // Saving the daily menu with the updated menuItems array
+        await newDailyMenu.save();
 
-    // Saving the school with the updated menuItems array
-    await school.save();
-  }
+        // Adding the daily menu to the school's menus array
+        school.dailyMenus.push(newDailyMenu);
 
-  // Associating daily menus with schools and menu items
-  for (newDailyMenu of dailyMenus) {
-    // Select a school in the array
-    const school = schools[0];
-
-    // Selecting a random menu item from the school's menuItems array
-    const randomIndex = Math.floor(Math.random() * school.menuItems.length);
-    const menuItem = school.menuItems[randomIndex];
-
-    newDailyMenu.school = school;
-
-    // Adding the selected menu item to the daily menu's menuItems array
-    newDailyMenu.menuItems.push(menuItem);
-
-    // Saving the daily menu with the updated menuItems array
-    await newDailyMenu.save();
-
-    // Adding the daily menu to the school's menus array
-    school.dailyMenus.push(newDailyMenu);
-
-    // Saving the school with the updated menus array
-    await school.save();
+        // Saving the school with the updated menus array
+        await school.save();
+      }
+    }
   }
 
   // Logging a message when the process is completed
-  console.log('all done!');
-
+  console.log('all done');
+  
   // Closing the database connection
   db.close();
 });
