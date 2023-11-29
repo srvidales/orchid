@@ -12,7 +12,6 @@ const typeDefs = `
     _id: ID
     name: String!
     description: String!
-    image: String
     category: Category
   }
 
@@ -127,14 +126,12 @@ const typeDefs = `
     addMenuItem(
       name: String!, 
       description: String!, 
-      image: String, 
       category: String!
     ): MenuItem
     updateMenuItem(
       itemId: ID!, 
       name: String, 
       description: String, 
-      image: String, 
       category: String
     ): MenuItem
     deleteMenuItem(itemId: ID!): String

@@ -107,7 +107,7 @@ const resolvers = {
       // Populating the 'dailyMenus' field to retrieve associated daily menus
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
-        .sort({ createdAt: -1 })
+        .sort({ name: "descending" })
         .populate('menuItems')
         .populate('users')
         .populate({
@@ -446,13 +446,12 @@ const resolvers = {
       }
     },
     // Mutation resolver for adding a menu item
-    addMenuItem: async (_parent, { name, description, image, category }) => {
+    addMenuItem: async (_parent, { name, description, category }) => {
       try {
         // Create a new menu item in the database
         const menuItem = await MenuItem.create({
           name,
           description,
-          image,
           category,
         });
 
@@ -466,7 +465,7 @@ const resolvers = {
     // Mutation resolver for updating a menu item
     updateMenuItem: async (
       _parent,
-      { itemId, name, description, image, category },
+      { itemId, name, description, category },
     ) => {
       try {
         // Find the menu item by ID and update its fields
@@ -476,7 +475,6 @@ const resolvers = {
             // Only update the fields that are provided
             ...(name && { name }),
             ...(description && { description }),
-            ...(image && { image }),
             ...(category && { category }),
           },
           { new: true }, // Return the updated document after the update is applied
