@@ -61,12 +61,6 @@ const AddInventory = () => {
     }
   };
 
-  // // Placeholder function, replace with our actual logic to add an item
-  // const addNewItem = (itemData) => {
-  //   // Perform the action to add an item (make the API call, update state)
-  //   console.log('Adding item:', itemData);
-  // };
-
   return (
     <>
       <Container style={{ maxWidth: '90%' }}>
@@ -98,16 +92,13 @@ const AddInventory = () => {
             >
               <Form.Control
                 type="text"
-                value={formState.name}
                 value={formState.description}
                 onChange={handleChange}
-                name="name"
                 name="description"
               />
             </FloatingLabel>
 
             <div>
-              <Form.Select
               <Form.Select
                 value={formState.description}
                 name="description"
@@ -117,8 +108,6 @@ const AddInventory = () => {
                 <option value="ENTREE">Entree</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
-              </Form.Select>{' '}
-              */}
               </Form.Select>
               <Form.Select
                 value={formState.category}

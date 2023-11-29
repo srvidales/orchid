@@ -85,11 +85,6 @@ const schoolSchema = new Schema({
       ref: 'DailyMenu',
     },
   ],
-  // Timestamp for school creation
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
 // Create the School model using the defined schema
