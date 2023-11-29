@@ -65,12 +65,11 @@ const AddInventory = () => {
     <>
       <Container style={{ maxWidth: '90%' }}>
         <Row
-          className="d-inline-block mx-3"
+          className="d-inline-block mx-3 my-3"
           style={{
             display: 'inline-block',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
             padding: '1%',
           }}
         >
@@ -109,17 +108,15 @@ const AddInventory = () => {
                 <option value="DRINK">Drink</option>
                 <option value="SNACK">Snack</option>
               </Form.Select>
-              <div className="d-inline-block mx-3">
+              <div className="d-inline-block mx-3 my-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
-                {/* <Button onClick={() => console.log(formState)}>
-                  Check State
-                </Button> */}
               </div>
             </div>
           </div>
         </Row>
       </Container>
+
       {/* Display success message below the button */}
       {displayMessage && (
         <p
