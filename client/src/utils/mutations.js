@@ -85,3 +85,11 @@ mutation CreateSchoolDailyMenu($input: CreateSchoolDailyMenuInput!) {
   }
 }
 `
+
+export const ADD_MENU_ITEM = gql`
+mutation addMenuItem($name: String!, $description: String!, $category: String!) {
+  addMenuItem(name: $name, description: $description, category: $category) {
+    _id
+    name
+  }
+}`
