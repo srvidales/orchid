@@ -125,7 +125,7 @@ const typeDefs = `
     deleteDailyMenu(dailyMenuId: ID!): String
     addMenuItem(
       name: String!, 
-      description: String!, 
+      description: String!,  
       category: String!
     ): MenuItem
     updateMenuItem(

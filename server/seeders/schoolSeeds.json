@@ -7,23 +7,5 @@
     "zip": "94705",
     "phone": "510-644-6890",
     "email": "info@emersonelementary.org"
-  },
-  {
-    "name": "Belladonna Elementary",
-    "address": "Solanaceae Street",
-    "city": "Oldfaire",
-    "state": "Michigan",
-    "zip": "49971",
-    "phone": "517-222-1222",
-    "email": "info@belladonnaelementary.com"
-  },
-  {
-    "name": "Nightshade Academy",
-    "address": "Noxious Ave",
-    "city": "Westreckyln",
-    "state": "Washington",
-    "zip": "99403",
-    "phone": "703-659-9540",
-    "email": "info@nightshadeacademy.com"
   }
 ]
