@@ -98,14 +98,17 @@ const AddInventory = () => {
             >
               <Form.Control
                 type="text"
+                value={formState.name}
                 value={formState.description}
                 onChange={handleChange}
+                name="name"
                 name="description"
               />
             </FloatingLabel>
 
             <div>
-              {/* <Form.Select
+              <Form.Select
+              <Form.Select
                 value={formState.description}
                 name="description"
                 onChange={handleChange}
@@ -114,8 +117,9 @@ const AddInventory = () => {
                 <option value="ENTREE">Entree</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
-              </Form.Select> */}
-
+              </Form.Select>{' '}
+              */}
+              </Form.Select>
               <Form.Select
                 value={formState.category}
                 name="category"
@@ -127,7 +131,6 @@ const AddInventory = () => {
                 <option value="DRINK">Drink</option>
                 <option value="SNACK">Snack</option>
               </Form.Select>
-
               <div className="d-inline-block mx-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
