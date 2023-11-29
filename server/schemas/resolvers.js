@@ -17,32 +17,20 @@ const resolvers = {
         throw new Error('An error occurred while fetching users.');
       }
     },
-
     // Resolver for fetching daily menus by school
-    dailyMenusBySchool: async (_parent, { schoolId }) => {
+    dailyMenusBySchool: async (p, { schoolId }) => {
       try {
-        // Fetch daily menus for the given school, sorted by date in descending order
-        const dailyMenus = await DailyMenu.find({ school: schoolId })
-          .sort({ date: -1 })
+        return await School.findById(schoolId)
           .populate('menuItems')
+          .populate('users')
           .populate({
-            path: 'school',
-            populate: {
-              path: 'dailyMenus',
-              populate: {
-                path: 'menuItems',
-              },
+            path: 'dailyMenus',
+            populate: { path: 'menuItems' },
+            options: {
+              sort: { meal: 'asc' },
             },
           });
-
-        // Format the dates to ISO string
-        const formattedDailyMenus = dailyMenus.map((menu) => ({
-          ...menu.toObject(),
-          date: menu.date.toISOString(),
-        }));
-
-        return formattedDailyMenus;
-      } catch (error) {
+      } catch (err) {
         // Handle errors during the fetch
         console.error('Error during daily menus fetch by school:', error);
         throw new Error(
@@ -50,7 +38,6 @@ const resolvers = {
         );
       }
     },
-
     // Resolver for fetching daily menus by school and date
     dailyMenusBySchoolAndDate: async (_parent, { schoolId, date }) => {
       try {
@@ -79,7 +66,6 @@ const resolvers = {
         throw new Error('An error occurred while fetching daily menu.');
       }
     },
-
     // Resolver for fetching daily menus by school, date, and meal
     dailyMenusBySchoolDateAndMeal: async (
       _parent,
@@ -112,7 +98,6 @@ const resolvers = {
         throw new Error('An error occurred while fetching daily menu.');
       }
     },
-
     // Resolver for fetching schools with associated menu items and daily menus
     schools: async () => {
       // Using the School model to find all schools
@@ -122,7 +107,7 @@ const resolvers = {
       // Populating the 'dailyMenus' field to retrieve associated daily menus
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
-        .sort({ createdAt: -1 })
+        .sort({ name: "descending" })
         .populate('menuItems')
         .populate('users')
         .populate({
@@ -130,7 +115,6 @@ const resolvers = {
           populate: { path: 'menuItems' },
         });
     },
-
     // Resolver for fetching a specific school by ID
     schoolById: async (_parent, { _id }) => {
       try {
@@ -156,7 +140,6 @@ const resolvers = {
         throw new Error('An error occurred while fetching the school.');
       }
     },
-
     // Resolver for fetching menu items
     menuItems: async () => {
       try {
@@ -169,7 +152,7 @@ const resolvers = {
         throw new Error('An error occurred while fetching menu items.');
       }
     },
-
+    // Resolver for fetching menu items by school
     menuItemsBySchool: async (_parent, { schoolId }) => {
       try {
         return await MenuItem.find({ school: schoolId })
@@ -180,7 +163,6 @@ const resolvers = {
         throw new Error('An error occurred while fetching menu items.');
       }
     },
-
     // Resolver that fetches daily menus and populates each one with its associated menu items
     dailyMenus: async () => {
       try {
@@ -196,7 +178,7 @@ const resolvers = {
 
         const formattedDailyMenus = populatedDailyMenus.map((menu) => ({
           ...menu.toObject(),
-          date: menu.date.toLocaleDateString(),
+          date: new Date(menu.date).toLocaleDateString(),
         }));
 
         // Return the daily menus with populated menu items
@@ -241,7 +223,6 @@ const resolvers = {
         throw new Error('An error occurred during signup. Please try again.');
       }
     },
-
     // Mutation resolver for loginUser
     loginUser: async (_parent, { email, password }) => {
       try {
@@ -262,7 +243,6 @@ const resolvers = {
         throw new Error('Invalid credentials');
       }
     },
-
     // Mutation resolver for updateUser
     updateUser: async (
       _parent,
@@ -298,7 +278,6 @@ const resolvers = {
         );
       }
     },
-
     // Mutation resolver for deleting a user
     deleteUser: async (_parent, { userId, schoolId }) => {
       try {
@@ -332,7 +311,6 @@ const resolvers = {
         throw new Error('An error occurred during user deletion.');
       }
     },
-
     // Mutation resolver for adding a school
     addSchool: async (_parent, schoolInfo) => {
       try {
@@ -347,7 +325,6 @@ const resolvers = {
         throw new Error('An error occurred during school creation.');
       }
     },
-
     // Mutation resolver for updating a school
     updateSchool: async (_parent, { schoolId, ...updatedFields }) => {
       try {
@@ -366,7 +343,6 @@ const resolvers = {
         throw new Error('An error occurred during school update.');
       }
     },
-
     // Mutation resolver for deleting a school
     deleteSchool: async (_parent, { schoolId }) => {
       try {
@@ -398,7 +374,6 @@ const resolvers = {
         throw new Error('An error occurred during school deletion.');
       }
     },
-
     // Mutation resolver for adding a daily menu
     addDailyMenu: async (_parent, { date, meal, menuItems }) => {
       try {
@@ -424,7 +399,6 @@ const resolvers = {
         );
       }
     },
-
     // Mutation resolver for updating a daily menu
     updateDailyMenu: async (
       _parent,
@@ -450,7 +424,6 @@ const resolvers = {
         throw new Error('An error occurred during daily menu update.');
       }
     },
-
     // Mutation resolver for deleting a daily menu
     deleteDailyMenu: async (_parent, { dailyMenuId }) => {
       try {
@@ -472,7 +445,6 @@ const resolvers = {
         throw new Error('An error occurred during Daily Menu deletion.');
       }
     },
-
     // Mutation resolver for adding a menu item
     addMenuItem: async (_parent, args, context) => {
       try {
@@ -486,11 +458,10 @@ const resolvers = {
         throw new Error('An error occurred during menu item creation.');
       }
     },
-
     // Mutation resolver for updating a menu item
     updateMenuItem: async (
       _parent,
-      { itemId, name, description, image, category },
+      { itemId, name, description, category },
     ) => {
       try {
         // Find the menu item by ID and update its fields
@@ -500,7 +471,6 @@ const resolvers = {
             // Only update the fields that are provided
             ...(name && { name }),
             ...(description && { description }),
-            ...(image && { image }),
             ...(category && { category }),
           },
           { new: true }, // Return the updated document after the update is applied
@@ -513,7 +483,6 @@ const resolvers = {
         throw new Error('An error occurred during menu item update.');
       }
     },
-
     // Mutation resolver for deleting a menu item
     deleteMenuItem: async (_parent, { itemId }) => {
       try {
@@ -537,7 +506,7 @@ const resolvers = {
         );
       }
     },
-
+    // Mutation resolver for creating a daily menu for a school
     createSchoolDailyMenu: async (_, { input }) => {
       try {
         // Destructuring input fields

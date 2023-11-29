@@ -12,7 +12,6 @@ const userSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-
   // User's last name properties
   lastName: {
     type: String,
@@ -21,7 +20,6 @@ const userSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
-
   // User's email properties with validation
   email: {
     type: String,
@@ -32,18 +30,11 @@ const userSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, 'Must match an email address!'],
   },
-
   // User's password properties
   password: {
     type: String,
     required: 'You need to enter a password!',
     minlength: 8,
-  },
-
-  // Timestamp for user creation
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 

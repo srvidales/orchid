@@ -11,7 +11,6 @@ const menuItemSchema = new Schema({
     maxlength: 280, // Validation: Maximum length of 280 characters
     trim: true, // Trimming leading and trailing whitespaces
   },
-
   // Description of the menu item
   description: {
     type: String,
@@ -20,28 +19,17 @@ const menuItemSchema = new Schema({
     maxlength: 280, // Validation: Maximum length of 280 characters
     trim: true, // Trimming leading and trailing whitespaces
   },
-
-  // Image URL for the menu item (optional)
-  image: {
-    type: String,
-  },
-
   // Category of the menu item (ENTREE, SIDE, DRINK, SNACK)
   category: {
     type: String,
     required: 'You need to enter a category!', // Validation: Category is required
     enum: ['ENTREE', 'SIDE', 'DRINK', 'SNACK', 'BREAKFAST', 'LUNCH'], // Validation: Category must be one of these values
   },
-
-  school: {
-    type: Schema.Types.ObjectId,
-    ref: 'School',
-  },
-
-  // Creation timestamp for the menu item, defaulting to the current date
+    // Creation timestamp for the menu item, defaulting to the current date
   createdAt: {
     type: Date,
     default: Date.now, // Default value is the current date and time
+    get: (timestamp) => dateFormat(timestamp), // Applying custom date formatting using the dateFormat utility
   },
 });
 
