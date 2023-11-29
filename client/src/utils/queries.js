@@ -29,16 +29,13 @@ export const GET_DAILY_MENUS_BY_SCHOOL = gql`
       name
       dailyMenus {
         _id
-        createdAt
         date
         meal
         menuItems {
           _id
           category
-          createdAt
           description
           name
-          image
         }
       }
     }

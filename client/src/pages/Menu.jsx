@@ -5,20 +5,21 @@ import { useQuery } from '@apollo/client';
 import { GET_SCHOOL_NAMES } from '../utils/queries';
 
 const Menu = () => {
-  const { loading, data, error } = useQuery(GET_SCHOOL_NAMES);
-  console.log('data from Menu:', data);
+  const { loading, data } = useQuery(GET_SCHOOL_NAMES);
+  const schoolData = data?.schools || [];
+  // console.log('data from Menu:', schoolData[1]);
   return (
     <div>
       {Auth.loggedIn() ? (
         loading ? (
           <p>Loading...</p>
         ) : (
-          <MenuBuilder schoolId={data?.schools[0]?._id} />
+          <MenuBuilder schoolId={schoolData[1]?._id} />
         )
       ) : data ? (
-        <MenuView schoolId={data?.schools[0]?._id} />
+        <MenuView schoolId={schoolData[1]?._id} />
       ) : (
-        <MenuView schoolId={data?.schools[0]?._id} />
+        <MenuView schoolId={schoolData[1]?._id} />
       )}
     </div>
   );
