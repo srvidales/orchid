@@ -108,6 +108,7 @@ const AddInventory = () => {
 
             <div>
               <Form.Select
+              <Form.Select
                 value={formState.description}
                 name="description"
                 onChange={handleChange}
@@ -118,6 +119,7 @@ const AddInventory = () => {
                 <option value="Snack">Snack</option>
               </Form.Select>{' '}
               */}
+              </Form.Select>
               <Form.Select
                 value={formState.category}
                 name="category"
