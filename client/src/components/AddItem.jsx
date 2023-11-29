@@ -1,11 +1,14 @@
+import { useMutation } from '@apollo/client';
+import { ADD_MENU_ITEM } from '../utils/mutations';
 import React, { useState } from 'react';
 import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
 const AddInventory = () => {
+  const [addNewItem, { data, loading }] = useMutation(ADD_MENU_ITEM);
   const [formState, setFormState] = useState({
-    item_name: '',
-    mealChosen: '',
-    course: '',
+    name: '',
+    description: '',
+    category: '',
   });
 
   const [displayMessage, setDisplayMessage] = useState('');
@@ -18,14 +21,14 @@ const AddInventory = () => {
 
   const clearForm = () => {
     setFormState({
-      item_name: '',
-      mealChosen: '',
-      course: '',
+      name: '',
+      description: '',
+      category: '',
     });
   };
 
-  const addItem = () => {
-    if (!formState.item_name || !formState.mealChosen || !formState.course) {
+  const addItem = async () => {
+    if (!formState.name || !formState.description || !formState.category) {
       setDisplayMessage('Please fill out all fields.');
       setTimeout(() => {
         setDisplayMessage('');
@@ -33,13 +36,15 @@ const AddInventory = () => {
       return;
     }
 
-    // // Placeholder function for adding an item (replace with our logic)
-    // addNewItem({
-    //   item_name: formState.item_name,
-    //   mealChosen: formState.mealChosen,
-    //   course: formState.course,
-    // });
-
+    // Placeholder function for adding an item (replace with our logic)
+    const data = await addNewItem({
+      variables: {
+        name: formState.name,
+        description: formState.description,
+        category: formState.category,
+      },
+    });
+    console.log(data);
     clearForm();
     setDisplayMessage('Success in adding an item!');
 
@@ -78,23 +83,19 @@ const AddInventory = () => {
               padding: '1%',
             }}
           >
-            <FloatingLabel
-              controlId="item_name"
-              label="Item Name"
-              className="mb-3"
-            >
+            <FloatingLabel controlId="name" label="Item Name" className="mb-3">
               <Form.Control
                 type="text"
-                value={formState.item_name}
+                value={formState.name}
                 onChange={handleChange}
-                name="item_name"
+                name="name"
               />
             </FloatingLabel>
 
             <div>
               <Form.Select
-                value={formState.mealChosen}
-                name="mealChosen"
+                value={formState.description}
+                name="description"
                 onChange={handleChange}
               >
                 <option value="">Please Choose a Meal Time</option>
@@ -104,15 +105,15 @@ const AddInventory = () => {
               </Form.Select>
 
               <Form.Select
-                value={formState.course}
-                name="course"
+                value={formState.category}
+                name="category"
                 onChange={handleChange}
               >
-                <option value="">Course</option>
-                <option value="Breakfast">Entree</option>
-                <option value="Lunch">Side</option>
-                <option value="Snack">Drink</option>
-                <option value="Snack">Snack</option>
+                <option value="">Category</option>
+                <option value="ENTREE">Entree</option>
+                <option value="SIDE">Side</option>
+                <option value="DRINK">Drink</option>
+                <option value="SNACK">Snack</option>
               </Form.Select>
 
               <div className="d-inline-block mx-3">
