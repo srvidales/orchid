@@ -57,7 +57,7 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
   };
 
   const renderSection = (title, ids, category) => (
-    <div className="menu-section">
+    <div className="menu-section" style={{ marginBottom: '20px' }}>
       <h3>{title}</h3>
       <div className="menu-options">
         {ids.map((id) => (
