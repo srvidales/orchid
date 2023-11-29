@@ -98,10 +98,8 @@ const AddInventory = () => {
             >
               <Form.Control
                 type="text"
-                value={formState.name}
                 value={formState.description}
                 onChange={handleChange}
-                name="name"
                 name="description"
               />
             </FloatingLabel>
@@ -116,8 +114,7 @@ const AddInventory = () => {
                 <option value="ENTREE">Entree</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
-              </Form.Select>{' '}
-              */}
+              </Form.Select>
               <Form.Select
                 value={formState.category}
                 name="category"
