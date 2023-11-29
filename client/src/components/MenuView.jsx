@@ -73,7 +73,7 @@ export default memo(function MenuView({ schoolId }) {
     };
 
     return (
-      <div style={containerStyle} className="border">
+      <div key={dateKey} style={containerStyle} className="border">
         <div>
           <h2 className="text-center" style={dateHeadingStyle}>
             {formattedDate}
