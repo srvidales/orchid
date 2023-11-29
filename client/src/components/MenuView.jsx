@@ -11,7 +11,7 @@ export default memo(function MenuView({ schoolId }) {
     variables: { schoolId },
   });
 
-  console.log('#2', data);
+  console.log('From the Query:', data);
 
   // Check for errors and log them if present
   if (error) {
@@ -19,29 +19,21 @@ export default memo(function MenuView({ schoolId }) {
   }
 
   // Extract daily menu data or default to an empty array
-  const dailyMenuData = data?.dailyMenusBySchool || [];
+  const dailyMenuDataSchool = data?.dailyMenusBySchool || {};
+  const dailyMenuData = dailyMenuDataSchool?.dailyMenus || [];
 
-  // Group daily menu data by date using a custom utility function
-  const MenusByDate = Object.groupBy(dailyMenuData, ({ date }) => {
-    // Format the date using a custom date format
-    const formattedDate = new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    }).format(new Date(date));
-    return formattedDate;
-  });
+  const groupedData = Object.groupBy(dailyMenuData, ({ date }) => date);
+  console.log('Daily Menu Data:', groupedData);
 
-  console.log('data from query', MenusByDate);
-
-  // Get an array of keys (dates) from the grouped MenusByDate, filtering out weekends
-  const filterWeekdays = (date) => {
-    const dayOfWeek = new Date(date).getDay();
-    return dayOfWeek >= 1 && dayOfWeek <= 5; // Monday (1) to Friday (5)
+  // Filter out weekends (Saturday and Sunday)
+  const filterWeekdays = (menu) => {
+    const dayOfWeek = new Date(menu).getDay();
+    return dayOfWeek !== 0 && dayOfWeek !== 6; // 0 is Sunday, 6 is Saturday
   };
 
-  // Use the formatted date keys for filtering
-  const weekdayKeysArray = Object.keys(MenusByDate).filter(filterWeekdays);
+  // Use the filter function to get only weekdays
+  const weekdaysOnly = Object.keys(groupedData).filter(filterWeekdays);
+  console.log('Weekdays Only:', weekdaysOnly);
 
   // Create a function to format the current week in mm/dd/yy - mm/dd/yy
   const getCurrentWeek = () => {
@@ -93,21 +85,23 @@ export default memo(function MenuView({ schoolId }) {
     };
 
     return (
-      <div style={containerStyle} className="border" key={dateKey}>
+      <div style={containerStyle} className="border">
         <div>
           <h2 className="text-center" style={dateHeadingStyle}>
             {formattedDate}
           </h2>
         </div>
         <div>
-          {MenusByDate[dateKey].map((dayData, index) => (
+          {groupedData[dateKey].map((dayData, index) => 
+          (
             <div key={index} className="text-center">
               <div style={{ marginBottom: '10px' }}>
                 <h3 style={{ fontSize: '1em' }}>{dayData.meal}</h3>
                 <p style={{ fontSize: '0.9em' }}>{dayData.menuItems[0].name}</p>
               </div>
             </div>
-          ))}
+          )
+          )}
         </div>
       </div>
     );
@@ -134,16 +128,22 @@ export default memo(function MenuView({ schoolId }) {
         {currentWeek}
       </h2>
       <div className="d-flex flex-wrap justify-content-center align-items-center">
-        {weekdayKeysArray
+        {weekdaysOnly
           .filter((dateKey) => {
+            console.log('dkey',dateKey);
             const dateObject = new Date(dateKey);
+            const start = new Date(currentWeek.split('-')[0]);
+            const end = new Date(currentWeek.split('-')[1]);
+
+            // console.log(new Date(currentWeek.split('-')[0]));
+            // console.log('dateobj', dateObject.getTime() / 1000);
             return (
-              dateObject >= new Date(currentWeek.split(' - ')[0]) &&
-              dateObject <= new Date(currentWeek.split(' - ')[1])
+              dateObject.getTime() / 1000 >= start.getTime() / 1000 &&
+              dateObject.getTime() / 1000 <= end.getTime() / 1000
             );
           })
           .sort((a, b) => new Date(a) - new Date(b))
-          .map(renderMenuItems)}
+          .map( renderMenuItems)}
       </div>
     </>
   );
