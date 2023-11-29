@@ -39,9 +39,7 @@ const AddInventory = () => {
     // Placeholder function for adding an item (replace with our logic)
     const data = await addNewItem({
       variables: {
-        name: formState.name,
-        description: formState.description,
-        category: formState.category,
+        ...formState,
       },
     });
     console.log(data);
@@ -92,17 +90,30 @@ const AddInventory = () => {
               />
             </FloatingLabel>
 
+            <FloatingLabel
+              controlId="name"
+              label="Item Description"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                value={formState.description}
+                onChange={handleChange}
+                name="description"
+              />
+            </FloatingLabel>
+
             <div>
-              <Form.Select
+              {/* <Form.Select
                 value={formState.description}
                 name="description"
                 onChange={handleChange}
               >
                 <option value="">Please Choose a Meal Time</option>
-                <option value="Breakfast">Breakfast</option>
+                <option value="ENTREE">Entree</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
-              </Form.Select>
+              </Form.Select> */}
 
               <Form.Select
                 value={formState.category}
