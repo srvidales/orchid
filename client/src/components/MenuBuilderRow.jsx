@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { CREATE_SCHOOL_DAILY_MENU } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
-import AddInventory from '../components/AddItem';
-
 MenuBuilderRow.propTypes = {
   schoolId: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
@@ -83,15 +81,17 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
       <option value="" disabled>
         ---
       </option>
-      <optgroup label={category}>
-        {items
-          .filter((item) => item.category === category)
-          .map((item) => (
-            <option key={item._id} value={item._id}>
-              {item.name}
-            </option>
-          ))}
-      </optgroup>
+      {category.map((data) => (
+        <optgroup label={data}>
+          {items
+            .filter((item) => item.category === data)
+            .map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            ))}
+        </optgroup>
+      ))}
     </select>
   );
 
@@ -104,9 +104,9 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           })} ${new Date(date).toLocaleDateString()}`}
         </p>
       </div>
-      {renderSection('Breakfast', ['b1', 'b2', 'b3'], 'ENTREE')}
-      {renderSection('Snack', ['s1', 's2'], 'SNACK')}
-      {renderSection('Lunch', ['l1', 'l2', 'l3', 'l4'], 'ENTREE')}
+      {renderSection('Breakfast', [1, 2, 3], ['ENTREE', 'SIDE', 'DRINK'])}
+      {renderSection('Snack', [1, 2], ['SIDE', 'DRINK'])}
+      {renderSection('Lunch', [1, 2, 3, 4], ['ENTREE', 'SIDE', 'DRINK'])}
       <div className="save-button">
         <button
           className="btn btn-primary"

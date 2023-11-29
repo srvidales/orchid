@@ -474,15 +474,10 @@ const resolvers = {
     },
 
     // Mutation resolver for adding a menu item
-    addMenuItem: async (_parent, { name, description, image, category }) => {
+    addMenuItem: async (_parent, args, context) => {
       try {
         // Create a new menu item in the database
-        const menuItem = await MenuItem.create({
-          name,
-          description,
-          image,
-          category,
-        });
+        const menuItem = await MenuItem.create(args);
 
         // Return the newly created menu item
         return menuItem;

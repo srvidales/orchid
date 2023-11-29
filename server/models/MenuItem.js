@@ -30,7 +30,7 @@ const menuItemSchema = new Schema({
   category: {
     type: String,
     required: 'You need to enter a category!', // Validation: Category is required
-    enum: ['ENTREE', 'SIDE', 'DRINK', 'SNACK'], // Validation: Category must be one of these values
+    enum: ['ENTREE', 'SIDE', 'DRINK', 'SNACK', 'BREAKFAST', 'LUNCH'], // Validation: Category must be one of these values
   },
 
   school: {

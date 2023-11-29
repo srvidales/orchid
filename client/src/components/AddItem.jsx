@@ -1,11 +1,14 @@
+import { useMutation } from '@apollo/client';
+import { ADD_MENU_ITEM } from '../utils/mutations';
 import React, { useState } from 'react';
 import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
 const AddInventory = () => {
+  const [addNewItem, { data, loading }] = useMutation(ADD_MENU_ITEM);
   const [formState, setFormState] = useState({
-    item_name: '',
-    mealChosen: '',
-    course: '',
+    name: '',
+    description: '',
+    category: '',
   });
 
   const [displayMessage, setDisplayMessage] = useState('');
@@ -18,14 +21,14 @@ const AddInventory = () => {
 
   const clearForm = () => {
     setFormState({
-      item_name: '',
-      mealChosen: '',
-      course: '',
+      name: '',
+      description: '',
+      category: '',
     });
   };
 
-  const addItem = () => {
-    if (!formState.item_name || !formState.mealChosen || !formState.course) {
+  const addItem = async () => {
+    if (!formState.name || !formState.description || !formState.category) {
       setDisplayMessage('Please fill out all fields.');
       setTimeout(() => {
         setDisplayMessage('');
@@ -33,13 +36,13 @@ const AddInventory = () => {
       return;
     }
 
-    // // Placeholder function for adding an item (replace with our logic)
-    // addNewItem({
-    //   item_name: formState.item_name,
-    //   mealChosen: formState.mealChosen,
-    //   course: formState.course,
-    // });
-
+    // Placeholder function for adding an item (replace with our logic)
+    const data = await addNewItem({
+      variables: {
+        ...formState,
+      },
+    });
+    console.log(data);
     clearForm();
     setDisplayMessage('Success in adding an item!');
 
@@ -66,61 +69,71 @@ const AddInventory = () => {
 
   return (
     <>
-      <Container style={{ maxWidth: '50%' }}>
-        <Row>
-          <div
-            className="d-inline-block mx-3"
-            style={{
-              display: 'inline-block',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100vh',
-              padding: '1%',
-            }}
-          >
+      <Container style={{ maxWidth: '90%' }}>
+        <Row
+          className="d-inline-block mx-3"
+          style={{
+            display: 'inline-block',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            padding: '1%',
+          }}
+        >
+          <div>
+            <h4>Add Menu Item</h4>
+            <FloatingLabel controlId="name" label="Item Name" className="mb-3">
+              <Form.Control
+                type="text"
+                value={formState.name}
+                onChange={handleChange}
+                name="name"
+              />
+            </FloatingLabel>
+
             <FloatingLabel
-              controlId="item_name"
-              label="Item Name"
+              controlId="name"
+              label="Item Description"
               className="mb-3"
             >
               <Form.Control
                 type="text"
-                value={formState.item_name}
+                value={formState.description}
                 onChange={handleChange}
-                name="item_name"
+                name="description"
               />
             </FloatingLabel>
 
             <div>
-              <Form.Select
-                value={formState.mealChosen}
-                name="mealChosen"
+              {/* <Form.Select
+                value={formState.description}
+                name="description"
                 onChange={handleChange}
               >
                 <option value="">Please Choose a Meal Time</option>
-                <option value="Breakfast">Breakfast</option>
+                <option value="ENTREE">Entree</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Snack">Snack</option>
-              </Form.Select>
+              </Form.Select> */}
 
               <Form.Select
-                value={formState.course}
-                name="course"
+                value={formState.category}
+                name="category"
                 onChange={handleChange}
               >
-                <option value="">Course</option>
-                <option value="Breakfast">Entree</option>
-                <option value="Lunch">Side</option>
-                <option value="Snack">Drink</option>
-                <option value="Snack">Snack</option>
+                <option value="">Category</option>
+                <option value="ENTREE">Entree</option>
+                <option value="SIDE">Side</option>
+                <option value="DRINK">Drink</option>
+                <option value="SNACK">Snack</option>
               </Form.Select>
 
               <div className="d-inline-block mx-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
-                <Button onClick={() => console.log(formState)}>
+                {/* <Button onClick={() => console.log(formState)}>
                   Check State
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

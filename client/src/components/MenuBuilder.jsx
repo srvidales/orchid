@@ -4,6 +4,8 @@ import MenuBuilderRow from './MenuBuilderRow';
 import PropTypes from 'prop-types';
 import './menuBuilder.css';
 
+import AddInventory from './AddItem';
+
 import { useQuery } from '@apollo/client';
 import { GET_MENU_ITEMS_BY_SCHOOL_ID } from '../utils/queries';
 
@@ -37,11 +39,17 @@ export default function MenuBuilder({ schoolId }) {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <MenuBuilderRow
-            schoolId={schoolId}
-            date={new Date(selectedDate)}
-            items={data.schoolById.menuItems}
-          />
+          <>
+            <MenuBuilderRow
+              schoolId={schoolId}
+              date={new Date(selectedDate)}
+              items={data.schoolById.menuItems}
+            />
+
+            <div className="mt-5 border border-dark-subtle">
+              <AddInventory />
+            </div>
+          </>
         )}
       </div>
     </div>
