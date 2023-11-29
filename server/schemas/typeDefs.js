@@ -6,7 +6,6 @@ const typeDefs = `
     lastName: String!
     email: String!
     password: String!
-    createdAt: String
   }
 
   type MenuItem {
@@ -15,8 +14,6 @@ const typeDefs = `
     description: String!
     image: String
     category: Category
-    school: School
-    createdAt: String
   }
 
   type DailyMenu {
@@ -24,8 +21,6 @@ const typeDefs = `
     date: String
     meal: MealType
     menuItems: [MenuItem]
-    school: School
-    createdAt: String
   }
 
   type School {
@@ -40,7 +35,6 @@ const typeDefs = `
     users: [User]
     menuItems: [MenuItem]
     dailyMenus: [DailyMenu]
-    createdAt: String
   }
 
   type Auth {
@@ -68,7 +62,7 @@ const typeDefs = `
     menuItems: [MenuItem]
     menuItemsBySchool(schoolId: ID!): [MenuItem]    
     dailyMenus: [DailyMenu]
-    dailyMenusBySchool(schoolId: ID!): [DailyMenu]
+    dailyMenusBySchool(schoolId: ID!): School
     dailyMenusBySchoolAndDate(schoolId: ID!, date: String!): [DailyMenu]
     dailyMenusBySchoolDateAndMeal(schoolId: ID!, date: String!, meal: MealType!): [DailyMenu]
   }
