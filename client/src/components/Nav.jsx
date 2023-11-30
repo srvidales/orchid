@@ -46,7 +46,13 @@ const Navbar = () => {
             style={{ width: '100%', paddingRight: '18px' }}
           >
             {links.map((navlink, i) => (
-              <Nav.Link key={i} href={navlink.link} className="nav-link">
+              <Nav.Link
+                key={i}
+                as={NavLink} // Use NavLink instead of Nav.Link
+                to={navlink.link}
+                className="nav-link"
+                activeClassName="active"
+              >
                 {navlink.title}
               </Nav.Link>
             ))}
