@@ -16,6 +16,10 @@ export default function Signup() {
     school: '',
   });
 
+  const [showValidationAlert, setShowValidationAlert] = useState(false);
+  const [showDuplicateEmailAlert, setShowDuplicateEmailAlert] = useState(false);
+  const [showShortPasswordAlert, setShowShortPasswordAlert] = useState(false);
+
   // Using the useMutation hook to handle the user signup mutation
   const [signupUser, { error }] = useMutation(ADD_USER);
 
@@ -30,26 +34,41 @@ export default function Signup() {
 
   // Event handler for form submission
   const handleSignup = async (e) => {
-    // Preventing the default form submission behavior
     e.preventDefault();
 
-    // Checking form validity
+    // Display validation alert if form is not valid
     if (e.currentTarget.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
+      setShowValidationAlert(true);
+      return;
+    }
+
+    // Display short password alert if password is too short
+    if (formData.password.length < 8) {
+      setShowShortPasswordAlert(true);
+      setTimeout(() => {
+        setShowShortPasswordAlert(false);
+      }, 3000);
+      return;
     }
 
     try {
-      // Making a signup mutation request with the form data
       const { data } = await signupUser({
         variables: { ...formData },
       });
 
-      // Logging in the user and storing the token in local storage
+      // Log in the user and store the token in local storage
       Auth.login(data.signupUser.token);
     } catch (error) {
       // Handling errors that may occur during the signup process
       console.error('Error during signup:', error);
+
+      if (error.message.includes('E11000 duplicate key')) {
+        // Email is already registered
+        setShowDuplicateEmailAlert(true);
+        setTimeout(() => {
+          setShowDuplicateEmailAlert(false);
+        }, 3000); // Hide the message after 3 seconds
+      }
     }
   };
 
@@ -60,8 +79,22 @@ export default function Signup() {
       <Row className="mt-5">
         <Col md={{ span: 6, offset: 3 }}>
           <h1>Sign Up</h1>
-          {/* Displaying an error message if there is an error */}
-          {/* {signupError && <Alert variant="danger">{signupError}</Alert>} */}
+          {/* Display validation alert */}
+          {showValidationAlert && (
+            <Alert variant="danger">Please fill in all the fields.</Alert>
+          )}
+          {/* Display duplicate email alert */}
+          {showDuplicateEmailAlert && (
+            <Alert variant="danger" onClose={() => setShowDuplicateEmailAlert(false)} dismissible>
+              Email is already registered.
+            </Alert>
+          )}
+          {/* Display short password alert */}
+          {showShortPasswordAlert && (
+            <Alert variant="danger">
+              Password must be at least 8 characters long.
+            </Alert>
+          )}
 
           {/* Form for user signup */}
           <Form onSubmit={handleSignup}>
@@ -74,6 +107,7 @@ export default function Signup() {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
 
@@ -86,6 +120,7 @@ export default function Signup() {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
 
@@ -98,6 +133,7 @@ export default function Signup() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
 
@@ -110,6 +146,7 @@ export default function Signup() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
 
@@ -122,6 +159,7 @@ export default function Signup() {
                 name="school"
                 value={formData.school}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
 

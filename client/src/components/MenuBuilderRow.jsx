@@ -26,6 +26,9 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
     CREATE_SCHOOL_DAILY_MENU,
   );
 
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showError, setShowError] = useState(false);
+
   const handleSaveClick = async () => {
     if (Object.values(selectValue).every((value) => value !== '')) {
       await newDailyMenu('BREAKFAST', [
@@ -39,13 +42,21 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
         selectValue.l2,
         selectValue.l3,
       ]);
+      
+      setShowSuccessPopup(true);
+      setTimeout(() => {
+        resetForm();
+        setShowSuccessPopup(false);
+      }, 2000); 
     } else {
-      alert('Please select an item for each menu item.');
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 2000); 
     }
   };
 
   const selectKeyValuePairs = { ...defaultKeyValuePairs };
-
   const [selectValue, setSelectValue] = useState(selectKeyValuePairs);
 
   const handleChange = (id, event) => {
@@ -128,9 +139,17 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           onClick={handleSaveClick}
         >
           Save
-        </button>
-        {loading ? <p>Saving...</p> : null}
-        {/* <button onClick={() => console.log(selectValue)}>Check State</button> */}
+          </button>
+        {showError && (
+          <div className="error-popup">
+            <p style={{ color: 'red' }}>Please select an item for every menu category!</p>
+          </div>
+        )}
+        {showSuccessPopup && (
+          <div className="success-popup">
+            <p style={{ color: 'green' }}>Menu Successfully Updated!</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -152,5 +171,11 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
     } catch (err) {
       console.error('Error creating daily menu', err);
     }
+  }
+
+  function resetForm() {
+    setShowSuccessPopup(false);
+    setShowError(false);
+    setSelectValue(defaultKeyValuePairs);
   }
 }
