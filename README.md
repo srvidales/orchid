@@ -92,10 +92,10 @@ To run the project in your local machine:
 7. Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Authors
-Clarice Kwong: https://github.com/Clkwong3
-Kim Nguyen: https://github.com/charmingdarling
-Patrick McClelland: https://github.com/pmcclelland11
-Sergio Vidales Perez: https://github.com/srvidales
+- Clarice Kwong: https://github.com/Clkwong3
+- Kim Nguyen: https://github.com/charmingdarling
+- Patrick McClelland: https://github.com/pmcclelland11
+- Sergio Vidales Perez: https://github.com/srvidales
 
 ## Link to Deployed Application
-TODO: Add Deployment Link Here
+https://best-app-ever-for-real-f31386fb5351.herokuapp.com/ 
