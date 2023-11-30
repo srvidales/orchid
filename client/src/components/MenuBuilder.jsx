@@ -35,21 +35,22 @@ export default function MenuBuilder({ schoolId }) {
         className="custom-calendar"
       />
       <br></br>
-      <div className="col-sm menuBuilder">
+      <div className="col-sm-8 menuBuilder">
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <>
-            <MenuBuilderRow
-              schoolId={schoolId}
-              date={new Date(selectedDate)}
-              items={data.schoolById.menuItems}
-            />
-
-            <div className="mt-5 border border-dark-subtle">
+          <div className="row">
+            <div className="col-sm-6">
+              <MenuBuilderRow
+                schoolId={schoolId}
+                date={new Date(selectedDate)}
+                items={data.schoolById.menuItems}
+              />
+            </div>
+            <div className="col-sm-6 border border-dark-subtle mx-auto">
               <AddInventory />
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
