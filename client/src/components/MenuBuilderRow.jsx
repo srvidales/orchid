@@ -57,7 +57,7 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
   };
 
   const renderSection = (title, ids, category) => (
-    <div className="menu-section">
+    <div className="menu-section" style={{ marginBottom: '20px' }}>
       <h3>{title}</h3>
       <div className="menu-options">
         {ids.map((id) => (
@@ -84,12 +84,18 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
       {category.map((data) => (
         <optgroup label={data}>
           {items
-            .filter((item) => item.category === data)
-            .map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
+            .filter((item) => {
+              console.log(data, item.category);
+              return item.category === data;
+            })
+            .map((item) => {
+              console.log(item);
+              return (
+                <option key={item._id} value={item._id}>
+                  {item.name}
+                </option>
+              );
+            })}
         </optgroup>
       ))}
     </select>
@@ -104,9 +110,17 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           })} ${new Date(date).toLocaleDateString()}`}
         </p>
       </div>
-      {renderSection('Breakfast', [1, 2, 3], ['ENTREE', 'SIDE', 'DRINK'])}
-      {renderSection('Snack', [1, 2], ['SIDE', 'DRINK'])}
-      {renderSection('Lunch', [1, 2, 3, 4], ['ENTREE', 'SIDE', 'DRINK'])}
+      {renderSection(
+        'Breakfast',
+        ['b1', 'b2', 'b3'],
+        ['ENTREE', 'SIDE', 'DRINK'],
+      )}
+      {renderSection('Snack', ['s1', 's2'], ['SNACK', 'DRINK'])}
+      {renderSection(
+        'Lunch',
+        ['l1', 'l2', 'l3', 'l4'],
+        ['ENTREE', 'SIDE', 'DRINK'],
+      )}
       <div className="save-button">
         <button
           className="btn btn-primary"
@@ -116,6 +130,7 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           Save
         </button>
         {loading ? <p>Saving...</p> : null}
+        {/* <button onClick={() => console.log(selectValue)}>Check State</button> */}
       </div>
     </div>
   );

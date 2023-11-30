@@ -65,12 +65,11 @@ const AddInventory = () => {
     <>
       <Container style={{ maxWidth: '90%' }}>
         <Row
-          className="d-inline-block mx-3"
+          className="d-inline-block mx-3 my-3"
           style={{
             display: 'inline-block',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
             padding: '1%',
           }}
         >
@@ -97,18 +96,7 @@ const AddInventory = () => {
                 name="description"
               />
             </FloatingLabel>
-
             <div>
-              <Form.Select
-                value={formState.description}
-                name="description"
-                onChange={handleChange}
-              >
-                <option value="">Please Choose a Meal Time</option>
-                <option value="ENTREE">Entree</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Snack">Snack</option>
-              </Form.Select>
               <Form.Select
                 value={formState.category}
                 name="category"
@@ -120,7 +108,7 @@ const AddInventory = () => {
                 <option value="DRINK">Drink</option>
                 <option value="SNACK">Snack</option>
               </Form.Select>
-              <div className="d-inline-block mx-3">
+              <div className="d-inline-block mx-3 my-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
                 {/* <Button onClick={() => console.log(formState)}>
