@@ -63,20 +63,23 @@ const AddInventory = () => {
 
   return (
     <>
-      <Container style={{ maxWidth: '90%' }}>
+      <Container style={{ alignItems: 'center' }} className="mx-auto">
         <Row
           className="d-inline-block mx-3"
           style={{
             display: 'inline-block',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
             padding: '1%',
           }}
         >
           <div>
-            <h4>Add Menu Item</h4>
-            <FloatingLabel controlId="name" label="Item Name" className="mb-3">
+            <h3 style={{ margin: '30px' }}>Add Menu Item</h3>
+            <FloatingLabel
+              controlId="name"
+              label="Name of food"
+              className="mb-3"
+            >
               <Form.Control
                 type="text"
                 value={formState.name}
@@ -87,7 +90,7 @@ const AddInventory = () => {
 
             <FloatingLabel
               controlId="name"
-              label="Item Description"
+              label="Describe the food"
               className="mb-3"
             >
               <Form.Control
@@ -102,6 +105,7 @@ const AddInventory = () => {
               <Form.Select
                 value={formState.description}
                 name="description"
+                className="mb-3"
                 onChange={handleChange}
               >
                 <option value="">Please Choose a Meal Time</option>
@@ -112,6 +116,7 @@ const AddInventory = () => {
               <Form.Select
                 value={formState.category}
                 name="category"
+                className="mb-3"
                 onChange={handleChange}
               >
                 <option value="">Category</option>
