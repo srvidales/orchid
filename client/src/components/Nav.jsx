@@ -7,7 +7,7 @@ import ColoredBar from './ColoredBar';
 import './nav.css';
 
 const links = [
-  { title: 'Home', link: '' },
+  { title: 'Home', link: '/' },
   { title: 'About', link: '/about' },
   { title: 'Menu', link: '/menu' },
   { title: 'Contact', link: '/contact' },
