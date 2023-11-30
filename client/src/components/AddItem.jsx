@@ -111,12 +111,14 @@ const AddInventory = () => {
               <div className="d-inline-block mx-3 my-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
+                {/* <Button onClick={() => console.log(formState)}>
+                  Check State
+                </Button> */}
               </div>
             </div>
           </div>
         </Row>
       </Container>
-
       {/* Display success message below the button */}
       {displayMessage && (
         <p

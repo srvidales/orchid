@@ -130,7 +130,7 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           Save
         </button>
         {loading ? <p>Saving...</p> : null}
-        <button onClick={() => console.log(selectValue)}>Check State</button>
+        {/* <button onClick={() => console.log(selectValue)}>Check State</button> */}
       </div>
     </div>
   );
