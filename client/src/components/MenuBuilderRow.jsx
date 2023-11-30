@@ -9,80 +9,93 @@ MenuBuilderRow.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const defaultKeyValuePairs = {
-  b1: '',
-  b2: '',
-  b3: '',
-  s1: '',
-  s2: '',
-  l1: '',
-  l2: '',
-  l3: '',
-  l4: '',
-};
-
 export default function MenuBuilderRow({ schoolId, date, items }) {
   const [createDailyMenu, { loading, error }] = useMutation(
     CREATE_SCHOOL_DAILY_MENU,
   );
 
+  const defaultKeyValuePairs = {
+    b1: '',
+    b2: '',
+    b3: '',
+    s1: '',
+    s2: '',
+    l1: '',
+    l2: '',
+    l3: '',
+    l4: '',
+  };
+
+  const [breakfast, setBreakfast] = useState({ ...defaultKeyValuePairs });
+  const [snack, setSnack] = useState({ ...defaultKeyValuePairs });
+  const [lunch, setLunch] = useState({ ...defaultKeyValuePairs });
+
   const handleSaveClick = async () => {
-    if (Object.values(selectValue).every((value) => value !== '')) {
+    if (
+      Object.values(breakfast).every((value) => value !== '') &&
+      Object.values(snack).every((value) => value !== '') &&
+      Object.values(lunch).every((value) => value !== '')
+    ) {
       await newDailyMenu('BREAKFAST', [
-        selectValue.b1,
-        selectValue.b2,
-        selectValue.b3,
+        breakfast.b1,
+        breakfast.b2,
+        breakfast.b3,
       ]);
-      await newDailyMenu('SNACK', [selectValue.s1, selectValue.s2]);
-      await newDailyMenu('LUNCH', [
-        selectValue.l1,
-        selectValue.l2,
-        selectValue.l3,
-      ]);
+      await newDailyMenu('SNACK', [snack.s1, snack.s2]);
+      await newDailyMenu('LUNCH', [lunch.l1, lunch.l2, lunch.l3]);
     } else {
       alert('Please select an item for each menu item.');
     }
   };
 
-  const selectKeyValuePairs = { ...defaultKeyValuePairs };
-
-  const [selectValue, setSelectValue] = useState(selectKeyValuePairs);
-
-  const handleChange = (id, event) => {
+  const handleChange = (mealType, id, event) => {
     const updatedSelectKeyValuePairs = {
-      ...selectValue,
+      ...mealType,
       [id]: event.target.value,
     };
-    setSelectValue(updatedSelectKeyValuePairs);
+
+    switch (mealType) {
+      case 'breakfast':
+        setBreakfast(updatedSelectKeyValuePairs);
+        break;
+      case 'snack':
+        setSnack(updatedSelectKeyValuePairs);
+        break;
+      case 'lunch':
+        setLunch(updatedSelectKeyValuePairs);
+        break;
+      default:
+        break;
+    }
   };
 
-  const renderSection = (title, ids, category) => (
-    <div className="menu-section">
+  const renderSection = (title, ids, categories, mealType) => (
+    <div className="menu-section" style={{ marginBottom: '20px' }}>
       <h3>{title}</h3>
       <div className="menu-options">
-        {ids.map((id) => (
+        {ids.map((id, index) => (
           <div key={id} className="select-wrapper">
-            {renderSelect(id, category)}
+            {renderSelect(id, [categories[index]], mealType)}
           </div>
         ))}
       </div>
     </div>
   );
 
-  const renderSelect = (id, category) => (
+  const renderSelect = (id, category, mealType) => (
     <select
       key={id}
       id={id}
       className="selectpicker"
       style={{ minWidth: '300px' }}
-      value={selectValue[id]}
-      onChange={(event) => handleChange(id, event)}
+      value={mealType[id]}
+      onChange={(event) => handleChange(mealType, id, event)}
     >
-      <option value="" disabled>
+      <option value="--------------">
         ---
       </option>
       {category.map((data) => (
-        <optgroup label={data}>
+        <optgroup label={data} key={data}>
           {items
             .filter((item) => item.category === data)
             .map((item) => (
@@ -104,9 +117,9 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
           })} ${new Date(date).toLocaleDateString()}`}
         </p>
       </div>
-      {renderSection('Breakfast', [1, 2, 3], ['ENTREE', 'SIDE', 'DRINK'])}
-      {renderSection('Snack', [1, 2], ['SIDE', 'DRINK'])}
-      {renderSection('Lunch', [1, 2, 3, 4], ['ENTREE', 'SIDE', 'DRINK'])}
+      {renderSection('Breakfast', [1, 2], ['ENTREE', 'DRINK'], breakfast)}
+      {renderSection('Snack', [1], ['SNACK'], snack)}
+      {renderSection('Lunch', [1, 2, 3], ['ENTREE', 'SIDE', 'DRINK'], lunch)}
       <div className="save-button">
         <button
           className="btn btn-primary"
