@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_SCHOOL_DAILY_MENU } from '../utils/mutations';
-import { useMutation } from '@apollo/client';
+import { GET_MENU_ITEMS_BY_SCHOOL_ID } from '../utils/queries';
+import AddInventory from './AddItem';
 
 MenuBuilderRow.propTypes = {
   schoolId: PropTypes.string.isRequired,
@@ -9,22 +11,29 @@ MenuBuilderRow.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+const defaultKeyValuePairs = {
+  b1: '',
+  b2: '',
+  b3: '',
+  s1: '',
+  s2: '',
+  l1: '',
+  l2: '',
+  l3: '',
+  l4: '',
+};
+
 export default function MenuBuilderRow({ schoolId, date, items }) {
   const [createDailyMenu, { loading, error }] = useMutation(
     CREATE_SCHOOL_DAILY_MENU,
   );
 
-  const defaultKeyValuePairs = {
-    b1: '',
-    b2: '',
-    b3: '',
-    s1: '',
-    s2: '',
-    l1: '',
-    l2: '',
-    l3: '',
-    l4: '',
-  };
+  const { data: { school } = {}, refetch: refetchSchool } = useQuery(
+    GET_MENU_ITEMS_BY_SCHOOL_ID,
+    {
+      variables: { schoolId },
+    },
+  );
 
   const [breakfast, setBreakfast] = useState({ ...defaultKeyValuePairs });
   const [snack, setSnack] = useState({ ...defaultKeyValuePairs });
@@ -41,10 +50,15 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
         breakfast.b2,
         breakfast.b3,
       ]);
-      await newDailyMenu('SNACK', [snack.s1, snack.s2]);
+      await newDailyMenu('SNACK', [snack.s1]);
       await newDailyMenu('LUNCH', [lunch.l1, lunch.l2, lunch.l3]);
     } else {
-      alert('Please select an item for each menu item.');
+      alert(
+        'Please select an item for each menu item.\n' +
+          `Breakfast: ${Object.values(breakfast)}\n` +
+          `Snack: ${Object.values(snack)}\n` +
+          `Lunch: ${Object.values(lunch)}`,
+      );
     }
   };
 
@@ -75,38 +89,54 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
       <div className="menu-options">
         {ids.map((id, index) => (
           <div key={id} className="select-wrapper">
-            {renderSelect(id, [categories[index]], mealType)}
+            {renderSelect(
+              id,
+              [categories[index]],
+              mealType === breakfast
+                ? breakfast
+                : mealType === snack
+                  ? snack
+                  : lunch,
+            )}
           </div>
         ))}
       </div>
     </div>
   );
 
-  const renderSelect = (id, category, mealType) => (
-    <select
-      key={id}
-      id={id}
-      className="selectpicker"
-      style={{ minWidth: '300px' }}
-      value={mealType[id]}
-      onChange={(event) => handleChange(mealType, id, event)}
-    >
-      <option value="--------------">
-        ---
-      </option>
-      {category.map((data) => (
-        <optgroup label={data} key={data}>
-          {items
-            .filter((item) => item.category === data)
-            .map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
-        </optgroup>
-      ))}
-    </select>
-  );
+  const renderSelect = (id, category, mealType) => {
+    return (
+      <select
+        key={id}
+        id={id}
+        className="selectpicker"
+        style={{ minWidth: '300px' }}
+        value={mealType[id]}
+        onChange={(event) => handleChange(mealType, id, event)}
+      >
+        <option value="--------------">---</option>
+        {category.map((data) => (
+          <optgroup label={data} key={data}>
+            {items
+              .filter((item) => item.category === data)
+              .map((item) => (
+                <option key={item._id} value={item._id}>
+                  {item.name}
+                </option>
+              ))}
+          </optgroup>
+        ))}
+      </select>
+    );
+  };
+
+  const updateItems = async () => {
+    try {
+      await refetchSchool();
+    } catch (error) {
+      console.error('Error fetching updated items', error);
+    }
+  };
 
   return (
     <div className="menu-builder-row">
@@ -130,6 +160,7 @@ export default function MenuBuilderRow({ schoolId, date, items }) {
         </button>
         {loading ? <p>Saving...</p> : null}
       </div>
+      <AddInventory schoolId={schoolId} onItemAdded={updateItems} />
     </div>
   );
 

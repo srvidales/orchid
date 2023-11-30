@@ -25,7 +25,12 @@ const menuItemSchema = new Schema({
     required: 'You need to enter a category!', // Validation: Category is required
     enum: ['ENTREE', 'SIDE', 'DRINK', 'SNACK', 'BREAKFAST', 'LUNCH'], // Validation: Category must be one of these values
   },
-    // Creation timestamp for the menu item, defaulting to the current date
+  // Schools associated with the menu item
+  school: {
+    type: Schema.Types.ObjectId,
+    ref: 'School',
+  },
+  // Creation timestamp for the menu item, defaulting to the current date
   createdAt: {
     type: Date,
     default: Date.now, // Default value is the current date and time

@@ -3,8 +3,8 @@ import { ADD_MENU_ITEM } from '../utils/mutations';
 import React, { useState } from 'react';
 import { Button, Form, FloatingLabel, Container, Row } from 'react-bootstrap';
 
-const AddInventory = () => {
-  const [addNewItem, { data, loading }] = useMutation(ADD_MENU_ITEM);
+const AddInventory = ({ schoolId }) => {
+  const [addNewItem, { data, loading, error }] = useMutation(ADD_MENU_ITEM);
   const [formState, setFormState] = useState({
     name: '',
     description: '',
@@ -15,7 +15,6 @@ const AddInventory = () => {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(name, value);
     setFormState({ ...formState, [name]: value });
   };
 
@@ -28,6 +27,7 @@ const AddInventory = () => {
   };
 
   const addItem = async () => {
+    // Validate form fields
     if (!formState.name || !formState.description || !formState.category) {
       setDisplayMessage('Please fill out all fields.');
       setTimeout(() => {
@@ -36,24 +36,29 @@ const AddInventory = () => {
       return;
     }
 
-    // Placeholder function for adding an item (replace with our logic)
-    const data = await addNewItem({
-      variables: {
-        ...formState,
-      },
-    });
-    console.log(data);
-    clearForm();
-    setDisplayMessage('Success in adding an item!');
-
-    // Reset the success message after 10 seconds
-    setTimeout(() => {
-      setDisplayMessage('');
-    }, 10000);
-
     try {
-    } catch (err) {
-      console.log('Failed.', err);
+      // Trigger the mutation
+      const { data: mutationData } = await addNewItem({
+        variables: { ...formState, schoolId },
+      });
+
+      // Access data from the mutation result
+      const resultData = mutationData && mutationData.addMenuItem;
+
+      // Clear the form and update UI as needed
+      clearForm();
+      setDisplayMessage('Success in adding an item!');
+
+      // Reset the success message after 10 seconds
+      setTimeout(() => {
+        setDisplayMessage('');
+      }, 10000);
+
+      // Reload the page after successful addition
+      window.location.reload();
+    } catch (error) {
+      // Handle error from the mutation
+      console.error('Mutation Error:', error);
       setDisplayMessage('Unable to add item');
 
       // Reset the success message after 10 seconds
@@ -103,23 +108,12 @@ const AddInventory = () => {
 
             <div>
               <Form.Select
-                value={formState.description}
-                name="description"
-                className="mb-3"
-                onChange={handleChange}
-              >
-                <option value="">Please Choose a Meal Time</option>
-                <option value="ENTREE">Entree</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Snack">Snack</option>
-              </Form.Select>
-              <Form.Select
                 value={formState.category}
                 name="category"
                 className="mb-3"
                 onChange={handleChange}
               >
-                <option value="">Category</option>
+                <option value="">Select a Menu Item Type</option>
                 <option value="ENTREE">Entree</option>
                 <option value="SIDE">Side</option>
                 <option value="DRINK">Drink</option>
@@ -128,9 +122,6 @@ const AddInventory = () => {
               <div className="d-inline-block mx-3">
                 <Button onClick={clearForm}>Clear Added Item</Button>
                 <Button onClick={addItem}>Submit Added Item</Button>
-                {/* <Button onClick={() => console.log(formState)}>
-                  Check State
-                </Button> */}
               </div>
             </div>
           </div>

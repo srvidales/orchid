@@ -107,7 +107,7 @@ const resolvers = {
       // Populating the 'dailyMenus' field to retrieve associated daily menus
       // Nested population to retrieve menu items within each daily menu
       return await School.find()
-        .sort({ name: "descending" })
+        .sort({ name: 'descending' })
         .populate('menuItems')
         .populate('users')
         .populate({
@@ -125,13 +125,12 @@ const resolvers = {
         // Nested population to retrieve menu items within each daily menu
         // Populate 'menuItems' field inside 'dailyMenus'
         const school = await School.findById(_id)
-          .populate('menuItems')
+          .populate({ path: 'menuItems', match: { school: { _id } } })
           .populate('users')
           .populate({
             path: 'dailyMenus',
             populate: { path: 'menuItems' },
           });
-
         // Return the school data
         return school;
       } catch (error) {
@@ -448,11 +447,35 @@ const resolvers = {
     // Mutation resolver for adding a menu item
     addMenuItem: async (_parent, args, context) => {
       try {
+        // Destructure the school IDs from the args
+        const { schoolId, ...menuItemData } = args;
+
+        // Fetch the school details using the school ID
+        const foundSchool = await School.findById(schoolId);
+
+        // Check if the school exists
+        if (!foundSchool) {
+          throw new Error('School not found.');
+        }
+
         // Create a new menu item in the database
-        const menuItem = await MenuItem.create(args);
+        const menuItem = await MenuItem.create({
+          ...menuItemData,
+          school: foundSchool._id,
+        });
+
+        // Push the newly created menu item to the school's menuItems array
+        foundSchool.menuItems.push(menuItem._id);
+        await foundSchool.save();
+
+        // Populate the school and menuItems fields in the menuItem object
+        const populateSchoolMenuItem = await MenuItem.populate(menuItem, {
+          path: 'school',
+          populate: { path: 'menuItems' },
+        });
 
         // Return the newly created menu item
-        return menuItem;
+        return populateSchoolMenuItem;
       } catch (error) {
         console.error(error);
         throw new Error('An error occurred during menu item creation.');

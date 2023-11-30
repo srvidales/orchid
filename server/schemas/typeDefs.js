@@ -1,5 +1,4 @@
 const typeDefs = `
-
   type User {
     _id: ID
     firstName: String!
@@ -12,6 +11,7 @@ const typeDefs = `
     _id: ID
     name: String!
     description: String!
+    school: School 
     category: Category
   }
 
@@ -125,7 +125,8 @@ const typeDefs = `
     deleteDailyMenu(dailyMenuId: ID!): String
     addMenuItem(
       name: String!, 
-      description: String!,  
+      description: String!, 
+      schoolId: ID!, 
       category: String!
     ): MenuItem
     updateMenuItem(

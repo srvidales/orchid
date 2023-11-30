@@ -99,18 +99,26 @@ export const CREATE_SCHOOL_DAILY_MENU = gql`
 `;
 
 export const ADD_MENU_ITEM = gql`
-  mutation addMenuItem(
+  mutation AddMenuItem(
     $name: String!
     $description: String!
+    $schoolId: ID!
     $category: String!
   ) {
-    addMenuItem(name: $name, description: $description, category: $category) {
+    addMenuItem(
+      name: $name
+      description: $description
+      schoolId: $schoolId
+      category: $category
+    ) {
       _id
       name
       description
-      image
+      school {
+        _id
+        name
+      }
       category
-      createdAt
     }
   }
 `;
